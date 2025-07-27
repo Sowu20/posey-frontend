@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://802026a08790.ngrok-free.app/api/',
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Authorization': `Token ${localStorage.getItem('auth_token')}`,
     'Content-Type': 'application/json',
