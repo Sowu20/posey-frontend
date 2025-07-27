@@ -1,0 +1,104 @@
+<template>
+  <main class="container py-5">
+    <!-- Profil prestataire -->
+    <div v-if="prestataire" class="card p-4 shadow-sm text-center">
+      <img
+        :src="formatImage(prestataire.image)"
+        alt="Photo du prestataire"
+        class="img-fluid rounded-circle border border-2 mx-auto mb-3"
+        style="max-width: 150px; height: 150px; object-fit: cover;"
+      />
+      <h3 class="fw-bold">{{ prestataire.nom }} {{ prestataire.prenom }}</h3>
+      <p class="mb-1"><strong>Email :</strong> {{ prestataire.email }}</p>
+      <p class="mb-1"><strong>Catégorie :</strong> {{ prestataire.categorie }}</p>
+      <p class="mb-1"><strong>Quartier :</strong> {{ prestataire.quartier }}</p>
+      <p class="mb-1"><strong>Ville :</strong> {{ prestataire.ville }}</p>
+
+      <div class="mt-3">
+        <strong>Note moyenne :</strong>
+        <span class="text-warning fs-5">
+          <span v-for="i in 5" :key="i">
+            {{ i <= noteMoyenne ? '★' : '☆' }}
+          </span>
+        </span>
+        <span class="ms-2 text-muted">
+          ({{ noteMoyenne ?? 'Non noté' }})
+        </span>
+      </div>
+
+      <div class="mt-2 text-success">
+        <strong>Prestations terminées :</strong> {{ nombrePrestations }}
+      </div>
+    </div>
+
+    <!-- Chargement -->
+    <div v-else class="text-center text-danger">Chargement du profil...</div>
+
+    <!-- Commentaires clients -->
+    <div v-if="commentaires && commentaires.length" class="mt-5">
+      <h4 class="text-center mb-4">Commentaires des clients</h4>
+      <div class="row g-3">
+        <div class="col-md-6" v-for="commentaire in commentaires" :key="commentaire.id">
+          <div class="card h-100 p-3 shadow-sm">
+            <p class="mb-2"><strong>{{ commentaire.client_nom }}</strong></p>
+            <p class="mb-1 text-muted">"{{ commentaire.commentaire }}"</p>
+            <div class="text-warning">
+              <span v-for="i in 5" :key="i">
+                {{ i <= commentaire.note ? '★' : '☆' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div v-else-if="prestataire" class="text-center mt-5 text-muted">
+      Aucun commentaire reçu pour le moment.
+    </div>
+  </main>
+</template>
+
+<script>
+  import api from '../services/api'
+  import { ref, onMounted } from 'vue'
+  import { useRoute } from 'vue-router'
+
+  export default {
+    name: 'ShowProviderTemplate',
+    setup() {
+      const route = useRoute()
+      const prestataireId = route.params.id
+
+      const prestataire = ref(null)
+      const noteMoyenne = ref(null)
+      const nombrePrestations = ref(0)
+      const commentaires = ref([])
+
+      const formatImage = (imagePath) => {
+        if (!imagePath) return '/img/default-avatar.png'
+        if (imagePath.startsWith('http')) return imagePath
+        return `http://127.0.0.1:8000${imagePath}`
+      }
+
+      onMounted(async () => {
+        try {
+          const [userResponse, noteResponse, prestationsResponse, commentairesResponse] = await Promise.all([
+            api.get(`/user/prestataires/${prestataireId}/`),
+            api.get(`/note/prestataire-note/${prestataireId}/`),
+            api.get(`/prestation/terminees/prestataire/${prestataireId}/`),  // Crée cette vue côté backend si elle n’existe pas encore
+            api.get(`/note/commentaires/prestataire/${prestataireId}/`)      // Crée cette vue aussi
+          ])
+
+          prestataire.value = userResponse.data
+          noteMoyenne.value = Math.round(noteResponse.data.moyenne_score || 0)
+          nombrePrestations.value = prestationsResponse.data.total || 0
+          commentaires.value = commentairesResponse.data || []
+        } catch (error) {
+          console.error('Erreur de chargement du profil :', error)
+        }
+      })
+
+      return { prestataire, noteMoyenne, nombrePrestations, commentaires, formatImage }
+    }
+  }
+</script>
