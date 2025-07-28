@@ -14,12 +14,12 @@
           <alert v-if="hasError" :success="false" :message="errorMessage" />
           <div class="mb-3">
             <label for="username">Nom d'utilisateur</label>
-            <input v-model="LoginFormData.username" id="username" type="text" class="form-control" required autocomplete="username"/>
+            <input v-model="LoginFormData.username" id="username" name="username" type="text" class="form-control" required autocomplete="username"/>
           </div>
 
           <div class="mb-3">
             <label for="password">Mot de passe</label>
-            <input v-model="LoginFormData.password" id="password" type="password" class="form-control" required autocomplete="current-password"/>
+            <input v-model="LoginFormData.password" id="password" name="password" type="password" class="form-control" required autocomplete="current-password"/>
           </div>
 
           <button type="submit" class="btn btn-primary w-100">

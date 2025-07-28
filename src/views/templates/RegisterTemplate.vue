@@ -19,32 +19,32 @@
 
           <div class="mb-3">
             <label for="username">Nom d'utilisateur</label>
-            <input v-model="registerFormData.username" id="username" type="text" class="form-control" required autocomplete="username" />
+            <input v-model="registerFormData.username" id="username" name="username" type="text" class="form-control" required autocomplete="username" />
           </div>
 
           <div class="mb-3">
             <label for="nom">Nom</label>
-            <input v-model="registerFormData.nom" id="nom" type="text" class="form-control" required />
+            <input v-model="registerFormData.nom" id="nom" name="nom" type="text" class="form-control" required />
           </div>
 
           <div class="mb-3">
             <label for="prenom">Prénom</label>
-            <input v-model="registerFormData.prenom" id="prenom" type="text" class="form-control" required />
+            <input v-model="registerFormData.prenom" id="prenom" name="prenom" type="text" class="form-control" required />
           </div>
 
           <div class="mb-3">
             <label for="email">Adresse email</label>
-            <input v-model="registerFormData.email" id="email" type="email" class="form-control" required autocomplete="email" />
+            <input v-model="registerFormData.email" id="email" name="email" type="email" class="form-control" required autocomplete="email" />
           </div>
 
           <div class="mb-3">
             <label for="password">Mot de passe</label>
-            <input v-model="registerFormData.password" id="password" type="password" class="form-control" required autocomplete="new-password" />
+            <input v-model="registerFormData.password" id="password" name="password" type="password" class="form-control" required autocomplete="new-password" />
           </div>
 
           <div class="mb-3">
             <label for="role">Type de compte</label>
-            <select v-model="registerFormData.role" id="role" class="form-select" required>
+            <select v-model="registerFormData.role" id="role" name="role" class="form-select" required>
               <option value="client">Client</option>
               <option value="prestataire">Prestataire</option>
               <option value="admin">Admin</option>
@@ -53,17 +53,17 @@
 
           <div class="mb-3">
             <label for="quartier">Quartier</label>
-            <input v-model="registerFormData.quartier" id="quartier" type="text" class="form-control" required />
+            <input v-model="registerFormData.quartier" id="quartier" name="quartier" type="text" class="form-control" required />
           </div>
 
           <div class="mb-3">
             <label for="ville">Ville</label>
-            <input v-model="registerFormData.ville" id="ville" type="text" class="form-control" required />
+            <input v-model="registerFormData.ville" id="ville" name="ville" type="text" class="form-control" required />
           </div>
 
           <div class="mb-3" v-if="registerFormData.role === 'prestataire'">
             <label for="categorie">Catégorie</label>
-            <input v-model="registerFormData.categorie" id="categorie" type="text" class="form-control" required />
+            <input v-model="registerFormData.categorie" id="categorie" name="categorie" type="text" class="form-control" required />
           </div>
 
           <button type="submit" class="btn btn-lg btn-primary w-100">

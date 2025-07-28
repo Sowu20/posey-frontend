@@ -4,8 +4,8 @@
 
     <div class="bg-white rounded shadow-sm p-4 mb-4">
       <h5 class="mb-3">Faire un dépôt</h5>
-      <input type="number" class="form-control mb-3" placeholder="Votre numéro de téléphone">
-      <input v-model="montant" type="number" class="form-control mb-3" placeholder="Montant en FCFA" />
+      <input type="number" class="form-control mb-3" placeholder="Votre numéro de téléphone" name="telephone" id="telephone">
+      <input v-model="montant" type="number" class="form-control mb-3" placeholder="Montant en FCFA" name="montant" id="montant" />
       <div class="d-flex gap-3">
         <button class="btn btn-warning w-100" @click="depot('t-money')">TMoney</button>
         <button class="btn w-100 text-white" style="background-color: #6f42c1;" @click="depot('flooz')">Flooz</button>
