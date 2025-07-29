@@ -47,12 +47,7 @@
                 <button class="page-link" @click="changePage(currentPage - 1)">Précédent</button>
               </li>
 
-              <li
-                v-for="page in totalPages"
-                :key="page"
-                class="page-item"
-                :class="{ active: currentPage === page }"
-              >
+              <li v-for="page in totalPages" :key="page" class="page-item" :class="{ active: currentPage === page }">
                 <button class="page-link" @click="changePage(page)">{{ page }}</button>
               </li>
 
@@ -77,7 +72,7 @@
       const commandes = ref([])
       const loading = ref(true)
       const currentPage = ref(1)
-      const pageSize = 5 // Nombre d'éléments par page
+      const pageSize = 4 // Nombre d'éléments par page
 
       const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
 
@@ -130,16 +125,7 @@
         if (userId) fetchCommandes()
       })
 
-      return {
-        commandes,
-        paginatedCommandes,
-        loading,
-        currentPage,
-        totalPages,
-        changePage,
-        formatDate,
-        getStatutBadge
-      }
+      return { commandes, paginatedCommandes, loading, currentPage, totalPages, changePage, formatDate, getStatutBadge }
     }
   }
 </script>
