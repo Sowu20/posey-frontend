@@ -77,7 +77,7 @@
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
         if (imagePath.startsWith('http')) return imagePath
-        return `http://127.0.0.1:8000${imagePath}`
+        return `https://8f917dd4af0a.ngrok-free.app${imagePath}`
       }
 
       onMounted(async () => {
@@ -85,8 +85,8 @@
           const [userResponse, noteResponse, prestationsResponse, commentairesResponse] = await Promise.all([
             api.get(`/user/prestataires/${prestataireId}/`),
             api.get(`/note/prestataire-note/${prestataireId}/`),
-            api.get(`/prestation/terminees/prestataire/${prestataireId}/`),  // Crée cette vue côté backend si elle n’existe pas encore
-            api.get(`/note/commentaires/prestataire/${prestataireId}/`)      // Crée cette vue aussi
+            // api.get(`/prestation/terminees/prestataire/${prestataireId}/`),
+            // api.get(`/note/commentaires/prestataire/${prestataireId}/`)
           ])
 
           prestataire.value = userResponse.data
