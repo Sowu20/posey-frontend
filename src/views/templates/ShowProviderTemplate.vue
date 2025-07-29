@@ -1,33 +1,38 @@
 <template>
   <main class="container py-5">
     <!-- Profil prestataire -->
-    <div v-if="prestataire" class="card p-4 shadow-sm text-center">
-      <img
-        :src="formatImage(prestataire.image)"
-        alt="Photo du prestataire"
-        class="img-fluid rounded-circle border border-2 mx-auto mb-3"
-        style="max-width: 150px; height: 150px; object-fit: cover;"
-      />
-      <h3 class="fw-bold">{{ prestataire.nom }} {{ prestataire.prenom }}</h3>
-      <p class="mb-1"><strong>Email :</strong> {{ prestataire.email }}</p>
-      <p class="mb-1"><strong>Catégorie :</strong> {{ prestataire.categorie }}</p>
-      <p class="mb-1"><strong>Quartier :</strong> {{ prestataire.quartier }}</p>
-      <p class="mb-1"><strong>Ville :</strong> {{ prestataire.ville }}</p>
+    <div v-if="prestataire" class="card p-4 shadow-sm">
+      <div class="row align-items-center">
+       <div class="col-md-4 text-center mb-4 mb-md-0">
+          <img
+            :src="formatImage(prestataire.image)"
+            alt="Photo du prestataire"
+            class="img-fluid rounded-circle border border-2 mb-3"
+            style="max-width: 150px; height: 150px; object-fit: cover;"
+          />
+          <h3 class="fw-bold mb-0">{{ prestataire.nom }} {{ prestataire.prenom }}</h3>
+        </div>
 
-      <div class="mt-3">
-        <strong>Note moyenne :</strong>
-        <span class="text-warning fs-5">
-          <span v-for="i in 5" :key="i">
-            {{ i <= noteMoyenne ? '★' : '☆' }}
-          </span>
-        </span>
-        <span class="ms-2 text-muted">
-          ({{ noteMoyenne ?? 'Non noté' }})
-        </span>
-      </div>
+        <div class="col-md-8">
+          <p class="mb-2"><strong>Email :</strong> {{ prestataire.email }}</p>
+          <p class="mb-2"><strong>Catégorie :</strong> {{ prestataire.categorie }}</p>
+          <p class="mb-2"><strong>Quartier :</strong> {{ prestataire.quartier }}</p>
+          <p class="mb-2"><strong>Ville :</strong> {{ prestataire.ville }}</p>
 
-      <div class="mt-2 text-success">
-        <strong>Prestations terminées :</strong> {{ nombrePrestations }}
+          <div class="mt-3">
+            <strong>Note moyenne :</strong>
+            <span class="text-warning fs-5">
+              <span v-for="i in 5" :key="i">
+                {{ i <= noteMoyenne ? '★' : '☆' }}
+              </span>
+            </span>
+            <span class="ms-2 text-muted">({{ noteMoyenne ?? 'Non noté' }})</span>
+          </div>
+
+          <div class="mt-2 text-success">
+            <strong>Prestations terminées :</strong> {{ nombrePrestations }}
+          </div>
+        </div>
       </div>
     </div>
 
