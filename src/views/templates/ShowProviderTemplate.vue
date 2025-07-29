@@ -41,7 +41,7 @@
 
     <!-- Commentaires clients -->
     <div v-if="commentaires && commentaires.length" class="mt-5">
-      <h4 class="text-center mb-4">Commentaires des clients</h4>
+      <h4 class="text-center mb-4">Commentaires reçus</h4>
       <div class="row g-3">
         <div class="col-md-6" v-for="commentaire in commentaires" :key="commentaire.id">
           <div class="card h-100 p-3 shadow-sm">
