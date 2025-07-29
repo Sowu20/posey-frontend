@@ -26,7 +26,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(commande, index) in paginatedCommandes" :key="index">
+                <tr v-for="commande in commandesPagines" :key="commande.id">
                   <td>{{ commande.prestation }}</td>
                   <td>{{ formatDate(commande.date_commande) }}</td>
                   <td>
@@ -40,24 +40,17 @@
             </table>
           </div>
 
-          <!-- Pagination locale -->
-          <nav v-if="totalPages > 1" class="mt-3 d-flex justify-content-center">
+          <!-- Pagination -->
+          <nav class="d-flex justify-content-center mt-4">
             <ul class="pagination">
-              <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                <button class="page-link" @click="changePage(currentPage - 1)">Précédent</button>
+              <li class="page-item" :class="{ disabled: page.value === 1 }">
+                <button class="page-link" @click="changerPage(page.value - 1)">Précédent</button>
               </li>
-
-              <li
-                v-for="page in totalPages"
-                :key="page"
-                class="page-item"
-                :class="{ active: currentPage === page }"
-              >
-                <button class="page-link" @click="changePage(page)">{{ page }}</button>
+              <li class="page-item" v-for="p in totalPages" :key="p" :class="{ active: page.value === p }">
+                <button class="page-link" @click="changerPage(p)">{{ p }}</button>
               </li>
-
-              <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-                <button class="page-link" @click="changePage(currentPage + 1)">Suivant</button>
+              <li class="page-item" :class="{ disabled: page.value === totalPages }">
+                <button class="page-link" @click="changerPage(page.value + 1)">Suivant</button>
               </li>
             </ul>
           </nav>
@@ -68,76 +61,71 @@
 </template>
 
 <script>
-import api from '../services/api'
-import { ref, computed, onMounted } from 'vue'
+  import api from '../services/api'
+  import { ref, computed, onMounted } from 'vue'
 
-export default {
-  name: 'ListOrdersTemplate',
-  setup() {
-    const commandes = ref([])
-    const loading = ref(true)
-    const currentPage = ref(1)
-    const pageSize = 4
+  export default {
+    name: 'ListOrdersTemplate',
+    setup() {
+      const commandes = ref([])
+      const loading = ref(true)
+      const page = ref(1)
+      const commandesParPage = 4
 
-    const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
+      const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
 
-    const fetchCommandes = async () => {
-      loading.value = true
-      try {
-        const response = await api.get(`commande/client/${userId}/`)
-        const data = response.data
-        // Accepte data.results ou data directement
-        commandes.value = Array.isArray(data.results) ? data.results : data
-      } catch (error) {
-        console.error("Erreur lors du chargement des commandes :", error)
-        commandes.value = []
-      } finally {
-        loading.value = false
+      const fetchCommandes = async () => {
+        loading.value = true
+        try {
+          const response = await api.get(`commande/client/${userId}/`)
+          commandes.value = response.data.results || []
+        } catch (error) {
+          console.error("Erreur lors du chargement des commandes :", error)
+        } finally {
+          loading.value = false
+        }
       }
-    }
 
-    const paginatedCommandes = computed(() => {
-      const start = (currentPage.value - 1) * pageSize
-      return commandes.value.slice(start, start + pageSize)
-    })
+      const totalPages = computed(() => {
+        return Math.ceil(commandes.value.length / commandesParPage) || 1
+      })
 
-    const totalPages = computed(() => {
-      return Math.ceil(commandes.value.length / pageSize) || 1
-    })
+      const commandesPagines = computed(() => {
+        const start = (page.value - 1) * commandesParPage
+        return commandes.value.slice(start, start + commandesParPage)
+      })
 
-    const changePage = (page) => {
-      if (page >= 1 && page <= totalPages.value) {
-        currentPage.value = page
+      const changerPage = (nouvellePage) => {
+        if (nouvellePage >= 1 && nouvellePage <= totalPages.value) {
+          page.value = nouvellePage
+        }
       }
-    }
 
-    const getStatutBadge = (statut) => {
-      switch (statut) {
-        case 'en attente':
-          return 'badge bg-warning text-dark'
-        case 'accepte':
-          return 'badge bg-primary'
-        case 'succes':
-          return 'badge bg-success'
-        default:
-          return 'badge bg-secondary'
+      const getStatutBadge = (statut) => {
+        switch (statut) {
+          case 'en attente':
+            return 'badge bg-warning text-dark'
+          case 'accepte':
+            return 'badge bg-primary'
+          case 'succes':
+            return 'badge bg-success'
+          default:
+            return 'badge bg-secondary'
+        }
       }
-    }
 
-    const formatDate = (dateStr) => {
-      const options = { year: 'numeric', month: 'long', day: 'numeric' }
-      return new Date(dateStr).toLocaleDateString(undefined, options)
-    }
-
-    onMounted(() => {
-      if (userId) {
-        fetchCommandes()
+      const formatDate = (dateStr) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' }
+        return new Date(dateStr).toLocaleDateString(undefined, options)
       }
-    })
 
-    return { commandes, paginatedCommandes, loading, currentPage, totalPages, changePage, formatDate, getStatutBadge }
+      onMounted(() => {
+        if (userId) fetchCommandes()
+      })
+
+      return { commandes, loading, page, commandesPagines, totalPages, changerPage, formatDate, getStatutBadge }
+    }
   }
-}
 </script>
 
 <style scoped>
