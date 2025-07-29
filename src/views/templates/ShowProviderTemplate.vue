@@ -49,7 +49,7 @@
             <p class="mb-1 text-muted">"{{ commentaire.commentaire }}"</p>
             <div class="text-warning">
               <span v-for="i in 5" :key="i">
-                {{ i <= commentaire.note ? '★' : '☆' }}
+                {{ i <= commentaire.score ? '★' : '☆' }}
               </span>
             </div>
           </div>
