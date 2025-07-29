@@ -30,7 +30,7 @@
           </div>
 
           <div class="mt-2 text-success">
-            <strong>Prestations terminées :</strong> {{ nombrePrestations }}
+            <strong>Prestations réalisées :</strong> {{ nombrePrestations }}
           </div>
         </div>
       </div>
