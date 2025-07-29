@@ -1,8 +1,6 @@
 <template>
   <div class="min-vh-100 bg-light py-5">
     <div class="container">
-      <h2 class="mb-4 fw-bold">Mes commandes</h2>
-
       <!-- Chargement -->
       <div v-if="loading" class="text-center">
         <div class="spinner-border text-primary" role="status">
@@ -16,37 +14,44 @@
           Aucune commande faite pour le moment.
         </div>
 
-        <div v-else class="table-responsive">
-          <table class="table table-bordered table-striped align-middle">
-            <thead class="table-dark">
-              <tr>
-                <th>Prestation</th>
-                <th>Date</th>
-                <th>Statut</th>
-                <th>Prestataire</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(commande, index) in commandes" :key="index">
-                <td>{{ commande.prestation }}</td>
-                <td>{{ formatDate(commande.date_commande) }}</td>
-                <td>
-                  <span :class="getStatutBadge(commande.statut)">
-                    {{ commande.statut }}
-                  </span>
-                </td>
-                <td>{{ commande.prestataire }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div v-else>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle">
+              <thead class="table-dark">
+                <tr>
+                  <th>Prestation</th>
+                  <th>Date</th>
+                  <th>Statut</th>
+                  <th>Prestataire</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(commande, index) in commandes" :key="index">
+                  <td>{{ commande.prestation }}</td>
+                  <td>{{ formatDate(commande.date_commande) }}</td>
+                  <td>
+                    <span :class="getStatutBadge(commande.statut)">
+                      {{ commande.statut }}
+                    </span>
+                  </td>
+                  <td>{{ commande.prestataire }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-        <!-- Bouton de commande
-        <div class="text-end mt-4">
-          <button class="btn btn-primary" @click="goToCreateCommande">
-            Faire une commande
-          </button>
-        </div> -->
+          <!-- Pagination -->
+          <nav class="mt-3 d-flex justify-content-center">
+            <ul class="pagination">
+              <li class="page-item" :class="{ disabled: !previous }">
+                <button class="page-link" @click="changePage(previous)" :disabled="!previous">Précédent</button>
+              </li>
+              <li class="page-item" :class="{ disabled: !next }">
+                <button class="page-link" @click="changePage(next)" :disabled="!next">Suivant</button>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
@@ -55,14 +60,36 @@
 <script>
   import api from '../services/api'
   import { ref, onMounted } from 'vue'
-  // import { useRouter } from 'vue-router'
 
   export default {
     name: 'ListOrdersTemplate',
     setup() {
       const commandes = ref([])
       const loading = ref(true)
-      // const router = useRouter()
+      const next = ref(null)
+      const previous = ref(null)
+
+      const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
+
+      const fetchCommandes = async (url = null) => {
+        loading.value = true
+        try {
+          const endpoint = url || `commande/client/${userId}/`
+          const response = await api.get(endpoint)
+
+          commandes.value = response.data.results
+          next.value = response.data.next
+          previous.value = response.data.previous
+        } catch (error) {
+          console.error("Erreur lors du chargement des commandes :", error)
+        } finally {
+          loading.value = false
+        }
+      }
+
+      const changePage = (url) => {
+        if (url) fetchCommandes(url)
+      }
 
       const getStatutBadge = (statut) => {
         switch (statut) {
@@ -82,26 +109,11 @@
         return new Date(dateStr).toLocaleDateString(undefined, options)
       }
 
-      // const goToCreateCommande = () => {
-      //   router.push('/commande/nouvelle') // 🔁 adapte selon ta route
-      // }
-
-      onMounted(async () => {
-        try {
-          const userData = JSON.parse(localStorage.getItem('auth_user_data'))
-          if (!userData || !userData.id) throw new Error("Utilisateur non connecté.")
-
-          const id = userData.id
-          const response = await api.get(`commande/client/${id}/`)
-          commandes.value = response.data
-        } catch (error) {
-          console.error("Erreur lors du chargement des commandes :", error)
-        } finally {
-          loading.value = false
-        }
+      onMounted(() => {
+        if (userId) fetchCommandes()
       })
 
-      return { commandes, loading, formatDate, getStatutBadge }
+      return { commandes, loading, next, previous, changePage, formatDate, getStatutBadge }
     }
   }
 </script>
