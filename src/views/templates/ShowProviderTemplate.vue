@@ -90,8 +90,8 @@
           const [userResponse, noteResponse, prestationsResponse, commentairesResponse] = await Promise.all([
             api.get(`/user/prestataires/${prestataireId}/`),
             api.get(`/note/prestataire-note/${prestataireId}/`),
-            // api.get(`/prestation/terminees/prestataire/${prestataireId}/`),
-            // api.get(`/note/commentaires/prestataire/${prestataireId}/`)
+            api.get(`/prestation/terminees/${prestataireId}/`),
+            api.get(`/note/commentaires/${prestataireId}/`)
           ])
 
           prestataire.value = userResponse.data
