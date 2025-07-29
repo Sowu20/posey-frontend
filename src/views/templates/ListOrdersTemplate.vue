@@ -26,7 +26,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(commande, index) in commandes" :key="index">
+                <tr v-for="(commande, index) in paginatedCommandes" :key="index">
                   <td>{{ commande.prestation }}</td>
                   <td>{{ formatDate(commande.date_commande) }}</td>
                   <td>
@@ -40,14 +40,24 @@
             </table>
           </div>
 
-          <!-- Pagination -->
+          <!-- Pagination locale -->
           <nav class="mt-3 d-flex justify-content-center">
             <ul class="pagination">
-              <li class="page-item" :class="{ disabled: !previous }">
-                <button class="page-link" @click="changePage(previous)" :disabled="!previous">Précédent</button>
+              <li class="page-item" :class="{ disabled: currentPage === 1 }">
+                <button class="page-link" @click="changePage(currentPage - 1)">Précédent</button>
               </li>
-              <li class="page-item" :class="{ disabled: !next }">
-                <button class="page-link" @click="changePage(next)" :disabled="!next">Suivant</button>
+
+              <li
+                v-for="page in totalPages"
+                :key="page"
+                class="page-item"
+                :class="{ active: currentPage === page }"
+              >
+                <button class="page-link" @click="changePage(page)">{{ page }}</button>
+              </li>
+
+              <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+                <button class="page-link" @click="changePage(currentPage + 1)">Suivant</button>
               </li>
             </ul>
           </nav>
@@ -59,27 +69,23 @@
 
 <script>
   import api from '../services/api'
-  import { ref, onMounted } from 'vue'
+  import { ref, computed, onMounted } from 'vue'
 
   export default {
     name: 'ListOrdersTemplate',
     setup() {
       const commandes = ref([])
       const loading = ref(true)
-      const next = ref(null)
-      const previous = ref(null)
+      const currentPage = ref(1)
+      const pageSize = 5 // Nombre d'éléments par page
 
       const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
 
-      const fetchCommandes = async (url = null) => {
+      const fetchCommandes = async () => {
         loading.value = true
         try {
-          const endpoint = url || `commande/client/${userId}/`
-          const response = await api.get(endpoint)
-
-          commandes.value = response.data.results
-          next.value = response.data.next
-          previous.value = response.data.previous
+          const response = await api.get(`commande/client/${userId}/`)
+          commandes.value = response.data.results // Si ton endpoint ne pagine pas côté backend
         } catch (error) {
           console.error("Erreur lors du chargement des commandes :", error)
         } finally {
@@ -87,8 +93,19 @@
         }
       }
 
-      const changePage = (url) => {
-        if (url) fetchCommandes(url)
+      const paginatedCommandes = computed(() => {
+        const start = (currentPage.value - 1) * pageSize
+        return commandes.value.slice(start, start + pageSize)
+      })
+
+      const totalPages = computed(() => {
+        return Math.ceil(commandes.value.length / pageSize)
+      })
+
+      const changePage = (page) => {
+        if (page >= 1 && page <= totalPages.value) {
+          currentPage.value = page
+        }
       }
 
       const getStatutBadge = (statut) => {
@@ -113,7 +130,16 @@
         if (userId) fetchCommandes()
       })
 
-      return { commandes, loading, next, previous, changePage, formatDate, getStatutBadge }
+      return {
+        commandes,
+        paginatedCommandes,
+        loading,
+        currentPage,
+        totalPages,
+        changePage,
+        formatDate,
+        getStatutBadge
+      }
     }
   }
 </script>
@@ -122,5 +148,10 @@
   .badge {
     font-size: 0.85rem;
     padding: 0.4em 0.6em;
+  }
+  .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
   }
 </style>
