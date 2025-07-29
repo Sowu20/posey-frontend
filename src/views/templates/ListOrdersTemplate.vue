@@ -41,13 +41,18 @@
           </div>
 
           <!-- Pagination locale -->
-          <nav class="mt-3 d-flex justify-content-center">
+          <nav v-if="totalPages > 1" class="mt-3 d-flex justify-content-center">
             <ul class="pagination">
               <li class="page-item" :class="{ disabled: currentPage === 1 }">
                 <button class="page-link" @click="changePage(currentPage - 1)">Précédent</button>
               </li>
 
-              <li v-for="page in totalPages" :key="page" class="page-item" :class="{ active: currentPage === page }">
+              <li
+                v-for="page in totalPages"
+                :key="page"
+                class="page-item"
+                :class="{ active: currentPage === page }"
+              >
                 <button class="page-link" @click="changePage(page)">{{ page }}</button>
               </li>
 
@@ -63,71 +68,76 @@
 </template>
 
 <script>
-  import api from '../services/api'
-  import { ref, computed, onMounted } from 'vue'
+import api from '../services/api'
+import { ref, computed, onMounted } from 'vue'
 
-  export default {
-    name: 'ListOrdersTemplate',
-    setup() {
-      const commandes = ref([])
-      const loading = ref(true)
-      const currentPage = ref(1)
-      const pageSize = 4 // Nombre d'éléments par page
+export default {
+  name: 'ListOrdersTemplate',
+  setup() {
+    const commandes = ref([])
+    const loading = ref(true)
+    const currentPage = ref(1)
+    const pageSize = 4
 
-      const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
+    const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
 
-      const fetchCommandes = async () => {
-        loading.value = true
-        try {
-          const response = await api.get(`commande/client/${userId}/`)
-          commandes.value = response.data.results // Si ton endpoint ne pagine pas côté backend
-        } catch (error) {
-          console.error("Erreur lors du chargement des commandes :", error)
-        } finally {
-          loading.value = false
-        }
+    const fetchCommandes = async () => {
+      loading.value = true
+      try {
+        const response = await api.get(`commande/client/${userId}/`)
+        const data = response.data
+        // Accepte data.results ou data directement
+        commandes.value = Array.isArray(data.results) ? data.results : data
+      } catch (error) {
+        console.error("Erreur lors du chargement des commandes :", error)
+        commandes.value = []
+      } finally {
+        loading.value = false
       }
-
-      const paginatedCommandes = computed(() => {
-        const start = (currentPage.value - 1) * pageSize
-        return commandes.value.slice(start, start + pageSize)
-      })
-
-      const totalPages = computed(() => {
-        return Math.ceil(commandes.value.length / pageSize)
-      })
-
-      const changePage = (page) => {
-        if (page >= 1 && page <= totalPages.value) {
-          currentPage.value = page
-        }
-      }
-
-      const getStatutBadge = (statut) => {
-        switch (statut) {
-          case 'en attente':
-            return 'badge bg-warning text-dark'
-          case 'accepte':
-            return 'badge bg-primary'
-          case 'succes':
-            return 'badge bg-success'
-          default:
-            return 'badge bg-secondary'
-        }
-      }
-
-      const formatDate = (dateStr) => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' }
-        return new Date(dateStr).toLocaleDateString(undefined, options)
-      }
-
-      onMounted(() => {
-        if (userId) fetchCommandes()
-      })
-
-      return { commandes, paginatedCommandes, loading, currentPage, totalPages, changePage, formatDate, getStatutBadge }
     }
+
+    const paginatedCommandes = computed(() => {
+      const start = (currentPage.value - 1) * pageSize
+      return commandes.value.slice(start, start + pageSize)
+    })
+
+    const totalPages = computed(() => {
+      return Math.ceil(commandes.value.length / pageSize) || 1
+    })
+
+    const changePage = (page) => {
+      if (page >= 1 && page <= totalPages.value) {
+        currentPage.value = page
+      }
+    }
+
+    const getStatutBadge = (statut) => {
+      switch (statut) {
+        case 'en attente':
+          return 'badge bg-warning text-dark'
+        case 'accepte':
+          return 'badge bg-primary'
+        case 'succes':
+          return 'badge bg-success'
+        default:
+          return 'badge bg-secondary'
+      }
+    }
+
+    const formatDate = (dateStr) => {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' }
+      return new Date(dateStr).toLocaleDateString(undefined, options)
+    }
+
+    onMounted(() => {
+      if (userId) {
+        fetchCommandes()
+      }
+    })
+
+    return { commandes, paginatedCommandes, loading, currentPage, totalPages, changePage, formatDate, getStatutBadge }
   }
+}
 </script>
 
 <style scoped>
