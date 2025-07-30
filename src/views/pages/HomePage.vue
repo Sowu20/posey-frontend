@@ -113,19 +113,8 @@
 
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png';
-
-        if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
-          return imagePath;
-        }
-
-        const API_BASE_URL = 'https://d0cb15f8ed4e.ngrok-free.app';
-        let cleanImagePath = imagePath.startsWith('/') ? imagePath : '/' + imagePath;
-
-        if (!cleanImagePath.startsWith('/media/')) {
-          cleanImagePath = '/media/' + cleanImagePath;
-        }
-
-        return `${API_BASE_URL}${cleanImagePath}`;
+        if (imagePath.startsWith('http')) return imagePath;
+        return `https://d0cb15f8ed4e.ngrok-free.app${imagePath}`;
       };
 
       onMounted(async () => {
