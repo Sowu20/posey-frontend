@@ -46,7 +46,7 @@
         <div class="row g-4">
           <div class="col-sm-12 col-md-6 col-lg-4" v-for="prestataire in topPrestataire" :key="prestataire.id">
             <div class="card h-100 shadow-sm border-0">
-              <img :src="prestataire.image || '/img/default-avatar2.png'"
+              <img :src="formatImage(prestataire.image) || '/img/default-avatar2.png'"
                    :alt="prestataire.nom"
                    class="card-img-top" />
               <div class="card-body d-flex flex-column">
