@@ -43,13 +43,13 @@
           <!-- Pagination -->
           <div class="mt-5 w-100 d-flex justify-content-center" v-if="totalPages > 1">
             <nav class="d-flex gap-2 align-items-center">
-              <button class="btn btn-outline-primary" :disabled="page === 1" @click="page--">
+              <button class="btn btn-outline-primary" :disabled="currentPage === 1" @click="currentPage--">
                 &lt;
               </button>
-              <button v-for="page in totalPages" :key="page" @click="() => page = page" :class="[ 'btn', page === page ? 'btn-primary text-white' : 'btn-outline-primary' ]">
-                {{ page }}
+              <button v-for="pageNum in totalPages" :key="pageNum" @click="currentPage = pageNum" :class="[ 'btn', currentPage === pageNum ? 'btn-primary text-white' : 'btn-outline-primary' ]">
+                {{ pageNum }}
               </button>
-              <button class="btn btn-outline-primary" :disabled="page === page" @click="page++">
+              <button class="btn btn-outline-primary" :disabled="currentPage === totalPages" @click="currentPage++">
                 &gt;
               </button>
             </nav>
@@ -61,7 +61,6 @@
 </template>
 
 <script>
-  import { list } from 'postcss'
   import api from '../services/api'
   import { ref, computed, onMounted } from 'vue'
 
@@ -70,7 +69,7 @@
     setup() {
       const commandes = ref([])
       const loading = ref(true)
-      const page = ref(1)
+      const currentPage = ref(1)
       const commandesParPage = 4
 
       const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
@@ -92,15 +91,9 @@
       })
 
       const commandesPagines = computed(() => {
-        const start = (page.value - 1) * commandesParPage
-        return list.slice(start, start + commandesParPage)
+        const start = (currentPage.value - 1) * commandesParPage
+        return commandes.value.slice(start, start + commandesParPage) // Correction : utiliser commandes.value au lieu de list
       })
-
-      // const changerPage = (nouvellePage) => {
-      //   if (nouvellePage >= 1 && nouvellePage <= totalPages.value) {
-      //     page.value = nouvellePage
-      //   }
-      // }
 
       const getStatutBadge = (statut) => {
         switch (statut) {
@@ -129,7 +122,7 @@
         if (userId) fetchCommandes()
       })
 
-      return { commandes, loading, page, commandesPagines, totalPages, formatDate, getStatutBadge }
+      return { commandes, loading, currentPage, commandesPagines, totalPages, formatDate, getStatutBadge }
     }
   }
 </script>
