@@ -5,7 +5,7 @@
       <div class="row align-items-center">
        <div class="col-md-4 text-center mb-4 mb-md-0">
           <img
-            :src="prestataire.image || '/img/default-avatar/avatar.png'"
+            :src="formatImage(prestataire.image)"
             alt="Photo du prestataire"
             class="img-fluid rounded-circle border border-2 mb-3"
             style="max-width: 150px; height: 150px; object-fit: cover;"
@@ -82,7 +82,7 @@
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
         if (imagePath.startsWith('http')) return imagePath
-        return `https://d0cb15f8ed4e.ngrok-free.app${imagePath}`
+        return `http://127.0.0.1:8000${imagePath}`
       }
 
       onMounted(async () => {
