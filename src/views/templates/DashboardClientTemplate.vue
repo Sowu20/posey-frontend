@@ -88,7 +88,7 @@
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
         if (imagePath.startsWith('http')) return imagePath
-        return `http://d0cb15f8ed4e.ngrok-free.app${imagePath}`
+        return `http://d0cb15f8ed4e.ngrok-free.app/media/users${imagePath}`
       }
 
       const currentViewComponent = computed(() => {
