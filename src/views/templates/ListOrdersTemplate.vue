@@ -70,7 +70,7 @@
       const commandes = ref([])
       const loading = ref(true)
       const page = ref(1)
-      const commandesParPage = 4
+      const commandesParPage = 5 // aligné avec la pagination utilisateurs
 
       const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
 
@@ -115,8 +115,13 @@
       }
 
       const formatDate = (dateStr) => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' }
-        return new Date(dateStr).toLocaleDateString(undefined, options)
+        const options = {
+          weekday: 'short',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }
+        return new Date(dateStr).toLocaleDateString('fr-FR', options)
       }
 
       onMounted(() => {
