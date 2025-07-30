@@ -72,7 +72,7 @@
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
         if (imagePath.startsWith('http')) return imagePath
-        return `http://127.0.0.1:8000/${imagePath}`
+        return `https://d0cb15f8ed4e.ngrok-free.app${imagePath}`
       }
 
       // const fetchNotifications = async () => {
