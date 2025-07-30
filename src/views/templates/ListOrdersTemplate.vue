@@ -25,7 +25,7 @@
                   <th>Prestataire</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody v-if="commandesPagines.length">
                 <tr v-for="commande in commandesPagines" :key="commande.id">
                   <td>{{ commande.prestation }}</td>
                   <td>{{ formatDate(commande.date_commande) }}</td>
@@ -41,19 +41,19 @@
           </div>
 
           <!-- Pagination -->
-          <nav class="d-flex justify-content-center mt-4">
-            <ul class="pagination">
-              <li class="page-item" :class="{ disabled: page.value === 1 }">
-                <button class="page-link" @click="changerPage(page.value - 1)">Précédent</button>
-              </li>
-              <li class="page-item" v-for="p in totalPages" :key="p" :class="{ active: page.value === p }">
-                <button class="page-link" @click="changerPage(p)">{{ p }}</button>
-              </li>
-              <li class="page-item" :class="{ disabled: page.value === totalPages }">
-                <button class="page-link" @click="changerPage(page.value + 1)">Suivant</button>
-              </li>
-            </ul>
-          </nav>
+          <div class="mt-5 w-100 d-flex justify-content-center" v-if="totalPages > 1">
+            <nav class="d-flex gap-2 align-items-center">
+              <button class="btn btn-outline-primary" :disabled="page === 1" @click="page--">
+                &lt;
+              </button>
+              <button v-for="page in totalPages" :key="page" @click="() => page = page" :class="[ 'btn', page === page ? 'btn-primary text-white' : 'btn-outline-primary' ]">
+                {{ page }}
+              </button>
+              <button class="btn btn-outline-primary" :disabled="page === page" @click="page++">
+                &gt;
+              </button>
+            </nav>
+          </div>
         </div>
       </div>
     </div>
@@ -61,6 +61,7 @@
 </template>
 
 <script>
+  import { list } from 'postcss'
   import api from '../services/api'
   import { ref, computed, onMounted } from 'vue'
 
@@ -70,7 +71,7 @@
       const commandes = ref([])
       const loading = ref(true)
       const page = ref(1)
-      const commandesParPage = 5 // aligné avec la pagination utilisateurs
+      const commandesParPage = 4
 
       const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
 
@@ -87,19 +88,19 @@
       }
 
       const totalPages = computed(() => {
-        return Math.ceil(commandes.value.length / commandesParPage) || 1
+        return Math.ceil(commandes.value.length / commandesParPage)
       })
 
       const commandesPagines = computed(() => {
         const start = (page.value - 1) * commandesParPage
-        return commandes.value.slice(start, start + commandesParPage)
+        return list.slice(start, start + commandesParPage)
       })
 
-      const changerPage = (nouvellePage) => {
-        if (nouvellePage >= 1 && nouvellePage <= totalPages.value) {
-          page.value = nouvellePage
-        }
-      }
+      // const changerPage = (nouvellePage) => {
+      //   if (nouvellePage >= 1 && nouvellePage <= totalPages.value) {
+      //     page.value = nouvellePage
+      //   }
+      // }
 
       const getStatutBadge = (statut) => {
         switch (statut) {
@@ -128,7 +129,7 @@
         if (userId) fetchCommandes()
       })
 
-      return { commandes, loading, page, commandesPagines, totalPages, changerPage, formatDate, getStatutBadge }
+      return { commandes, loading, page, commandesPagines, totalPages, formatDate, getStatutBadge }
     }
   }
 </script>
