@@ -51,7 +51,7 @@
               <div class="card h-100 shadow-sm">
                 <div class="row g-0 align-items-center">
                   <div class="col-md-3 d-flex justify-content-center align-items-center">
-                    <img :src="formatImage(prestataire.img)" :alt="prestataire.nom" class="img-fluid rounded-circle border" style="width: 80px; height: 80px; object-fit: cover;"/>
+                    <img :src="formatImage(prestataire.image)" :alt="prestataire.nom" class="img-fluid rounded-circle border" style="width: 80px; height: 80px; object-fit: cover;"/>
                   </div>
                   <div class="col-md-9 p-3">
                     <div class="d-flex justify-content-between">
