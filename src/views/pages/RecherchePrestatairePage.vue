@@ -51,7 +51,7 @@
               <div class="card h-100 shadow-sm">
                 <div class="row g-0">
                   <div class="col-md-3">
-                    <img :src="prestataire.image" :alt="prestataire.nom" class="card-img-top" style="height: 70px; object-fit: cover"/>
+                    <img :src="formatImage(prestataire.img)" :alt="prestataire.nom" class="card-img-top" style="height: 70px; object-fit: cover"/>
                   </div>
                   <div class="col-md-9 p-3">
                     <div class="d-flex justify-content-between">
@@ -142,6 +142,12 @@
         return found ? Math.round(found.moyenne_score) : null
       }
 
+      const formatImage = (imagePath) => {
+        if (!imagePath) return '/img/default-avatar.png'
+        if (imagePath.startsWith('http')) return imagePath
+        return `http://127.0.0.1:8000${imagePath}`
+      }
+
       const filtrerPrestataires = () => {
         let resultat = [...prestataire.value]
 
@@ -206,7 +212,7 @@
 
       watch([selectedCategorie, selectedNote, selectedQuartier, selectedVille], filtrerPrestataires)
 
-      return { categories, prestataire, note, selectedCategorie, selectedNote, selectedQuartier, selectedVille, getNote, currentPage, totalPages, paginatedPrestataires, resetFiltres }
+      return { categories, prestataire, note, selectedCategorie, selectedNote, selectedQuartier, selectedVille, getNote, currentPage, totalPages, paginatedPrestataires, resetFiltres, formatImage }
     }
   }
 </script>
