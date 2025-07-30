@@ -43,13 +43,13 @@
           <!-- Pagination -->
           <div class="mt-5 w-100 d-flex justify-content-center" v-if="totalPages > 1">
             <nav class="d-flex gap-2 align-items-center">
-              <button class="btn btn-outline-primary" :disabled="currentPage === 1" @click="currentPage--">
+              <button class="btn btn-outline-primary" :disabled="currentPage === 1" @click="changerPage(currentPage - 1)">
                 &lt;
               </button>
-              <button v-for="pageNum in totalPages" :key="pageNum" @click="currentPage = pageNum" :class="[ 'btn', currentPage === pageNum ? 'btn-primary text-white' : 'btn-outline-primary' ]">
+              <button v-for="pageNum in totalPages" :key="pageNum" @click="changerPage(pageNum)" :class="[ 'btn', currentPage === pageNum ? 'btn-primary text-white' : 'btn-outline-primary' ]">
                 {{ pageNum }}
               </button>
-              <button class="btn btn-outline-primary" :disabled="currentPage === totalPages" @click="currentPage++">
+              <button class="btn btn-outline-primary" :disabled="currentPage === totalPages" @click="changerPage(currentPage + 1)">
                 &gt;
               </button>
             </nav>
@@ -62,7 +62,7 @@
 
 <script>
   import api from '../services/api'
-  import { ref, computed, onMounted } from 'vue'
+  import { ref, computed, onMounted, watch } from 'vue'
 
   export default {
     name: 'ListOrdersTemplate',
@@ -79,6 +79,7 @@
         try {
           const response = await api.get(`commande/client/${userId}/`)
           commandes.value = response.data.results || []
+          console.log("Commandes reçues :", commandes.value.length)
         } catch (error) {
           console.error("Erreur lors du chargement des commandes :", error)
         } finally {
@@ -94,6 +95,10 @@
         const start = (currentPage.value - 1) * commandesParPage
         return commandes.value.slice(start, start + commandesParPage) // Correction : utiliser commandes.value au lieu de list
       })
+
+      const changerPage = (p) => {
+        if (p >= 1 && p <= totalPages.value) currentPage.value = p
+      }
 
       const getStatutBadge = (statut) => {
         switch (statut) {
@@ -122,8 +127,14 @@
         if (userId) fetchCommandes()
       })
 
-      return { commandes, loading, currentPage, commandesPagines, totalPages, formatDate, getStatutBadge }
-    }
+      watch(commandes, (newVal) => {
+        if (newVal.length && currentPage.value > totalPages.value) {
+          currentPage.value = 1
+        }
+      })
+
+      return { commandes, loading, currentPage, commandesPagines, totalPages, changerPage, formatDate, getStatutBadge }
+    },
   }
 </script>
 
