@@ -3,7 +3,7 @@
     <div class="container">
       <!-- Profil centré -->
       <div class="text-center mb-5">
-        <img :src="client.image || '/img/default-avatar/avatar.png'" class="rounded-circle mb-3 border" width="100" height="100" />
+        <img :src="formatImage(client.image) || '/img/default-avatar/avatar.png'" class="rounded-circle mb-3 border" width="100" height="100" />
         <h4 class="fw-bold mb-0">{{ client.prenom }} {{ client.nom }}</h4>
         <p class="text-muted">{{ client.email }}</p>
       </div>
@@ -83,6 +83,12 @@
         return currentView.value === view
           ? 'btn-primary text-white'
           : 'btn-outline-primary'
+      }
+
+      const formatImage = (imagePath) => {
+        if (!imagePath) return '/img/default-avatar.png'
+        if (imagePath.startsWith('http')) return imagePath
+        return `http://127.0.0.1:8000${imagePath}`
       }
 
       const currentViewComponent = computed(() => {
@@ -213,7 +219,7 @@
         }
       })
 
-      return { client, currentView, currentViewComponent, getTabClass, componentProps, depot, filtrageActif }
+      return { client, currentView, currentViewComponent, getTabClass, componentProps, depot, filtrageActif, formatImage }
     }
   }
 </script>
