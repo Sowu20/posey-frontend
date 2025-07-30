@@ -38,10 +38,18 @@
     },
     setup() {
       const formatImage = (imagePath) => {
-        if (!imagePath) return '/img/default-avatar.png'
-        if (imagePath.startsWith('http')) return imagePath
-        return `https://d0cb15f8ed4e.ngrok-free.app${imagePath}`
-      }
+        // Si pas d'image, retourner l'image par défaut
+        if (!imagePath) return '/img/default-avatar.png';
+        // Si l'URL est déjà complète (commence par http), la retourner telle quelle
+        if (imagePath.startsWith('http')) return imagePath;
+        // Si l'image commence par /media/, construire l'URL complète
+        if (imagePath.startsWith('/media/')) {
+          return `https://d0cb15f8ed4e.ngrok-free.app${imagePath}`;
+        }
+        // Si l'image ne commence pas par /, l'ajouter
+        const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+        return `https://d0cb15f8ed4e.ngrok-free.app${cleanPath}`;
+      };
 
       return { formatImage }
     },
