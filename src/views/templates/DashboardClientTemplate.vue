@@ -173,8 +173,8 @@
 
       const fetchNotifications = async () => {
         try {
-          const userData = JSON.parse(localStorage.getItem('auth_user_data'))
-          const res = await api.get(`/prestation/notifications/${userData.id}`)
+          // const userData = JSON.parse(localStorage.getItem('auth_user_data'))
+          const res = await api.get(`/prestation/notifications/`)
           notifications.value = res.data
         } catch (error) {
           console.error("Erreur chargement notifications", error)
