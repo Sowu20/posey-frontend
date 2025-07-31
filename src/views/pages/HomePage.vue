@@ -110,10 +110,9 @@
       const topPrestataire = ref([]);
 
       const formatImage = (imagePath) => {
-        if (!imagePath) return null;
+        if (!imagePath) return '/img/default-avatar.png';
         if (imagePath.startsWith('http')) return imagePath;
-        const backendBaseUrl = 'https://802f8886a13d.ngrok-free.app'; // ou ton adresse ngrok
-        return `${backendBaseUrl}${imagePath}`;
+        return `https://802f8886a13d.ngrok-free.app${imagePath}`;
       };
 
       onMounted(async () => {
