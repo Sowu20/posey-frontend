@@ -70,6 +70,7 @@
       let interval = null
 
       const formatImage = (imagePath) => {
+        console.log('Image path original:', imagePath);
         if (!imagePath) return '/img/default-avatar.png'
         if (imagePath.startsWith('http')) return imagePath
         return `https://42492b2bb689.ngrok-free.app${imagePath}`
