@@ -40,7 +40,7 @@
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
         if (imagePath.startsWith('http')) return imagePath
-        return `https://802f8886a13d.ngrok-free.app${imagePath}`
+        return `https://42492b2bb689.ngrok-free.app${imagePath}`
       }
 
       return { formatImage }
