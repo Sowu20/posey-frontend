@@ -46,9 +46,7 @@
         <div class="row g-4">
           <div class="col-sm-12 col-md-6 col-lg-4" v-for="prestataire in topPrestataire" :key="prestataire.id">
             <div class="card h-100 shadow-sm border-0">
-              <img :src="formatImage(prestataire.image) || '/img/default-avatar2.png'"
-                   :alt="prestataire.nom"
-                   class="card-img-top" />
+              <img :src="formatImage(prestataire.image) || '/img/default-avatar2.png'" :alt="prestataire.nom" class="card-img-top" />
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title fw-semibold">{{ prestataire.nom }}</h5>
                 <p class="mb-2">{{ prestataire.categorie }}</p>
@@ -112,9 +110,10 @@
       const topPrestataire = ref([]);
 
       const formatImage = (imagePath) => {
-        if (!imagePath) return '/img/default-avatar.png';
+        if (!imagePath) return null;
         if (imagePath.startsWith('http')) return imagePath;
-        return `https://802f8886a13d.ngrok-free.app${imagePath}`;
+        const backendBaseUrl = 'https://802f8886a13d.ngrok-free.app'; // ou ton adresse ngrok
+        return `${backendBaseUrl}${imagePath}`;
       };
 
       onMounted(async () => {
