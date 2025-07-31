@@ -171,15 +171,15 @@
         alert(`Dépôt de ${montant.value} FCFA via ${moyen}`)
       }
 
-      // const fetchNotifications = async () => {
-      //   try {
-      //     const userData = JSON.parse(localStorage.getItem('auth_user_data'))
-      //     const res = await api.get(`/prestation/notifications/${userData.id}`)
-      //     notifications.value = res.data
-      //   } catch (error) {
-      //     console.error("Erreur chargement notifications", error)
-      //   }
-      // }
+      const fetchNotifications = async () => {
+        try {
+          const userData = JSON.parse(localStorage.getItem('auth_user_data'))
+          const res = await api.get(`/prestation/notifications/${userData.id}`)
+          notifications.value = res.data
+        } catch (error) {
+          console.error("Erreur chargement notifications", error)
+        }
+      }
 
 
       onMounted(async () => {
@@ -212,8 +212,8 @@
 
           filtrerPrestataires()
 
-          // fetchNotifications()
-          // setInterval(fetchNotifications, 30000)
+          fetchNotifications()
+          setInterval(fetchNotifications, 30000)
         } catch (error) {
           console.error("Erreur chargement des données client:", error)
         }

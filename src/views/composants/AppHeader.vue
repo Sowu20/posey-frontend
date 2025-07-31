@@ -37,7 +37,7 @@
           <div v-if="showNotifications" class="dropdown-menu show p-3 shadow rounded" style="position: absolute; right: 20px; top: 70px; min-width: 300px; z-index: 999;">
             <h6 class="dropdown-header">Notifications</h6>
             <div v-if="notifications.length">
-              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap">
+              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap" @click="markAsRead(notif.id)">
                 🔔 {{ notif.message }}
               </div>
             </div>
@@ -57,7 +57,7 @@
 <script>
   import { ref, onMounted, onBeforeUnmount } from 'vue'
   import { useRouter } from 'vue-router'
-  // import api from '../services/api'
+  import api from '../services/api'
 
   export default {
     name: 'AppHeader',
@@ -76,21 +76,31 @@
         return `https://42492b2bb689.ngrok-free.app${imagePath}`
       }
 
-      // const fetchNotifications = async () => {
-      //   try {
-      //     const user = JSON.parse(localStorage.getItem('auth_user_data'))
-      //     if (!user?.id) return
+      const fetchNotifications = async () => {
+        try {
+          const user = JSON.parse(localStorage.getItem('auth_user_data'))
+          if (!user?.id) return
 
-      //     const res = await api.get(`prestation/notifications/${user.id}`)
-      //     notifications.value = res.data
-      //   } catch (err) {
-      //     console.error("Erreur notifications :", err)
-      //   }
-      // }
+          const res = await api.get(`prestation/notifications/`)
+          notifications.value = res.data
+        } catch (err) {
+          console.error("Erreur notifications :", err)
+        }
+      }
 
-      // const toggleNotifications = () => {
-      //   showNotifications.value = !showNotifications.value
-      // }
+      const toggleNotifications = () => {
+        showNotifications.value = !showNotifications.value
+      }
+
+      const markAsRead = async (id) => {
+        try {
+          await api.post(`/prestation/notifications/lue/${id}/`)
+          // Supprimer la notification localement
+          notifications.value = notifications.value.filter(n => n.id !== id)
+        } catch (err) {
+          console.error("Erreur lors de la lecture :", err)
+        }
+      }
 
       const logout = () => {
         localStorage.removeItem('auth_user_data')
@@ -104,8 +114,8 @@
         if (user) {
           isLoggedIn.value = true
           userData.value = JSON.parse(user)
-          // fetchNotifications()
-          // interval = setInterval(fetchNotifications, 60000) // toutes les 60 secondes
+          fetchNotifications()
+          interval = setInterval(fetchNotifications, 30000) // toutes les 30 secondes
         }
       })
 
@@ -113,7 +123,7 @@
         clearInterval(interval)
       })
 
-      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage }
+      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, markAsRead }
     }
   }
 </script>
