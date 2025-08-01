@@ -41,19 +41,19 @@
           </div>
 
           <!-- Pagination -->
-          <div class="mt-5 w-100 d-flex justify-content-center" v-if="totalPages > 1">
-            <nav class="d-flex gap-2 align-items-center">
-              <button class="btn btn-outline-primary" :disabled="currentPage === 1" @click="changerPage(currentPage - 1)">
-                &lt;
-              </button>
-              <button v-for="pageNum in totalPages" :key="pageNum" @click="changerPage(pageNum)" :class="['btn', currentPage === pageNum ? 'btn-primary text-white' : 'btn-outline-primary']">
-                {{ pageNum }}
-              </button>
-              <button class="btn btn-outline-primary" :disabled="currentPage === totalPages" @click="changerPage(currentPage + 1)">
-                &gt;
-              </button>
-            </nav>
-          </div>
+          <nav class="d-flex justify-content-center mt-4">
+            <ul class="pagination">
+              <li class="page-item" :class="{ disabled: page === 1 }">
+                <button class="page-link" @click="changerPage(page - 1)">Précédent</button>
+              </li>
+              <li class="page-item" v-for="p in totalPages" :key="p" :class="{ active: p === page }">
+                <button class="page-link" @click="changerPage(p)">{{ p }}</button>
+              </li>
+              <li class="page-item" :class="{ disabled: page === totalPages }">
+                <button class="page-link" @click="changerPage(page + 1)">Suivant</button>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
@@ -69,6 +69,7 @@
       return {
         commandes: [],
         loading: true,
+        page: 1,
         currentPage: 1,
         commandesParPage: 4,
         userId: JSON.parse(localStorage.getItem('auth_user_data'))?.id || null,
