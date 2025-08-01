@@ -43,14 +43,14 @@
           <!-- Pagination -->
           <nav class="d-flex justify-content-center mt-4">
             <ul class="pagination">
-              <li class="page-item" :class="{ disabled: page === 1 }">
-                <button class="page-link" @click="changerPage(page - 1)">Précédent</button>
+              <li class="page-item" :class="{ disabled: currentPage === 1 }">
+                <button class="page-link" @click="changerPage(currentPage - 1)">Précédent</button>
               </li>
-              <li class="page-item" v-for="p in totalPages" :key="p" :class="{ active: p === page }">
+              <li class="page-item" v-for="p in totalPages" :key="p" :class="{ active: p === currentPage }">
                 <button class="page-link" @click="changerPage(p)">{{ p }}</button>
               </li>
-              <li class="page-item" :class="{ disabled: page === totalPages }">
-                <button class="page-link" @click="changerPage(page + 1)">Suivant</button>
+              <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+                <button class="page-link" @click="changerPage(currentPage + 1)">Suivant</button>
               </li>
             </ul>
           </nav>
@@ -69,7 +69,6 @@
       return {
         commandes: [],
         loading: true,
-        page: 1,
         currentPage: 1,
         commandesParPage: 4,
         userId: JSON.parse(localStorage.getItem('auth_user_data'))?.id || null,
