@@ -25,7 +25,7 @@
                   <th>Prestataire</th>
                 </tr>
               </thead>
-              <tbody v-if="commandesPagines.length">
+              <tbody>
                 <tr v-for="commande in commandesPagines" :key="commande.id">
                   <td>{{ commande.prestation }}</td>
                   <td>{{ formatDate(commande.date_commande) }}</td>
@@ -46,7 +46,7 @@
               <button class="btn btn-outline-primary" :disabled="currentPage === 1" @click="changerPage(currentPage - 1)">
                 &lt;
               </button>
-              <button v-for="pageNum in totalPages" :key="pageNum" @click="changerPage(pageNum)" :class="[ 'btn', currentPage === pageNum ? 'btn-primary text-white' : 'btn-outline-primary' ]">
+              <button v-for="pageNum in totalPages" :key="pageNum" @click="changerPage(pageNum)" :class="['btn', currentPage === pageNum ? 'btn-primary text-white' : 'btn-outline-primary']">
                 {{ pageNum }}
               </button>
               <button class="btn btn-outline-primary" :disabled="currentPage === totalPages" @click="changerPage(currentPage + 1)">
@@ -62,45 +62,43 @@
 
 <script>
   import api from '../services/api'
-  import { ref, computed, onMounted, watch } from 'vue'
 
   export default {
     name: 'ListOrdersTemplate',
-    setup() {
-      const commandes = ref([])
-      const loading = ref(true)
-      const currentPage = ref(1)
-      const commandesParPage = 4
-
-      const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
-
-      const fetchCommandes = async () => {
-        loading.value = true
-        try {
-          const response = await api.get(`commande/client/${userId}/`)
-          commandes.value = response.data.results || []
-          console.log("Commandes reçues :", commandes.value.length)
-        } catch (error) {
-          console.error("Erreur lors du chargement des commandes :", error)
-        } finally {
-          loading.value = false
+    data() {
+      return {
+        commandes: [],
+        loading: true,
+        currentPage: 1,
+        commandesParPage: 4,
+        userId: JSON.parse(localStorage.getItem('auth_user_data'))?.id || null,
+      }
+    },
+    computed: {
+      totalPages() {
+        return Math.ceil(this.commandes.length / this.commandesParPage)
+      },
+      commandesPagines() {
+        const start = (this.currentPage - 1) * this.commandesParPage
+        return this.commandes.slice(start, start + this.commandesParPage)
+      }
+    },
+    methods: {
+      changerPage(page) {
+        if (page >= 1 && page <= this.totalPages) {
+          this.currentPage = page
         }
-      }
-
-      const totalPages = computed(() => {
-        return Math.ceil(commandes.value.length / commandesParPage)
-      })
-
-      const commandesPagines = computed(() => {
-        const start = (currentPage.value - 1) * commandesParPage
-        return commandes.value.slice(start, start + commandesParPage) // Correction : utiliser commandes.value au lieu de list
-      })
-
-      const changerPage = (p) => {
-        if (p >= 1 && p <= totalPages.value) currentPage.value = p
-      }
-
-      const getStatutBadge = (statut) => {
+      },
+      formatDate(dateStr) {
+        const options = {
+          weekday: 'short',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }
+        return new Date(dateStr).toLocaleDateString('fr-FR', options)
+      },
+      getStatutBadge(statut) {
         switch (statut) {
           case 'en attente':
             return 'badge bg-warning text-dark'
@@ -111,30 +109,31 @@
           default:
             return 'badge bg-secondary'
         }
-      }
-
-      const formatDate = (dateStr) => {
-        const options = {
-          weekday: 'short',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
+      },
+      async fetchCommandes() {
+        this.loading = true
+        try {
+          const response = await api.get(`commande/client/${this.userId}/`)
+          this.commandes = response.data.results || []
+        } catch (error) {
+          console.error('Erreur lors du chargement des commandes :', error)
+        } finally {
+          this.loading = false
         }
-        return new Date(dateStr).toLocaleDateString('fr-FR', options)
       }
-
-      onMounted(() => {
-        if (userId) fetchCommandes()
-      })
-
-      watch(commandes, (newVal) => {
-        if (newVal.length && currentPage.value > totalPages.value) {
-          currentPage.value = 1
-        }
-      })
-
-      return { commandes, loading, currentPage, commandesPagines, totalPages, changerPage, formatDate, getStatutBadge }
     },
+    mounted() {
+      if (this.userId) {
+        this.fetchCommandes()
+      }
+    },
+    watch: {
+      commandes(newVal) {
+        if (newVal.length && this.currentPage > this.totalPages) {
+          this.currentPage = 1
+        }
+      }
+    }
   }
 </script>
 
@@ -142,10 +141,5 @@
   .badge {
     font-size: 0.85rem;
     padding: 0.4em 0.6em;
-  }
-  .page-item.active .page-link {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-    color: white;
   }
 </style>
