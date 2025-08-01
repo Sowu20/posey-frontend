@@ -81,7 +81,7 @@
       commandesPagines() {
         const start = (this.currentPage - 1) * this.commandesParPage
         return this.commandes.slice(start, start + this.commandesParPage)
-      }
+      },
     },
     methods: {
       changerPage(page) {
