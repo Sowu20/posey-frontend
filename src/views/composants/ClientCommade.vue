@@ -99,8 +99,13 @@
       },
       async chargerCommandes() {
         try {
-          const response = await api.get('commande/utilisateur/');
-          this.commandes = response.data;
+          const [usersRes, catsRes] = await Promise.all([
+            api.get('user/detail/'),
+            api.get('/prestation/detail_categorie/'),
+          ])
+          this.utilisateurs = usersRes.data
+          this.categories = catsRes.data
+          // this.commandes = response.data;
         } catch (error) {
           console.error('Erreur lors du chargement des commandes :', error);
         } finally {
