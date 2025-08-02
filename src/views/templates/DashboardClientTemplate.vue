@@ -3,7 +3,7 @@
     <div class="container">
       <!-- Profil centré -->
       <div class="text-center mb-5">
-        <img src="/img/default-avatar2.png" class="rounded-circle mb-3 border" width="100" height="100" />
+        <img :src="formatImage(client.image) || '/img/default-avatar1.png'" class="rounded-circle mb-3 border" width="100" height="100" />
         <h4 class="fw-bold mb-0">{{ client.prenom }} {{ client.nom }}</h4>
         <p class="text-muted">{{ client.email }}</p>
       </div>
@@ -88,7 +88,7 @@
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
         if (imagePath.startsWith('http')) return imagePath
-        return `https://42492b2bb689.ngrok-free.app${imagePath}`
+        return `http://127.0.0.1:8000${imagePath}`
       }
 
       const currentViewComponent = computed(() => {

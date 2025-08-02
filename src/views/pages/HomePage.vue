@@ -46,7 +46,7 @@
         <div class="row g-4">
           <div class="col-sm-12 col-md-6 col-lg-4" v-for="prestataire in topPrestataire" :key="prestataire.id">
             <div class="card h-100 shadow-sm border-0">
-              <img src="/img/default-avatar2.png" :alt="prestataire.nom" class="card-img-top" />
+              <img :src="formatImage(prestataire.image) || '/image/default-avatar1.png'" :alt="prestataire.nom" class="card-img-top" />
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title fw-semibold">{{ prestataire.nom }}</h5>
                 <p class="mb-2">{{ prestataire.categorie }}</p>
@@ -112,7 +112,7 @@
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png';
         if (imagePath.startsWith('http')) return imagePath;
-        return `https://42492b2bb689.ngrok-free.app${imagePath}`;
+        return `http://127.0.0.1:8000${imagePath}`;
       };
 
       onMounted(async () => {

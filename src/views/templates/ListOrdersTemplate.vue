@@ -71,7 +71,7 @@
         loading: true,
         currentPage: 1,
         commandesParPage: 4,
-        userId: JSON.parse(localStorage.getItem('auth_user_data'))?.id || null, tjdkjfd
+        userId: JSON.parse(localStorage.getItem('auth_user_data'))?.id || null,
       }
     },
     computed: {
