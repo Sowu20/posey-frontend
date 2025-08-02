@@ -19,7 +19,7 @@
         <div class="d-flex gap-3 align-items-center" v-if="isLoggedIn">
           <!-- Avatar -->
           <router-link to="/profil" class="d-flex align-items-center text-decoration-none">
-            <img :src="formatImage(userData.image) || '/img/default-avatar1.png'" alt="image" class="rounded-circle" width="40" height="40"/>
+            <img src="/img/default-avatar2.png" alt="image" class="rounded-circle" width="40" height="40"/>
             <span class="ms-2 text-dark">{{ userData.username }}</span>
           </router-link>
           <span class="btn text-danger cursor-pointer ms-3 fw-semibold" @click="logout">
@@ -73,7 +73,7 @@
         console.log('Image path original:', imagePath);
         if (!imagePath) return '/img/default-avatar.png'
         if (imagePath.startsWith('http')) return imagePath
-        return `http://127.0.0.1:8000${imagePath}`
+        return `https://42492b2bb689.ngrok-free.app${imagePath}`
       }
 
       const fetchNotifications = async () => {

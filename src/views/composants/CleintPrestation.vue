@@ -34,7 +34,7 @@
           <div class="card h-100 shadow-sm">
             <div class="row g-0">
               <div class="col-md-3">
-                <img :src="formatImage(p.image) || '/img/default-avatar1.png'" class="card-img-top" style="height: 110px; object-fit: contain" />
+                <img src="/img/default-avatar2.png" class="card-img-top" style="height: 110px; object-fit: contain" />
               </div>
               <div class="col-md-9 p-3">
                 <div class="d-flex justify-content-between">
@@ -105,7 +105,7 @@
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
         if (imagePath.startsWith('http')) return imagePath
-        return `http://127.0.0.1:8000${imagePath}`
+        return `https://42492b2bb689.ngrok-free.app${imagePath}`
       }
 
       return { formatImage }
