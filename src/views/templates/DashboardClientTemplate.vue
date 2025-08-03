@@ -3,7 +3,7 @@
     <div class="container">
       <!-- Profil centré -->
       <div class="text-center mb-5">
-        <img :src="client.image || '/img/default-avatar/avatar.png'" class="rounded-circle mb-3 border" width="100" height="100" />
+        <img src="/img/default-avatar.png" class="rounded-circle mb-3 border" width="100" height="100" />
         <h4 class="fw-bold mb-0">{{ client.prenom }} {{ client.nom }}</h4>
         <p class="text-muted">{{ client.email }}</p>
       </div>

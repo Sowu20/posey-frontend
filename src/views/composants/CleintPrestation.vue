@@ -34,7 +34,7 @@
           <div class="card h-100 shadow-sm">
             <div class="row g-0">
               <div class="col-md-3">
-                <img :src="formatImage(p.image) || '/img/default-avatar/avatar.png'" class="card-img-top" style="height: 110px; object-fit: contain" />
+                <img src="/img/default-avatar.png" class="card-img-top" style="height: 110px; object-fit: contain" />
               </div>
               <div class="col-md-9 p-3">
                 <div class="d-flex justify-content-between">

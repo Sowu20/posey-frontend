@@ -19,7 +19,7 @@
         <div class="d-flex gap-3 align-items-center" v-if="isLoggedIn">
           <!-- Avatar -->
           <router-link to="/profil" class="d-flex align-items-center text-decoration-none">
-            <img :src="formatImage(userData.image) || '/img/default-avatar.png'" alt="image" class="rounded-circle" width="40" height="40"/>
+            <img src="/img/default-avatar.png" alt="image" class="rounded-circle" width="40" height="40"/>
             <span class="ms-2 text-dark">{{ userData.username }}</span>
           </router-link>
           <span class="btn text-danger cursor-pointer ms-3 fw-semibold" @click="logout">

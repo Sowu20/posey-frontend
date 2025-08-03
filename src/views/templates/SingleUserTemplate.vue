@@ -4,7 +4,7 @@
       <!-- Header utilisateur -->
       <div class="bg-primary text-white px-4 py-5 d-flex align-items-center">
         <div class="me-4 position-relative rounded-circle">
-          <img :src="previewImage || '/default-avatar.png'" class="rounded-circle border border-white" width="100" height="100" alt="Avatar" />
+          <img src="/img/default-avatar.png" class="rounded-circle border border-white" width="100" height="100" alt="Avatar" />
           <input type="file" ref="fileInput" @change="handleImageChange" accept="image/*" class="position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer" />
         </div>
         <div>
