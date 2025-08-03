@@ -1,11 +1,10 @@
-import axios from 'axios'
+const token = localStorage.getItem('auth_token');
 
 const api = axios.create({
   baseURL: 'https://a321a3f46fbb.ngrok-free.app/api/',
   headers: {
-    'Authorization': `Token ${localStorage.getItem('auth_token')}`,
+    ...(token && { 'Authorization': `Token ${token}` }), // ou Bearer
     'Content-Type': 'application/json',
+    'ngrok-skip-browser-warning': 'true',
   },
-})
-
-export default api
+});
