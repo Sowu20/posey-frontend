@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const token = localStorage.getItem('auth_token');
 
 const api = axios.create({
@@ -8,3 +10,5 @@ const api = axios.create({
     'ngrok-skip-browser-warning': 'true',
   },
 });
+
+export default api
