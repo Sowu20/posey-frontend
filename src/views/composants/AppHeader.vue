@@ -57,7 +57,7 @@
 <script>
   import { ref, onMounted, onBeforeUnmount } from 'vue'
   import { useRouter } from 'vue-router'
-  // import api from '../services/api'
+  import api from '../services/api'
 
   export default {
     name: 'AppHeader',
@@ -75,21 +75,21 @@
         return `http://127.0.0.1:8000${imagePath}`
       }
 
-      // const fetchNotifications = async () => {
-      //   try {
-      //     const user = JSON.parse(localStorage.getItem('auth_user_data'))
-      //     if (!user?.id) return
+      const fetchNotifications = async () => {
+        try {
+          const user = JSON.parse(localStorage.getItem('auth_user_data'))
+          if (!user?.id) return
 
-      //     const res = await api.get(`prestation/notifications/${user.id}`)
-      //     notifications.value = res.data
-      //   } catch (err) {
-      //     console.error("Erreur notifications :", err)
-      //   }
-      // }
+          const res = await api.get(`prestation/notifications/`)
+          notifications.value = res.data
+        } catch (err) {
+          console.error("Erreur notifications :", err)
+        }
+      }
 
-      // const toggleNotifications = () => {
-      //   showNotifications.value = !showNotifications.value
-      // }
+      const toggleNotifications = () => {
+        showNotifications.value = !showNotifications.value
+      }
 
       const logout = () => {
         localStorage.removeItem('auth_user_data')
@@ -103,8 +103,8 @@
         if (user) {
           isLoggedIn.value = true
           userData.value = JSON.parse(user)
-          // fetchNotifications()
-          // interval = setInterval(fetchNotifications, 60000) // toutes les 60 secondes
+          fetchNotifications()
+          interval = setInterval(fetchNotifications, 60000)
         }
       })
 
@@ -112,7 +112,7 @@
         clearInterval(interval)
       })
 
-      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage }
+      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications }
     }
   }
 </script>
