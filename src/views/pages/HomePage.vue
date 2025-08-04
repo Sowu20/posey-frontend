@@ -2,7 +2,7 @@
   <default-layout>
     <!-- Section Hero -->
     <section class="bg-primary text-white text-center py-5">
-      <div class="container-fluid px-4">
+      <div class="container-fluid px-2">
         <h1 class="display-4 fw-bold mb-4">Nous donnons vie à vos projets !</h1>
         <p class="lead mb-4">
           Trouvez facilement des prestataires de services qualifiés près de chez vous.
@@ -24,7 +24,7 @@
 
     <!-- Section Catégories -->
     <section>
-      <div class="container-fluid px-4">
+      <div class="container-fluid px-2">
         <h2>Nos catégories de services</h2>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-4">
           <div class="col" v-for="categorie in categories" :key="categorie.id">
@@ -41,7 +41,7 @@
 
     <!-- Section Top Prestataires -->
     <section>
-      <div class="container-fluid px-4">
+      <div class="container-fluid px-2">
         <h2>Nos prestataires les mieux notés</h2>
         <div class="row g-4">
           <div class="col-sm-12 col-md-6 col-lg-4" v-for="prestataire in topPrestataire" :key="prestataire.id">
@@ -67,7 +67,7 @@
 
     <!-- Section Fonctionnement -->
     <section>
-      <div class="container-fluid px-4">
+      <div class="container-fluid px-2">
         <h2>Comment ça marche ?</h2>
         <div class="row g-4 text-center">
           <div class="col-md-4">
