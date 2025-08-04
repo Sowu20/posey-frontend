@@ -103,7 +103,7 @@
     props: ['categories'],
     setup () {
       const formatImage = (imagePath) => {
-        if (!imagePath) return '/img/default-avatar.png'
+        if (!imagePath) return '/img/default-avatar2.png'
         if (imagePath.startsWith('http')) return imagePath
         return `http://127.0.0.1:8000${imagePath}`
       }
