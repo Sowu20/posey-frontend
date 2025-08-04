@@ -147,8 +147,8 @@
 
 <style scoped>
   section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
   section:nth-child(odd) {
     background-color: #ffffff;
