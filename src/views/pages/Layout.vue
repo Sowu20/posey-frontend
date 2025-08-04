@@ -24,6 +24,6 @@
 
 <style>
   main > .container {
-    padding: 60px 0 0;
+    padding: 60px 15px 0;
   }
 </style>
