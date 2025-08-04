@@ -8,7 +8,7 @@
             <small class="text-muted">{{ formatDate(presta.date_demande) }}</small>
           </div>
           <div class="mb-1">
-            <span class="fw-semibold">Client :</span> {{ presta.client }}
+            <span class="fw-semibold">Client :</span> {{ presta.client_username }}
           </div>
           <div class="mb-2">
             <span class="fw-semibold">Description :</span> {{ presta.description }}
