@@ -1,8 +1,8 @@
 <template>
   <default-layout>
     <!-- Section Hero -->
-    <section class="bg-primary text-white text-center py-5">
-      <div class="container-fluid">
+    <section class="bg-primary text-white text-center py-5 w-100">
+      <div class="container-fluid px-0">
         <h1 class="display-4 fw-bold mb-4">Nous donnons vie à vos projets !</h1>
         <p class="lead mb-4">
           Trouvez facilement des prestataires de services qualifiés près de chez vous.
@@ -146,7 +146,6 @@
 </script>
 
 <style scoped>
-  /* Section spacing and background alternance */
   section {
     padding-top: 4rem;
     padding-bottom: 4rem;
@@ -158,7 +157,6 @@
     background-color: #f8f9fa;
   }
 
-  /* Title styling */
   h2 {
     font-size: 2rem;
     font-weight: bold;
@@ -166,7 +164,6 @@
     text-align: center;
   }
 
-  /* Cards */
   .card {
     transition: transform 0.2s ease-in-out;
   }
@@ -174,18 +171,15 @@
     transform: scale(1.02);
   }
 
-  /* Icon style in categories */
   .card-body i {
     font-size: 2.5rem;
   }
 
-  /* Prestataire image */
   .card-img-top {
     object-fit: cover;
     height: 180px;
   }
 
-  /* Step icon style */
   .bg-step {
     background-color: #e9ecef;
     border-radius: 50%;
@@ -199,7 +193,6 @@
     margin: 0 auto 1rem;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 768px) {
     .card {
       margin-bottom: 1.5rem;
