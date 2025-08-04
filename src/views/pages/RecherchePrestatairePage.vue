@@ -51,7 +51,7 @@
               <div class="card h-100 shadow-sm">
                 <div class="row g-0">
                   <div class="col-md-3">
-                    <img src="/img/default-avatar2.png" class="card-img-top" style="height: 70px; object-fit: cover"/>
+                    <img src="/img/default-avatar2.png" class="card-img rounded-circle" style="height: 70px; width: 70px; object-fit: cover"/>
                   </div>
                   <div class="col-md-9 p-3">
                     <div class="d-flex justify-content-between">
