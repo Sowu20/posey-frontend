@@ -147,14 +147,20 @@
 
 <style scoped>
   section {
-    margin: 0;
-    padding: 0;
     padding-top: 4rem;
     padding-bottom: 4rem;
+    width: 100%;
   }
+
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   section:nth-child(odd) {
     background-color: #ffffff;
   }
+
   section:nth-child(even) {
     background-color: #f8f9fa;
   }
@@ -180,6 +186,7 @@
   .card-img-top {
     object-fit: cover;
     height: 180px;
+    width: 100%;
   }
 
   .bg-step {
