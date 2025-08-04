@@ -2,7 +2,7 @@
   <div>
   <AppHeader />
       <main class="flex-shrink-0">
-          <div class="container">
+          <div class="container-fluid">
               <slot />
           </div>
       </main>
@@ -23,7 +23,8 @@
 </script>
 
 <style>
-  main > .container {
-      padding: 60px 15px 0;
+  main > .container-fluid {
+      padding: 0;
+      margin: 0;
   }
 </style>
