@@ -1,6 +1,6 @@
 <template>
   <footer class="bg-dark text-white pt-5 pb-3 mt-auto">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <!-- Brand/Description -->
         <div class="col-md-3 mb-4">
