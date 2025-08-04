@@ -23,7 +23,7 @@
 </script>
 
 <style>
-  main > .container {
+  main > .container-fluid {
     padding: 60px 15px 0;
     margin: 0;
   }
