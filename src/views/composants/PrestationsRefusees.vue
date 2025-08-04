@@ -77,7 +77,7 @@
         return new Intl.DateTimeFormat('fr-FR', options).format(new Date(dateStr))
       }
     },
-    
+
     async mounted() {
       try {
         const res = await api.get('/prestation/refusees/toutes/')
