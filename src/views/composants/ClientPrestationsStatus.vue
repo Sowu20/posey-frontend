@@ -119,16 +119,8 @@
         }
       },
       formatDate(dateStr) {
-        if (!dateStr) return ''
-        const options = {
-          weekday: 'short',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-        }
-        return new Intl.DateTimeFormat('fr-FR', options).format(new Date(dateStr))
+        const options = { year: 'numeric', month: 'short', day: 'numeric' }
+        return new Date(dateStr).toLocaleDateString('fr-FR', options)
       }
     },
     mounted() {
