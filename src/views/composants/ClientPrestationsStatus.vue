@@ -119,9 +119,11 @@
         }
       },
       formatDate(dateStr) {
+        if (!dateStr) return 'Date inconnue'
         const options = { year: 'numeric', month: 'short', day: 'numeric' }
-        return new Date(dateStr).toLocaleDateString('fr-FR', options)
-      }
+        const date = new Date(dateStr)
+        return isNaN(date) ? 'Date invalide' : date.toLocaleDateString('fr-FR', options)
+      },
     },
     mounted() {
       this.fetchPrestations()
