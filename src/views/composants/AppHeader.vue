@@ -68,7 +68,6 @@
       const notifications = ref([])
       const showNotifications = ref(false)
       let interval = null
-      let socket = null
 
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
@@ -99,46 +98,28 @@
         router.push('/login')
       }
 
-      const initWebSocket = () => {
-        const user = JSON.parse(localStorage.getItem("auth_user_data"))
-        if (!user?.id) return
-        const wsUrl = `ws://127.0.0.1:8000/ws/notifications/${user.id}/`
-        socket = new WebSocket(wsUrl)
-
-        socket.onopen = () => {
-          console.log("WebSocket connecté")
-        }
-        socket.onmessage = (event) => {
-          const data = JSON.parse(event.data)
-          console.log("🔔 Notification reçue :", data)
-
-          notifications.value.unshift(data.data)
-        }
-        socket.onclose = () => {
-          console.log("WebSocket fermé")
-        }
-        socket.onerror = (error) => {
-          console.error("WebSocket erreur:", error)
-        }
-      }
-
       onMounted(() => {
         const user = localStorage.getItem('auth_user_data')
         if (user) {
           isLoggedIn.value = true
           userData.value = JSON.parse(user)
           fetchNotifications()
-          initWebSocket()
           interval = setInterval(fetchNotifications, 60000)
         }
       })
 
       onBeforeUnmount(() => {
         clearInterval(interval)
-        if (socket) socket.close()
       })
 
       return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications }
     }
   }
 </script>
+
+<style scoped>
+  .dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+</style>
