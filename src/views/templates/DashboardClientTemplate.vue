@@ -74,7 +74,6 @@
       const selectedVille = ref('')
       const selectedCategorie = ref('')
       const filteredPrestataires = ref([])
-      let socket = null
 
       const filtrageActif = computed(() =>
         selectedQuartier.value || selectedVille.value || selectedCategorie.value
@@ -176,36 +175,6 @@
         }
       }
 
-      const initWebSocket = () => {
-        const user = JSON.parse(localStorage.getItem('auth_user_data'))
-        if (!user?.id) return
-
-        socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${user.id}/`)
-
-        socket.onopen = () => {
-          console.log("WebSocket connecté")
-        }
-
-        socket.onmessage = (event) => {
-          const data = JSON.parse(event.data)
-          if(data.notification) {
-            notifications.value.unshift({
-              id: Date.now(),
-              message: data.notification,
-              read: false,
-            })
-          }
-        }
-
-        socket.onclose = () => {
-          console.log("WebSocket déconnecté")
-        }
-
-        socket.onerror = (error) => {
-          console.error("WebSocket erreur :", error)
-        }
-      }
-
       onMounted(async () => {
         try {
           const userData = JSON.parse(localStorage.getItem('auth_user_data'))
@@ -238,7 +207,6 @@
 
           fetchNotifications()
           setInterval(fetchNotifications, 30000)
-          initWebSocket()
         } catch (error) {
           console.error("Erreur chargement des données client:", error)
         }

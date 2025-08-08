@@ -68,7 +68,6 @@
       const notifications = ref([])
       const showNotifications = ref(false)
       let interval = null
-      let socket = null
 
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
@@ -99,36 +98,6 @@
         router.push('/login')
       }
 
-      const initWebSocket = () => {
-        const user = JSON.parse(localStorage.getItem('auth_user_data'))
-        if (!user?.id) return
-
-        socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${user.id}/`)
-
-        socket.onopen = () => {
-          console.log("WebSocket connecté")
-        }
-
-        socket.onmessage = (event) => {
-          const data = JSON.parse(event.data)
-          if(data.notification) {
-            notifications.value.unshift({
-              id: Date.now(),
-              message: data.notification,
-              read: false,
-            })
-          }
-        }
-
-        socket.onclose = () => {
-          console.log("WebSocket déconnecté")
-        }
-
-        socket.onerror = (error) => {
-          console.error("WebSocket erreur :", error)
-        }
-      }
-
       onMounted(() => {
         const user = localStorage.getItem('auth_user_data')
         if (user) {
@@ -136,17 +105,13 @@
           userData.value = JSON.parse(user)
           fetchNotifications()
           interval = setInterval(fetchNotifications, 60000)
-          initWebSocket()
         }
       })
 
       onBeforeUnmount(() => {
         clearInterval(interval)
-        if(socket) {
-          socket.close()
-        }
       })
-
+      
       return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications }
     }
   }
