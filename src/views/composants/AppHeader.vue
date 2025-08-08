@@ -104,7 +104,7 @@
         if (!user?.id) return
 
         // Remplace l'URL selon ton environnement
-        socket = new WebSocket(`ws://127.0.0.1:4040/ws/notifications/${user.id}/`)
+        socket = new WebSocket(`ws://127.0.0.1:6379/ws/notifications/${user.id}/`)
 
         socket.onopen = () => {
           console.log("WebSocket connecté")
