@@ -104,7 +104,7 @@
         if (!user?.id) return
 
         // Remplace l'URL selon ton environnement
-        socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${user.id}/`) 
+        socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/`)
 
         socket.onopen = () => {
           console.log("WebSocket connecté")
@@ -114,7 +114,7 @@
           const data = JSON.parse(event.data)
           if (data.notification) {
             notifications.value.unshift({
-              id: Date.now(), 
+              id: Date.now(),
               message: data.notification,
               read: false
             })
