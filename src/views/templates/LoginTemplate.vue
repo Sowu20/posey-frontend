@@ -66,35 +66,31 @@
           });
 
           if (response.data.access && response.data.user) {
-            const user = response.data.user;
+              const userWithTokens = {
+                  ...response.data.user,
+                  access: response.data.access,
+                  refresh: response.data.refresh 
+              };
 
-            localStorage.setItem('token', response.data.access);
-            localStorage.setItem('refresh_token', response.data.refresh);
-            localStorage.setItem('auth_user_data', JSON.stringify(response.data.user));
-            this.hasError = false;
-            this.errorMessage = '';
-            // this.$router.push('/');
+              localStorage.setItem('auth_user_data', JSON.stringify(userWithTokens));
 
-            Swal.fire({
-              icon: 'success',
-              title: 'Bienvenue ' + user.username,
-              showConfirmButton: false,
-              timer: 1500
-            })
+              this.hasError = false;
+              this.errorMessage = '';
 
-            if (user.role === 'admin') {
-              this.$router.push('/dashboard_admin')
-            } else if (user.role === 'prestataire'){
-              this.$router.push('/')
-            } else {
-              this.$router.push('/')
-            }
+              Swal.fire({
+                icon: 'success',
+                title: 'Bienvenue ' + userWithTokens.username,
+                showConfirmButton: false,
+                timer: 1500
+              });
 
-            this.LoginFormData = {
-              username: '',
-              password: '',
-            };
+              if (userWithTokens.role === 'admin') {
+                this.$router.push('/dashboard_admin');
+              } else {
+                this.$router.push('/');
+              }
 
+              this.LoginFormData = { username: '', password: '' };
           } else {
             this.hasError = true;
             this.errorMessage = "Échec de la connexion : réponse inattendue.";

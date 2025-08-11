@@ -69,7 +69,7 @@
       const next = ref(null)
       const previous = ref(null)
 
-      const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id
+      const userId = JSON.parse(localStorage.getItem('auth_user_data'))?.id ?.access
 
       const fetchCommandes = async (url = null) => {
         loading.value = true

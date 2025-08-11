@@ -79,9 +79,12 @@
       const fetchNotifications = async () => {
         try {
           const user = JSON.parse(localStorage.getItem('auth_user_data'))
-          if (!user?.id) return
+          if (!user?.id || !user?.access) return
 
-          const res = await api.get(`prestation/notifications/`)
+          // On utilise le token dans l'en-tête Authorization
+          const res = await api.get(`prestation/notifications/`, {
+            headers: { Authorization: `Bearer ${user.access}` }
+          })
           notifications.value = res.data
         } catch (err) {
           console.error("Erreur notifications :", err)
@@ -101,10 +104,10 @@
 
       const initWebSocket = () => {
         const user = JSON.parse(localStorage.getItem('auth_user_data'))
-        if (!user?.id) return
+        if (!user?.id || !user?.access) return
 
         // Remplace l'URL selon ton environnement
-        socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${user.id}/`)
+        socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${user.id}/?token=${user.access}`)
 
         socket.onopen = () => {
           console.log("WebSocket connecté")
