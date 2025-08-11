@@ -107,7 +107,7 @@
         if (!user?.id || !user?.access) return
 
         // Remplace l'URL selon ton environnement
-        socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${user.id}/?token=${user.access}`)
+        socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${user.id}/`)
 
         socket.onopen = () => {
           console.log("WebSocket connecté")
