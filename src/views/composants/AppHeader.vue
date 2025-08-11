@@ -38,7 +38,7 @@
             <h6 class="dropdown-header">Notifications</h6>
             <div v-if="notifications.length">
               <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap">
-                🔔 {{ notif.message }}
+                {{ notif.message }}
               </div>
             </div>
             <div v-else class="dropdown-item text-muted">Aucune notification</div>
