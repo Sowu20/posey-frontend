@@ -100,7 +100,9 @@
           const res = await api.get(`prestation/notifications/`, {
             headers: { Authorization: `Bearer ${user.access}` }
           })
-          notifications.value = res.data
+          notifications.value = res.data.sort((a, b) => {
+            return new Date(b.timestamp) -new Date(a.timestamp)
+          })
 
           if (res.data.length) {
             showNotification(res.data[0].message)
@@ -115,7 +117,7 @@
           const user = JSON.parse(localStorage.getItem('auth_user_data'))
           if (!user?.access) return
 
-          await api.post(`notifications/lue/${notifId}/`, {}, {
+          await api.post(`prestation/notifications/lue/${notifId}/`, {}, {
             headers: { Authorization: `Bearer ${user.access}` }
           })
 
@@ -155,8 +157,14 @@
             notifications.value.unshift({
               id: Date.now(),
               message: data.notification,
+              timestamp: new Date().toISOString(),
               read: false
             })
+
+            notifications.value.sort((a, b) => {
+              return new Date(b.created_at) - new Date(a.created_at)
+            })
+            
             showNotification(data.notification)
           }
         }
