@@ -45,7 +45,7 @@
           </div>
 
           <!-- Voir la dernière notif -->
-          <div v-if="lastNotification" class="toast-notification shadow rounded px-3 py-2 text-white">
+          <div v-if="lastNotification" class="toast-notification shadow rounded px-3 py-2">
             {{ lastNotification.message }}
           </div>
         </div>
@@ -186,7 +186,7 @@
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #0d6efd;
+    background-color: #fff;
     z-index: 2000;
     animation: fadeInOut 3s ease forwards;
   }
