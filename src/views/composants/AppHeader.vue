@@ -44,9 +44,8 @@
             <div v-else class="dropdown-item text-muted">Aucune notification</div>
           </div>
 
-          <!-- Voir la dernière notif -->
-          <div v-if="lastNotifications" class="toast-notification shadow rounded px-3 py-2 text-white">
-            {{ lastNotifications.message }}
+          <div v-if="lastNotification" class="toast-notification shadow rounded px-3 py-2 text-white">
+            {{ lastNotification.message }}
           </div>
         </div>
 
