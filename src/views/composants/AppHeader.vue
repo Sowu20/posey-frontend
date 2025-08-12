@@ -43,6 +43,11 @@
             </div>
             <div v-else class="dropdown-item text-muted">Aucune notification</div>
           </div>
+
+          <!-- Voir la dernière notif -->
+          <div v-if="lastNotifications" class="toast-notification shadow rounded px-3 py-2 text-white">
+            {{ lastNotifications.message }}
+          </div>
         </div>
 
         <div class="d-flex gap-2" v-else>
@@ -66,14 +71,17 @@
       const router = useRouter()
       const userData = ref({})
       const notifications = ref([])
-      const showNotifications = ref(false)
+      const lastNotification = ref(null)
       let interval = null
       let socket = null
+      let hideTimer = null
 
-      const formatImage = (imagePath) => {
-        if (!imagePath) return '/img/default-avatar.png'
-        if (imagePath.startsWith('http')) return imagePath
-        return `http://127.0.0.1:8000${imagePath}`
+      const showNotification = (message) => {
+        lastNotification.value = { message }
+        clearTimeout(hideTimer)
+        hideTimer = setTimeout(() => {
+          lastNotification.value = null
+        }, 3000) // 3 secondes
       }
 
       const fetchNotifications = async () => {
@@ -81,18 +89,18 @@
           const user = JSON.parse(localStorage.getItem('auth_user_data'))
           if (!user?.id || !user?.access) return
 
-          // On utilise le token dans l'en-tête Authorization
           const res = await api.get(`prestation/notifications/`, {
             headers: { Authorization: `Bearer ${user.access}` }
           })
           notifications.value = res.data
+
+          if (res.data.length) {
+            // Afficher uniquement la dernière au chargement
+            showNotification(res.data[0].message)
+          }
         } catch (err) {
           console.error("Erreur notifications :", err)
         }
-      }
-
-      const toggleNotifications = () => {
-        showNotifications.value = !showNotifications.value
       }
 
       const logout = () => {
@@ -106,7 +114,6 @@
         const user = JSON.parse(localStorage.getItem('auth_user_data'))
         if (!user?.id || !user?.access) return
 
-        // Remplace l'URL selon ton environnement
         socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${user.id}/`)
 
         socket.onopen = () => {
@@ -121,6 +128,7 @@
               message: data.notification,
               read: false
             })
+            showNotification(data.notification)
           }
         }
 
@@ -146,19 +154,30 @@
 
       onBeforeUnmount(() => {
         clearInterval(interval)
+        clearTimeout(hideTimer)
         if (socket) {
           socket.close()
         }
       })
 
-      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications }
+      return { isLoggedIn, userData, logout, notifications, lastNotification }
     }
   }
 </script>
 
 <style scoped>
-  .dropdown-menu {
-    max-height: 300px;
-    overflow-y: auto;
+  .toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #0d6efd; /* Bleu bootstrap */
+    z-index: 2000;
+    animation: fadeInOut 3s ease forwards;
+  }
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-10px); }
   }
 </style>
