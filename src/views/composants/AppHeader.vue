@@ -186,7 +186,14 @@
     position: fixed;
     top: 20px;
     right: 20px;
+    background-color: #0d6efd;
     z-index: 2000;
     animation: fadeInOut 3s ease forwards;
+  }
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-10px); }
   }
 </style>
