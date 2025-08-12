@@ -37,7 +37,7 @@
           <div v-if="showNotifications" class="dropdown-menu show p-3 shadow rounded" style="position: absolute; right: 20px; top: 70px; min-width: 300px; z-index: 999;">
             <h6 class="dropdown-header">Notifications</h6>
             <div v-if="notifications.length">
-              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap">
+              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap" :class="{ 'fw-bold': !notif.is_read }" @click="markAsRead(notif.id)">
                 {{ notif.message }}
               </div>
             </div>
@@ -110,6 +110,23 @@
         }
       }
 
+      const markAsRead = async (notifId) => {
+        try {
+          const user = JSON.parse(localStorage.getItem('auth_user_data'))
+          if (!user?.access) return
+
+          await api.post(`notifications/lue/${notifId}/`, {}, {
+            headers: { Authorization: `Bearer ${user.access}` }
+          })
+
+          // Met à jour localement l'état
+          const notif = notifications.value.find(n => n.id === notifId)
+          if (notif) notif.is_read = true
+        } catch (err) {
+          console.error("Erreur marquage notification :", err)
+        }
+      }
+
       const toggleNotifications = () => {
         showNotifications.value = !showNotifications.value
       }
@@ -172,7 +189,7 @@
         }
       })
 
-      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, lastNotification }
+      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, lastNotification, markAsRead }
     }
   }
 </script>
