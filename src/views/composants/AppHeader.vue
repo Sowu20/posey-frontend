@@ -37,7 +37,8 @@
           <div v-if="showNotifications" class="dropdown-menu show p-3 shadow rounded" style="position: absolute; right: 20px; top: 70px; min-width: 300px; z-index: 999;">
             <h6 class="dropdown-header">Notifications</h6>
             <div v-if="notifications.length">
-              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap" :class="{ 'fw-bold': !notif.is_read }" @click="markAsRead(notif.id), activeNotification(notif)">
+              <!-- markAsRead(notif.id), -->
+              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap" :class="{ 'fw-bold': !notif.is_read }" @click="activeNotification(notif)">
                 {{ notif.message }}
               </div>
             </div>
@@ -144,18 +145,18 @@
       }
 
       const openNotification = async (notif) => {
-        // if(!notif.is_read) {
-        //   try {
-        //     const user = JSON.parse(localStorage.getItem('auth_user_data'))
-        //     if (!user?.access) return
-        //     await api.post(`prestation/notifications/lue/${notif.id}/`, {}, {
-        //       headers: { Authorization: `Bearer ${user.access}` }
-        //     })
-        //     notif.is_read = true
-        //   } catch (error) {
-        //     console.log("Erreur de notification", error)
-        //   }
-        // }
+        if(!notif.is_read) {
+          try {
+            const user = JSON.parse(localStorage.getItem('auth_user_data'))
+            if (!user?.access) return
+            await api.post(`prestation/notifications/lue/${notif.id}/`, {}, {
+              headers: { Authorization: `Bearer ${user.access}` }
+            })
+            notif.is_read = true
+          } catch (error) {
+            console.log("Erreur de notification", error)
+          }
+        }
         activeNotification.value = notif
       }
       const closeNotification = () => {
@@ -252,14 +253,22 @@
   }
   .notification-popup-overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
     z-index: 3000;
   }
+  .notification-popup-overlay.show {
+    transform: translateX(0);
+  }
   .notification-popup {
-    max-width: 400px;
+    padding: 20px;
+    overflow-y: auto;
+    height: 100%;
   }
 </style>
