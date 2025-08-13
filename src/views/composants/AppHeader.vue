@@ -37,7 +37,7 @@
           <div v-if="showNotifications" class="dropdown-menu show p-3 shadow rounded" style="position: absolute; right: 20px; top: 70px; min-width: 300px; z-index: 999;">
             <h6 class="dropdown-header">Notifications</h6>
             <div v-if="notifications.length">
-              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap" :class="{ 'fw-bold': !notif.is_read }" @click="activeNotification(notif)">
+              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap" :class="{ 'fw-bold': !notif.is_read }" @click="openNotification(notif)">
                 {{ notif.message }}
               </div>
             </div>
