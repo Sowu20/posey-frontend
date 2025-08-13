@@ -45,11 +45,11 @@
           </div>
 
           <!-- Popup notification -->
-          <div v-if="activeNotification" class="notification-popup-overlay" @click.self="closeNotificationPopup">
+          <div v-if="activeNotification" class="notification-popup-overlay" @click.self="closeNotification">
             <div class="notification-popup shadow rounded p-3 bg-white">
               <h5>Notification</h5>
               <p>{{ activeNotification.message }}</p>
-              <button class="btn btn-primary" @click="closeNotificationPopup">Fermer</button>
+              <button class="btn btn-primary" @click="closeNotification">Fermer</button>
             </div>
           </div>
 
@@ -197,7 +197,7 @@
             })
 
             notifications.value.sort((a, b) => {
-              return new Date(b.created_at) - new Date(a.created_at)
+              return new Date(b.timestamp) - new Date(a.timestamp)
             })
 
             showNotification(data.notification)
@@ -205,7 +205,8 @@
         }
 
         socket.onclose = () => {
-          console.log("WebSocket déconnecté")
+          console.log("WebSocket déconnecté, reconnexion ...")
+          setTimeout(initWebSocket, 5000)
         }
 
         socket.onerror = (err) => {
