@@ -37,11 +37,20 @@
           <div v-if="showNotifications" class="dropdown-menu show p-3 shadow rounded" style="position: absolute; right: 20px; top: 70px; min-width: 300px; z-index: 999;">
             <h6 class="dropdown-header">Notifications</h6>
             <div v-if="notifications.length">
-              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap" :class="{ 'fw-bold': !notif.is_read }" @click="markAsRead(notif.id)">
+              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap" :class="{ 'fw-bold': !notif.is_read }" @click="openNotification(notif)">
                 {{ notif.message }}
               </div>
             </div>
             <div v-else class="dropdown-item text-muted">Aucune notification</div>
+          </div>
+
+          <!-- Popup notification -->
+          <div v-if="activeNotification" class="notification-popup-overlay" @click.self="closeNotificationPopup">
+            <div class="notification-popup shadow rounded p-3 bg-white">
+              <h5>Notification</h5>
+              <p>{{ activeNotification.message }}</p>
+              <button class="btn btn-primary" @click="closeNotificationPopup">Fermer</button>
+            </div>
           </div>
 
           <!-- Voir la dernière notif -->
@@ -73,9 +82,11 @@
       const notifications = ref([])
       const lastNotification = ref(false)
       const showNotifications = ref(false)
+      const activeNotification = ref(null)
       let interval = null
       let socket = null
       let hideTimer = null
+      let firstFetchDone = false
 
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
@@ -104,8 +115,12 @@
             return new Date(b.timestamp) -new Date(a.timestamp)
           })
 
-          if (res.data.length) {
-            showNotification(res.data[0].message)
+          if (!firstFetchDone) {
+            const lastUnread = notifications.value.find(n => !n.is_read)
+            if (lastUnread) {
+              showNotification(lastUnread.message)
+            }
+            firstFetchDone = true
           }
         } catch (err) {
           console.error("Erreur notifications :", err)
@@ -133,6 +148,25 @@
         showNotifications.value = !showNotifications.value
       }
 
+      const openNotification = async (notif) => {
+        if(!notif.is_read) {
+          try {
+            const user = JSON.parse(localStorage.getItem('auth_user_data'))
+            if (!user?.access) return
+            await api.post(`prestation/notifications/lue/${notif.id}/`, {}, {
+              headers: { Authorization: `Bearer ${user.access}` }
+            })
+            notif.is_read = true
+          } catch (error) {
+            console.log("Erreur de notification", error)
+          }
+        }
+        activeNotification.value = notif
+      }
+      const closeNotification = () => {
+        activeNotification.value = null
+      }
+
       const logout = () => {
         localStorage.removeItem('auth_user_data')
         isLoggedIn.value = false
@@ -158,7 +192,7 @@
               id: Date.now(),
               message: data.notification,
               timestamp: new Date().toISOString(),
-              read: false
+              is_read: false
             })
 
             notifications.value.sort((a, b) => {
@@ -197,7 +231,7 @@
         }
       })
 
-      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, lastNotification, markAsRead }
+      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, lastNotification, markAsRead, openNotification, closeNotification, activeNotification }
     }
   }
 </script>
@@ -220,5 +254,17 @@
     10% { opacity: 1; transform: translateY(0); }
     90% { opacity: 1; }
     100% { opacity: 0; transform: translateY(-10px); }
+  }
+  .notification-popup-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+  }
+  .notification-popup {
+    max-width: 400px;
   }
 </style>
