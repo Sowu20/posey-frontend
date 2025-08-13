@@ -37,8 +37,7 @@
           <div v-if="showNotifications" class="dropdown-menu show p-3 shadow rounded" style="position: absolute; right: 20px; top: 70px; min-width: 300px; z-index: 999;">
             <h6 class="dropdown-header">Notifications</h6>
             <div v-if="notifications.length">
-              <!-- markAsRead(notif.id), -->
-              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap" :class="{ 'fw-bold': !notif.is_read }" @click="activeNotification(notif)">
+              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap" :class="{ 'fw-bold': !notif.is_read }" @click="markAsRead(notif.id), activeNotification(notif)">
                 {{ notif.message }}
               </div>
             </div>
@@ -87,6 +86,7 @@
       let interval = null
       let socket = null
       let hideTimer = null
+      let firstFetchDone = false
 
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
@@ -115,8 +115,13 @@
             return new Date(b.timestamp) -new Date(a.timestamp)
           })
 
-          if (res.data.length) {
-            showNotification(res.data[0].message)
+          // if (res.data.length) {
+          //   showNotification(res.data[0].message)
+          // }
+          if (!firstFetchDone) {
+            const lastUnread = notifications.value.find(n => !n.is_read)
+            if (lastUnread) showNotification(lastUnread.message)
+            firstFetchDone = true
           }
         } catch (err) {
           console.error("Erreur notifications :", err)
@@ -145,18 +150,18 @@
       }
 
       const openNotification = async (notif) => {
-        if(!notif.is_read) {
-          try {
-            const user = JSON.parse(localStorage.getItem('auth_user_data'))
-            if (!user?.access) return
-            await api.post(`prestation/notifications/lue/${notif.id}/`, {}, {
-              headers: { Authorization: `Bearer ${user.access}` }
-            })
-            notif.is_read = true
-          } catch (error) {
-            console.log("Erreur de notification", error)
-          }
-        }
+        // if(!notif.is_read) {
+        //   try {
+        //     const user = JSON.parse(localStorage.getItem('auth_user_data'))
+        //     if (!user?.access) return
+        //     await api.post(`prestation/notifications/lue/${notif.id}/`, {}, {
+        //       headers: { Authorization: `Bearer ${user.access}` }
+        //     })
+        //     notif.is_read = true
+        //   } catch (error) {
+        //     console.log("Erreur de notification", error)
+        //   }
+        // }
         activeNotification.value = notif
       }
       const closeNotification = () => {
