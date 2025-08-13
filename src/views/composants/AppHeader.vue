@@ -86,7 +86,6 @@
       let interval = null
       let socket = null
       let hideTimer = null
-      let firstFetchDone = false
 
       const formatImage = (imagePath) => {
         if (!imagePath) return '/img/default-avatar.png'
@@ -115,12 +114,8 @@
             return new Date(b.timestamp) -new Date(a.timestamp)
           })
 
-          if (!firstFetchDone) {
-            const lastUnread = notifications.value.find(n => !n.is_read)
-            if (lastUnread) {
-              showNotification(lastUnread.message)
-            }
-            firstFetchDone = true
+          if (res.data.length) {
+            showNotification(res.data[0].message)
           }
         } catch (err) {
           console.error("Erreur notifications :", err)
