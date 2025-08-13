@@ -188,6 +188,7 @@
 
         socket.onmessage = (event) => {
           const data = JSON.parse(event.data)
+          console.log("Notification reçue: ", data)
           if (data.notification) {
             notifications.value.unshift({
               id: Date.now(),
@@ -195,6 +196,8 @@
               timestamp: new Date().toISOString(),
               is_read: false
             })
+
+            notifications.value.unshift(data)
 
             notifications.value.sort((a, b) => {
               return new Date(b.timestamp) - new Date(a.timestamp)
