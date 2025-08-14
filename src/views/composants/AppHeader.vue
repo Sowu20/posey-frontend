@@ -205,8 +205,6 @@
               is_read: false
             })
 
-            notifications.value.unshift(data)
-
             notifications.value.sort((a, b) => {
               return new Date(b.timestamp) - new Date(a.timestamp)
             })
