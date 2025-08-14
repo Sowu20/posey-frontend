@@ -28,6 +28,9 @@
           <!-- Cloche de notification -->
           <div class="position-relative me-3" @click="toggleNotifications" style="cursor: pointer;">
             <i class="bi bi-bell fs-5 text-dark"></i>
+            <!-- <span v-if="notifications.length" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ notifications.length }}
+            </span> -->
             <span v-if="notifications.length" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
               {{ notifications.length }}
             </span>
@@ -69,7 +72,7 @@
 </template>
 
 <script>
-  import { ref, onMounted, onBeforeUnmount } from 'vue'
+  import { ref, onMounted, computed, onBeforeUnmount } from 'vue'
   import { useRouter } from 'vue-router'
   import api from '../services/api'
 
@@ -93,6 +96,10 @@
         if (imagePath.startsWith('http')) return imagePath
         return `http://127.0.0.1:8000${imagePath}`
       }
+
+      const unreadCount = computed(() => {
+        return notifications.value.filter(n => !n.is_read).length
+      })
 
       const showNotification = (message) => {
         lastNotification.value = { message }
@@ -164,6 +171,7 @@
         }
         activeNotification.value = notif
       }
+
       const closeNotification = () => {
         activeNotification.value = null
       }
