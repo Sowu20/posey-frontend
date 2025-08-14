@@ -244,7 +244,7 @@
         }
       })
 
-      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, lastNotification, markAsRead, openNotification, closeNotification, activeNotification }
+      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, lastNotification, markAsRead, openNotification, closeNotification, activeNotification, unreadCount }
     }
   }
 </script>
