@@ -179,16 +179,16 @@
         activeNotification.value = null
       }
 
-      const deleteNotification = async (notif) => {
+      const deleteNotification = async (id) => {
         try {
           const user = JSON.parse(localStorage.getItem('auth_user_data'))
           if (!user?.access) return
 
-          await api.delete(`prestation/notifications/supprimer/${notif.id}/`, {
+          await api.delete(`prestation/notifications/supprimer/${id}/`, {
             headers: { Authorization: `Bearer ${user.access}` }
           })
           // Supprime la notification localement
-          notifications.value = notifications.value.filter(n => n.id !== notif)
+          notifications.value = notifications.value.filter(n => n.id !== id)
         } catch (err) {
           console.error("Erreur suppression notification :", err)
         }
