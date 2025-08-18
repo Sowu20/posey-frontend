@@ -89,7 +89,7 @@
       const lastNotification = ref(false)
       const showNotifications = ref(false)
       const activeNotification = ref(null)
-      // let interval = null
+      let interval = null
       let socket = null
       let hideTimer = null
       let firstFetchDone = false
@@ -245,13 +245,13 @@
           isLoggedIn.value = true
           userData.value = JSON.parse(user)
           fetchNotifications()
-          // interval = setInterval(fetchNotifications, 60000)
+          interval = setInterval(fetchNotifications, 1000)
           initWebSocket()
         }
       })
 
       onBeforeUnmount(() => {
-        // clearInterval(interval)
+        clearInterval(interval)
         clearTimeout(hideTimer)
         if (socket) {
           socket.close()
