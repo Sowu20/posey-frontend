@@ -44,8 +44,8 @@
                 <span @click="openNotification(notif)" style="cursor: pointer;">
                   {{ notif.message }}
                 </span>
+                <i class="bi bi-x text-danger ms-2" style="cursor: pointer;" @click.stop="deleteNotification(notif.id)"></i>
               </div>
-              <i class="bi bi-x text-danger ms-2" style="cursor: pointer;" @click.stop="deleteNotification(notif.id)"></i>
             </div>
             <div v-else class="dropdown-item text-muted">Aucune notification</div>
           </div>
