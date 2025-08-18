@@ -40,9 +40,12 @@
           <div v-if="showNotifications" class="dropdown-menu show p-3 shadow rounded" style="position: absolute; right: 20px; top: 70px; min-width: 300px; z-index: 999;">
             <h6 class="dropdown-header">Notifications</h6>
             <div v-if="notifications.length">
-              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item text-wrap" :class="{ 'fw-bold': !notif.is_read }" @click="openNotification(notif)">
-                {{ notif.message }}
+              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item d-flex justify-content-between align-items-center text-wrap" :class="{ 'fw-bold': !notif.is_read }">
+                <span @click="openNotification(notif)" style="cursor: pointer;">
+                  {{ notif.message }}
+                </span>
               </div>
+              <i class="bi bi-x text-danger ms-2" style="cursor: pointer;" @click.stop="deleteNotification(notif.id)"></i>
             </div>
             <div v-else class="dropdown-item text-muted">Aucune notification</div>
           </div>
@@ -176,6 +179,21 @@
         activeNotification.value = null
       }
 
+      const deleteNotification = async (notifId) => {
+        try {
+          const user = JSON.parse(localStorage.getItem('auth_user_data'))
+          if (!user?.access) return
+
+          await api.delete(`prestation/notifications/supprimer/${notifId}/`, {
+            headers: { Authorization: `Bearer ${user.access}` }
+          })
+          // Supprime la notification localement
+          notifications.value = notifications.value.filter(n => n.id !== notifId)
+        } catch (err) {
+          console.error("Erreur suppression notification :", err)
+        }
+      }
+
       const logout = () => {
         localStorage.removeItem('auth_user_data')
         isLoggedIn.value = false
@@ -242,7 +260,7 @@
         }
       })
 
-      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, lastNotification, markAsRead, openNotification, closeNotification, activeNotification, unreadCount }
+      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, lastNotification, markAsRead, openNotification, closeNotification, activeNotification, unreadCount, deleteNotification }
     }
   }
 </script>
