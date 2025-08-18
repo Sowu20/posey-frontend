@@ -187,8 +187,6 @@
           await api.delete(`prestation/notifications/supprimer/${id}/`, {
             headers: { Authorization: `Bearer ${user.access}` }
           })
-          // Supprime la notification localement
-          notifications.value = notifications.value.filter(n => n.id !== id)
         } catch (err) {
           console.error("Erreur suppression notification :", err)
         }
