@@ -107,10 +107,9 @@
       const showNotification = (message) => {
         lastNotification.value = { message }
         clearTimeout(hideTimer)
-        // hideTimer = setTimeout(() => {
-        //   lastNotification.value = null
-        // }, 3000)
-        lastNotification.value = null
+        hideTimer = setTimeout(() => {
+          lastNotification.value = null
+        }, 3000)
       }
 
       const fetchNotifications = async () => {
