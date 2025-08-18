@@ -109,7 +109,7 @@
         clearTimeout(hideTimer)
         hideTimer = setTimeout(() => {
           lastNotification.value = null
-        }, 1000)
+        }, 3000)
       }
 
       const fetchNotifications = async () => {
