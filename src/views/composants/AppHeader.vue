@@ -105,6 +105,8 @@
       })
 
       const showNotification = (message) => {
+        if (lastNotification.value) return
+
         lastNotification.value = { message }
         hideTimer = setTimeout(() => {
           lastNotification.value = null
@@ -212,6 +214,7 @@
         socket.onmessage = (event) => {
           const data = JSON.parse(event.data)
           console.log("Notification reçue: ", data)
+
           if (data.notification) {
             notifications.value.unshift({
               id: Date.now(),
@@ -243,7 +246,8 @@
           isLoggedIn.value = true
           userData.value = JSON.parse(user)
           fetchNotifications()
-          interval = setInterval(fetchNotifications, 1000)
+          // interval = setInterval(fetchNotifications, 1000)
+          fetchNotifications()
           initWebSocket()
         }
       })
