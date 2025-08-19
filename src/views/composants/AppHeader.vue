@@ -147,7 +147,6 @@
             headers: { Authorization: `Bearer ${user.access}` }
           })
 
-          // Met à jour localement l'état
           const notif = notifications.value.find(n => n.id === notifId)
           if (notif) notif.is_read = true
         } catch (err) {
@@ -224,7 +223,6 @@
             notifications.value.sort((a, b) => {
               return new Date(b.timestamp) - new Date(a.timestamp)
             })
-
             showNotification(data.notification)
           }
         }
