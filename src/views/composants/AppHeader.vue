@@ -247,7 +247,7 @@
           userData.value = JSON.parse(user)
           fetchNotifications()
           // interval = setInterval(fetchNotifications, 1000)
-          fetchNotifications()
+          fetchNotifications() 
           initWebSocket()
         }
       })
