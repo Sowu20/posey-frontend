@@ -246,11 +246,7 @@
           isLoggedIn.value = true
           userData.value = JSON.parse(user)
           fetchNotifications()
-          // interval = setInterval(fetchNotifications, 1000)
-          interval = setInterval(() => {
-            fetchNotifications()
-            showNotification()
-          }, 1000)
+          interval = setInterval(fetchNotifications, 1000)
           // fetchNotifications()
           initWebSocket()
         }
