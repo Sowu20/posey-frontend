@@ -105,12 +105,12 @@
       })
 
       const showNotification = (message) => {
-        if (lastNotification.value) return
+        // if (lastNotification.value) return
 
         lastNotification.value = { message }
         hideTimer = setTimeout(() => {
           lastNotification.value = null
-        }, 3000)
+        }, 1000)
         clearTimeout(hideTimer)
       }
 
@@ -247,7 +247,7 @@
           userData.value = JSON.parse(user)
           fetchNotifications()
           // interval = setInterval(fetchNotifications, 1000)
-          fetchNotifications() 
+          fetchNotifications()
           initWebSocket()
         }
       })
