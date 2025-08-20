@@ -259,7 +259,8 @@
 
       onBeforeUnmount(() => {
         clearInterval(interval)
-        clearTimeout(hideTimer)
+        // clearTimeout(hideTimer)
+        lastNotification()
         if (socket) {
           socket.close()
         }
