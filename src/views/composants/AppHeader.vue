@@ -251,6 +251,7 @@
           isLoggedIn.value = true
           userData.value = JSON.parse(user)
           fetchNotifications()
+          lastNotification()
           interval = setInterval(fetchNotifications, 1000)
           // fetchNotifications()
           initWebSocket()
@@ -260,7 +261,6 @@
       onBeforeUnmount(() => {
         clearInterval(interval)
         // clearTimeout(hideTimer)
-        lastNotification()
         if (socket) {
           socket.close()
         }
