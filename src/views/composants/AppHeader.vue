@@ -48,12 +48,6 @@
               </div>
             </div>
             <div v-else class="dropdown-item text-muted">Aucune notification</div>
-
-            <div class="p-3 border-top">
-              <button class="btn btn-primary w-100" @click="markAllRead">
-                Marquer tout comme lu
-              </button>
-            </div>
           </div>
 
           <!-- Voir la dernière notif -->
