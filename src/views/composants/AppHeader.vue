@@ -37,7 +37,34 @@
           </div>
 
           <!-- Menu notifications -->
-          <div v-if="showNotifications" class="dropdown-menu show p-3 shadow rounded" style="position: absolute; right: 20px; top: 70px; min-width: 300px; z-index: 999;">
+          <transition name="slide">
+            <div v-if="drawerOpen" class="drawer shadow">
+              <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+                <h5 class="mb-0">Notifications</h5>
+                <i class="bi bi-x-lg" style="cursor:pointer" @click="toggleDrawer"></i>
+              </div>
+
+              <div class="drawer-body">
+                <div v-if="notifications.length">
+                  <div v-for="notif in notifications" :key="notif.id" class="p-2 border-bottom d-flex justify-content-between align-items-start" :class="{ 'fw-bold': !notif.is_read }">
+                    <div @click="openNotification(notif)" style="cursor:pointer">
+                      <p class="mb-1">{{ notif.message }}</p>
+                      <small class="text-muted">{{ new Date(notif.timestamp).toLocaleString() }}</small>
+                    </div>
+                    <i class="bi bi-trash text-danger ms-2" style="cursor: pointer;" @click.stop="deleteNotification(notif.id)"></i>
+                  </div>
+                </div>
+                <div v-else class="text-muted p-3">Aucune notification</div>
+              </div>
+
+              <div class="p-3 border-top">
+                <button class="btn btn-primary w-100" @click="markAllRead">
+                  Marquer tout comme lu
+                </button>
+              </div>
+            </div>
+          </transition>
+          <!-- <div v-if="showNotifications" class="dropdown-menu show p-3 shadow rounded" style="position: absolute; right: 20px; top: 70px; min-width: 300px; z-index: 999;">
             <h6 class="dropdown-header">Notifications</h6>
             <div v-if="notifications.length">
               <div v-for="notif in notifications" :key="notif.id" class="dropdown-item d-flex justify-content-between align-items-center text-wrap" :class="{ 'fw-bold': !notif.is_read }">
@@ -48,16 +75,7 @@
               </div>
             </div>
             <div v-else class="dropdown-item text-muted">Aucune notification</div>
-          </div>
-
-          <!-- Popup notification -->
-          <div v-if="activeNotification" class="notification-popup-overlay" @click.self="closeNotification">
-            <div class="notification-popup shadow rounded p-3 bg-white">
-              <h5>Notification</h5>
-              <p>{{ activeNotification.message }}</p>
-              <button class="btn btn-primary" @click="closeNotification">Fermer</button>
-            </div>
-          </div>
+          </div> -->
 
           <!-- Voir la dernière notif -->
           <div v-if="lastNotification" class="toast-notification shadow rounded px-3 py-2">
@@ -88,6 +106,7 @@
       const notifications = ref([])
       const lastNotification = ref(false)
       const showNotifications = ref(false)
+      const drawerOpen = ref(false)
       const activeNotification = ref(null)
       let interval = null
       let socket = null
@@ -153,6 +172,20 @@
           if (notif) notif.is_read = true
         } catch (err) {
           console.error("Erreur marquage notification :", err)
+        }
+      }
+
+      const markAllRead = async () => {
+        try {
+          const user = JSON.parse(localStorage.getItem('auth_user_data'))
+          if (!user?.access) return
+
+          await api.post('prestation/notifications/tous_lues/', {}, {
+            headers: { Authorization: `Bearer ${user.access}` }
+          })
+          notifications.value.forEach(n => n.is_read = true)
+        } catch (err) {
+          console.error('Erreur! Tous les notifications ne sont pas marquées comme lues :', err)
         }
       }
 
@@ -240,6 +273,10 @@
         }
       }
 
+      const toggleDrawer = () => {
+        drawerOpen.value = !drawerOpen.value
+      }
+
       onMounted(() => {
         const user = localStorage.getItem('auth_user_data')
         if (user) {
@@ -260,7 +297,7 @@
         }
       })
 
-      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, lastNotification, markAsRead, openNotification, closeNotification, activeNotification, unreadCount, deleteNotification }
+      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, lastNotification, markAsRead, openNotification, closeNotification, activeNotification, unreadCount, deleteNotification, drawerOpen, toggleDrawer, markAllRead }
     }
   }
 </script>
@@ -303,5 +340,26 @@
     padding: 20px;
     overflow-y: auto;
     height: 100%;
+  }
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background: #fff;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+  }
+  .drawer-body {
+    flex: 1;
+    overflow-y: auto;
+  }
+  .slide-enter-active, .slide-leave-active {
+    transition: transform 0.3s ease;
+  }
+  .slide-enter-from, .slide-leave-to {
+    transform: translateX(100%);
   }
 </style>
