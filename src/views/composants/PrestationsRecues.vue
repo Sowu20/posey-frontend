@@ -125,7 +125,7 @@
           presta.loading = true
           const res = await api.post(`/prestation/accepter/${presta.id}/`)
           presta.statut = 'accepte'
-
+          
           Swal.fire({
             title: 'Acceptée !',
             text: res.data.message || 'La prestation a été acceptée avec succès.',
