@@ -222,7 +222,7 @@
 
           const payload = {
             client: parseInt(userData.id),
-            prestataire: parseInt(this.prestataireSelectionne.id),
+            prestataire_cible: parseInt(this.prestataireSelectionne.id),
             categorie: parseInt(this.categorie),
             titre: titre,
             description: this.description
