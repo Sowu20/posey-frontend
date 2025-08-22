@@ -123,7 +123,12 @@
 
         try {
           presta.loading = true
-          const res = await api.post(`/prestation/accepter/${presta.id}/`)
+          const user = JSON.parse(localStorage.getItem('auth_user_data'))
+          if (!user?.access) return
+
+          const res = await api.post(`/prestation/accepter/${presta.id}/`, {
+            headers: { Authorization: `Bearer ${user.access}` }
+          })
           presta.statut = 'accepte'
 
           Swal.fire({
