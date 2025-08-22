@@ -219,7 +219,6 @@
           }
 
           const titre = `Demande de ${this.categories.find(cat => cat.id === this.categorie)?.nom || ''}`
-
           const payload = {
             client: parseInt(userData.id),
             prestataire_cible: parseInt(this.prestataireSelectionne.id),
