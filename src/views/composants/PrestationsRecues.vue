@@ -104,6 +104,8 @@
             return 'Terminée'
           case 'annulee':
             return 'Annulée'
+          case 'refusee':
+            return 'Refusée'
           default:
             return statut
         }
