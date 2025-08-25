@@ -103,7 +103,6 @@
 
           // Émettre l'événement avec les bonnes données
           this.$emit('depot-effectue', response.data.transaction)
-
           // Optionnel : réinitialiser le formulaire
           this.telephone = ''
           this.methode = ''
