@@ -21,7 +21,7 @@
             </button>
 
             <!-- Afficher le bouton "Refuser" uniquement si la prestation est en attente et déjà assignée -->
-            <button v-if="presta.statut === 'en_attente' && presta.prestataire" class="btn btn-sm btn-danger" @click="RefuserPrestation(presta)" :disabled="presta.loading">
+            <button v-if="presta.statut === 'en_attente' && (presta.prestataire || presta.prestataire_cible)" class="btn btn-sm btn-danger" @click="RefuserPrestation(presta)" :disabled="presta.loading">
               {{ presta.loading ? 'Traitement...' : 'Refuser' }}
             </button>
           </div>
