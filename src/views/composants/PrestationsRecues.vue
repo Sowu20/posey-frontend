@@ -177,7 +177,6 @@
         if (!userData || !userData.id) throw new Error("Utilisateur non connecté.")
 
         const id = userData.id
-        
         const res = await api.get(`/prestation/prestataire/${id}`)
 
         this.prestations = res.data.prestations.map(p => ({ ...p, loading: false }))
