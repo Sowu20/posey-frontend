@@ -3,7 +3,7 @@ import axios from 'axios'
 const token = localStorage.getItem('auth_token');
 
 const api = axios.create({
-  baseURL: 'https://culture-cedar-briefing-impossible.trycloudflare.com/api/',
+  baseURL: 'https://landscape-waterproof-yo-ian.trycloudflare.com/api/',
   headers: {
     ...(token && { 'Authorization': `Token ${token}` }), // ou Bearer
     'Content-Type': 'application/json',
