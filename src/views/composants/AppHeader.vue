@@ -164,7 +164,6 @@
       const toggleNotifications = () => {
         showNotifications.value = !showNotifications.value
       }
-
       const openNotification = async (notif) => {
         if(!notif.is_read) {
           try {
