@@ -3,9 +3,9 @@ import axios from 'axios'
 const token = localStorage.getItem('auth_token');
 
 const api = axios.create({
-  baseURL: 'https://landscape-waterproof-yo-ian.trycloudflare.com/api/',
+  baseURL: 'https://0c53edb08fe9.ngrok-free.app/api/',
   headers: {
-    ...(token && { 'Authorization': `Token ${token}` }), // ou Bearer
+    ...(token && { 'Authorization': `Token ${token}` }),
     'Content-Type': 'application/json',
     'ngrok-skip-browser-warning': 'true',
   },
