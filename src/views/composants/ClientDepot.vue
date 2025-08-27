@@ -137,7 +137,7 @@
         const interval = setInterval(async () => {
           tentatives++
           try {
-            const res = await api.get('portefeuille/verifier-paiement/', { tx_reference })
+            const res = await api.post('portefeuille/verifier-paiement/', { tx_reference })
 
             if (res.data.message === "Paiement confirmé.") {
               clearInterval(interval)
