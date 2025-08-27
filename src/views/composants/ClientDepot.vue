@@ -144,7 +144,7 @@
               Swal.fire({
                 icon: 'success',
                 title: 'Dépôt réussi',
-                text: `Votre solde a été mis à jour : ${res.data.solde_utilisateur} FCFA`,
+                text: `Votre solde a été mis à jour : ${res.data.solde} FCFA`,
               })
               this.$emit('depot-effectue', res.data)
             }
@@ -168,7 +168,7 @@
               text: 'Le délai de vérification du paiement a été dépassé. Veuillez réessayer.'
             })
           }
-        }, 5000)
+        }, 10000)
       }
     },
   }
