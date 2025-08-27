@@ -93,6 +93,8 @@
             description: 'Dépôt client via plateforme'
           })
 
+          const tx_reference = response.data.transaction.reference_externe
+
           Swal.fire({
             icon: 'success',
             title: 'Paiement lancé',
@@ -101,9 +103,10 @@
             showConfirmButton: false
           })
 
+          this.verifierPaiement(tx_reference)
+
           // Émettre l'événement avec les bonnes données
           this.$emit('depot-effectue', response.data.transaction)
-          // Optionnel : réinitialiser le formulaire
           this.telephone = ''
           this.methode = ''
           this.localMontant = this.montant
@@ -128,6 +131,44 @@
         } finally {
           this.loading = false
         }
+      },
+      async verifierPaiement(tx_reference) {
+        let tentatives = 0
+        const interval = setInterval(async () => {
+          tentatives++
+          try {
+            const res = await api.get('portefeuille/verifier-paiement/', { tx_reference })
+
+            if (res.data.message === "Paiement confirmé.") {
+              clearInterval(interval)
+              Swal.fire({
+                icon: 'success',
+                title: 'Dépôt réussi',
+                text: `Votre solde a été mis à jour : ${res.data.solde_utilisateur} FCFA`,
+              })
+              this.$emit('depot-effectue', res.data)
+            }
+            else if (res.data.statut === "échec") {
+              clearInterval(interval)
+              Swal.fire({
+                icon: 'error',
+                title: 'Échec du paiement',
+                text: 'Votre dépôt a échoué.'
+              })
+            }
+          } catch (error) {
+            console.error("Erreur vérification paiement :", error)
+          }
+
+          if (tentatives >= 12) {
+            clearInterval(interval)
+            Swal.fire({
+              icon: 'error',
+              title: 'Délai dépassé',
+              text: 'Le délai de vérification du paiement a été dépassé. Veuillez réessayer.'
+            })
+          }
+        }, 5000)
       }
     },
   }
