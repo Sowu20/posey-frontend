@@ -11,7 +11,7 @@
             <h5 class="card-title">{{ presta.titre }}</h5>
             <p class="card-text text-muted">{{ presta.description }}</p>
             <p class="fw-bold text-primary">{{ presta.prix }} FCFA</p>
-            <button class="btn btn-success w-100" @click="commander(presta)">
+            <button class="btn btn-primary w-100" @click="commander(presta)">
               Commander
             </button>
           </div>
