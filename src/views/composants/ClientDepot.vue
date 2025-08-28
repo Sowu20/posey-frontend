@@ -114,7 +114,7 @@
         } catch (error) {
           console.error("Erreur dépôt :", error)
 
-          // Gestion des erreurs spécifiques
+          // Gestion des erreurs spécifiques thgtmorof
           let errorMessage = 'Une erreur est survenue lors du dépôt.'
 
           if (error.response?.data?.detail) {
