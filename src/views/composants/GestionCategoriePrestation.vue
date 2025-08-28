@@ -83,7 +83,7 @@
     methods: {
       async chargerCategories() {
         try {
-          const res = await api.get('/detail_categorie/')
+          const res = await api.get('/prestation/detail_categorie/')
           this.categories = res.data
         } catch (err) {
           console.error('Erreur chargement des catégories', err)
@@ -108,10 +108,10 @@
       async soumettreCategorie() {
         try {
           if (this.mode === 'ajout') {
-            await api.post('/register_categorie/', this.form)
+            await api.post('/prestation/register_categorie/', this.form)
             Swal.fire('Succès', 'Catégorie ajoutée.', 'success')
           } else {
-            await api.put(`/update_categorie/${this.editId}/`, this.form)
+            await api.put(`/prestation/update_categorie/${this.editId}/`, this.form)
             Swal.fire('Succès', 'Catégorie modifiée.', 'success')
           }
           this.modalInstance.hide()
@@ -133,7 +133,7 @@
         }).then(async (result) => {
           if (result.isConfirmed) {
             try {
-              await api.delete(`/delete_categorie/${cat.id}/`)
+              await api.delete(`/prestation/delete_categorie/${cat.id}/`)
               this.chargerCategories()
               Swal.fire('Supprimée', 'Catégorie supprimée avec succès.', 'success')
             } catch (err) {

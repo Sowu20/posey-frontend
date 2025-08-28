@@ -173,7 +173,7 @@
       async soumettreModification() {
         try {
           const id = this.utilisateurActuel.id
-          const response = await api.put(`update/${id}/`, this.utilisateurActuel)
+          const response = await api.put(`user/update/${id}/`, this.utilisateurActuel)
 
           const index = this.utilisateurs.findIndex(u => u.id === id)
           if (index !== -1) {
