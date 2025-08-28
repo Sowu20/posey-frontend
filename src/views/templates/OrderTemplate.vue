@@ -1,45 +1,72 @@
 <template>
-  <div class="container py-5">
-    <h2 class="fw-bold mb-4">Demande de prestation</h2>
-
-    <div class="bg-white p-4 rounded shadow-sm">
-      <div class="mb-3">
-        <label for="categorie">Catégorie</label>
-        <select v-model="categorie" class="form-select">
-          <option disabled value="">Choisissez une catégorie</option>
-          <option v-for="cat in categories" :key="cat.id" :value="cat.nom">{{ cat.nom }}</option>
-        </select>
+  <div class="container my-4">
+    <h2 class="text-center mb-4">Commander Nos Prestations</h2>
+    <div class="row">
+      <div v-for="presta in prestations" :key="presta.id" class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ presta.nom }}</h5>
+            <p class="card-text text-muted">{{ presta.description }}</p>
+            <p class="fw-bold text-primary">{{ presta.prix }} FCFA</p>
+            <button class="btn btn-success w-100" @click="commander(presta)">
+              Commander
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="description">Description</label>
-        <textarea v-model="description" class="form-control" rows="4" placeholder="Décrivez votre besoin..."></textarea>
-      </div>
-      <button class="btn btn-primary" @click="envoyerDemande">Envoyer la demande</button>
     </div>
   </div>
 </template>
 
 <script>
-  import api from '../services/api'
-  import { ref, onMounted } from 'vue'
+  import Swal from "sweetalert2";
+  import api from "../services/api";
 
   export default {
-    name: 'OrderTemplate',
-    setup() {
-      const categorie = ref('')
-      const categories = ref([])
-      const description = ref('')
+    name: "OrderTemplate",
+    data() {
+      return {
+        prestations: [],
+      };
+    },
+    methods: {
+      async getPrestations() {
+        try {
+          const response = await api.get('prestation/prestations_avec_prix/');
+          this.prestations = response.data;
+        } catch (error) {
+          console.error("Erreur lors du chargement des prestations", error);
+        }
+      },
+      async commander(presta) {
+        const result = await Swal.fire({
+          title: `Voulez-vous commander : ${presta.titre} ?`,
+          text: `Prix : ${presta.prix} FCFA`,
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonText: "Oui, commander",
+          cancelButtonText: "Annuler",
+        });
 
-      const envoyerDemande = () => {
-        alert(`Demande envoyée (Catégorie : ${categorie.value}, Description : ${description.value})`)
-      }
+        if (result.isConfirmed) {
+          try {
+            const user = JSON.parse(localStorage.getItem("auth_user_data"));
+            await api.post('commande/register_commande/', {
+              prestation: presta.id,
+              client: user.id,
+              prestataire: presta.prestataire,
+            });
 
-      onMounted(async () => {
-        const res = await api.get('prestation/detail_categorie/')
-        categories.value = res.data
-      })
-
-      return { categorie, categories, description, envoyerDemande }
-    }
-  }
+            Swal.fire("Succès", "Votre commande a été enregistrée ✅", "success");
+          } catch (error) {
+            console.error(error);
+            Swal.fire("Erreur", "Impossible de passer la commande ❌", "error");
+          }
+        }
+      },
+    },
+    mounted() {
+      this.getPrestations();
+    },
+  };
 </script>
