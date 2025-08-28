@@ -5,7 +5,7 @@
       <div v-for="presta in prestations" :key="presta.id" class="col-md-4 mb-4">
         <div class="card shadow-sm h-100">
           <div class="card-body">
-            <h5 class="card-title">{{ presta.nom }}</h5>
+            <h5 class="card-title">{{ presta.titre }}</h5>
             <p class="card-text text-muted">{{ presta.description }}</p>
             <p class="fw-bold text-primary">{{ presta.prix }} FCFA</p>
             <button class="btn btn-success w-100" @click="commander(presta)">
