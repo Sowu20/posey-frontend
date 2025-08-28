@@ -13,6 +13,7 @@
         <button class="btn" :class="getTabClass('overview')" @click="currentView = 'overview'">Vue d'ensemble</button>
         <button class="btn" :class="getTabClass('depot')" @click="currentView = 'depot'">Dépôt</button>
         <button class="btn" :class="getTabClass('commandes')" @click="currentView = 'commandes'">Mes commandes</button>
+        <button class="btn" :class="getTabClass('prestations')" @click="currentView = 'prestations'">Prestations Disponibles</button>
         <button class="btn" :class="getTabClass('commandeForm')" @click="currentView = 'commandeForm'">Demande de prestation</button>
         <!-- <button class="btn" :class="getTabClass('transactions')" @click="currentView = 'transactions'">Transactions</button> -->
         <button class="btn" :class="getTabClass('prestationsStatus')" @click="currentView = 'prestationsStatus'">Mes demandes de prestation</button>
@@ -35,6 +36,7 @@
   import CleintPrestation from '../composants/CleintPrestation.vue'
   import ClientTransaction from '../composants/ClientTransaction.vue'
   import ClientPrestationsStatus from '../composants/ClientPrestationsStatus.vue'
+  import OrderPage from '../pages/OrderPage.vue'
 
   export default {
     name: 'DashboardClientTemplate',
@@ -44,7 +46,8 @@
       ClientCommade,
       CleintPrestation,
       ClientTransaction,
-      ClientPrestationsStatus
+      ClientPrestationsStatus,
+      OrderPage
     },
     setup() {
       const currentView = ref('overview')
