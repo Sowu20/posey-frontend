@@ -59,6 +59,11 @@ const routes = [
     component: ShowProviderPage,
   },
   {
+    path: '/commandes',
+    name: 'commandes',
+    component: OrderPage,
+  },
+  {
     path: '/dashboard_client',
     name: 'dashboard_client',
     component: DashboardClientPage,
