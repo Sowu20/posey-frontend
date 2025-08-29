@@ -1,7 +1,7 @@
 <template>
 
   <div class="container my-4">
-    <h2 class="text-center mb-4">Commander Nos Prestations</h2>
+    <!-- <h2 class="text-center mb-4">Commander Nos Prestations</h2> -->
     <div class="row">
       <div v-for="presta in prestations" :key="presta.id" class="col-md-4 mb-4">
         <div class="card shadow-sm h-100">
