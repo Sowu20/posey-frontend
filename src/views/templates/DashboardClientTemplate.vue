@@ -96,7 +96,7 @@
           case 'commandeForm': return CleintPrestation
           case 'transactions': return ClientTransaction
           case 'prestationsStatus': return ClientPrestationsStatus
-          case 'order': return OrderPrestation
+          case 'prestations': return OrderPrestation
           default: return ClientOverView
         }
       })
