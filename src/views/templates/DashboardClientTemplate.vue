@@ -36,7 +36,7 @@
   import CleintPrestation from '../composants/CleintPrestation.vue'
   import ClientTransaction from '../composants/ClientTransaction.vue'
   import ClientPrestationsStatus from '../composants/ClientPrestationsStatus.vue'
-  import OrderTemplate from './OrderTemplate.vue'
+  import OrderPrestation from '../composants/OrderPrestation.vue'
 
   export default {
     name: 'DashboardClientTemplate',
@@ -47,7 +47,7 @@
       CleintPrestation,
       ClientTransaction,
       ClientPrestationsStatus,
-      OrderTemplate
+      OrderPrestation
     },
     setup() {
       const currentView = ref('overview')
@@ -96,7 +96,7 @@
           case 'commandeForm': return CleintPrestation
           case 'transactions': return ClientTransaction
           case 'prestationsStatus': return ClientPrestationsStatus
-          case 'order': return OrderTemplate
+          case 'order': return OrderPrestation
           default: return ClientOverView
         }
       })
