@@ -5,14 +5,15 @@
     <div class="row">
       <div v-for="presta in prestations" :key="presta.id" class="col-md-4 mb-4">
         <div class="card shadow-sm h-100">
-
           <img v-if="categorieprestation.image" :src="categorieprestation.image" class="card-img-top" alt="Image prestation" style="height: 200px; object-fit: cover;" >
           <img v-else src="/img/default-service.png" class="card-img-top" alt="Image par défaut" style="height: 200px; object-fit: cover;">
           <div class="card-body">
             <h5 class="card-title">{{ presta.titre }}</h5>
             <p class="card-text text-muted">{{ presta.description }}</p>
             <p class="fw-bold text-primary">{{ presta.prix }} FCFA</p>
-            <button class="btn btn-primary w-100" @click="commander(presta)">Commander</button>
+            <button class="btn btn-primary w-100" @click="commander(presta)">
+              Commander
+            </button>
           </div>
         </div>
       </div>
