@@ -13,7 +13,7 @@
         <button class="btn" :class="getTabClass('overview')" @click="currentView = 'overview'">Vue d'ensemble</button>
         <button class="btn" :class="getTabClass('depot')" @click="currentView = 'depot'">Dépôt</button>
         <button class="btn" :class="getTabClass('commandes')" @click="currentView = 'commandes'">Mes commandes</button>
-        <button class="btn" :class="getTabClass('prestations')" @click="currentView = 'prestations'">Prestations Disponibles</button>
+        <button class="btn" :class="getTabClass('prestations')" @click="currentView = 'prestations'">Faire une commande</button>
         <button class="btn" :class="getTabClass('commandeForm')" @click="currentView = 'commandeForm'">Demande de prestation</button>
         <!-- <button class="btn" :class="getTabClass('transactions')" @click="currentView = 'transactions'">Transactions</button> -->
         <button class="btn" :class="getTabClass('prestationsStatus')" @click="currentView = 'prestationsStatus'">Mes demandes de prestation</button>
