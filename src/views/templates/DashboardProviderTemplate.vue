@@ -33,7 +33,7 @@
   import PrestationsRecues from '../composants/PrestationsRecues.vue'
   import PrestationsRefusees from '../composants/PrestationsRefusees.vue'
   import OrderListCommande from '../composants/OrderListeCommande.vue'
-  import OrderPrestationDisponible '../composants/OrderPrestationDisponible'
+  import OrderPrestationDisponible from '../composants/OrderPrestationDisponible.vue'
 
   export default {
     name: 'DashboardProviderTemplate',
