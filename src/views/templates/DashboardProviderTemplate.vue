@@ -32,7 +32,7 @@
   import PrestataireStats from '../composants/PrestataireStats.vue'
   import PrestationsRecues from '../composants/PrestationsRecues.vue'
   import PrestationsRefusees from '../composants/PrestationsRefusees.vue'
-  import OrderListCommande from '../composants/OrderListeCommande.vue'
+  import OrderListCommande from '../composants/OrderListCommande.vue'
   import OrderPrestationDisponible from '../composants/OrderPrestationDisponible.vue'
 
   export default {
