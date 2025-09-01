@@ -18,6 +18,7 @@
             <span class="badge" :class="commande.statut === 'accepte' ? 'bg-success' : 'bg-warning'">{{ commande.statut }}</span>
           </div>
         </div>
+        <!-- Pagination -->
         <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">
           <ul class="pagination">
             <li class="page-item" :class="{ disabled: currentPage === 1 }" @click="changePage(currentPage - 1)">
@@ -33,6 +34,7 @@
             </li>
           </ul>
         </nav>
+
       </div>
 
       <!-- Aucun résultat -->
