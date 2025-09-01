@@ -1,7 +1,6 @@
 <template>
   <div class="container py-4">
-    <h2 class="mb-4 text-primary fw-bold">Prestations disponibles dans ma catégorie</h2>
-
+    
     <div v-if="loading" class="text-center">
       <div class="spinner-border text-primary" role="status"></div>
     </div>
