@@ -22,7 +22,7 @@
       <PrestationsRecues v-if="currentView === 'recues'" />
       <PrestationsRefusees v-if="currentView === 'refusees'" />
       <OrderListCommande v-if="currentView === 'commandes'" />
-      <OrderPrestationDisponible v-if="currentView === 'prestataires'" />
+      <OrderPrestationDisponible v-if="currentView === 'prestations'" />
 
     </div>
   </div>
