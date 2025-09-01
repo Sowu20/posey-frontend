@@ -1,18 +1,19 @@
 <template>
   <div class="container py-4">
-
     <div v-if="loading" class="text-center">
       <div class="spinner-border text-primary" role="status"></div>
     </div>
 
     <div v-else>
-      <div v-if="prestations.length">
-        <div v-for="presta in prestations" :key="presta.id" class="card shadow-sm mb-3">
+      <div v-if="paginatedPrestations.length">
+        <div v-for="presta in paginatedPrestations" :key="presta.id" class="card shadow-sm mb-3">
           <div class="card-body">
             <h5 class="card-title text-primary">{{ presta.titre }}</h5>
             <p class="card-text">{{ presta.description }}</p>
             <!-- <p class="fw-bold">Prix : {{ presta.prix }} FCFA</p> -->
-            <button class="btn btn-success btn-sm" @click="accepter(presta.id)">Accepter</button>
+            <button class="btn btn-success btn-sm" @click="accepter(presta.id)">
+              Accepter
+            </button>
           </div>
         </div>
 
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-  import api from '../services/api';
+  import api from "../services/api";
 
   export default {
     name: "PrestationsDisponibles",
@@ -51,7 +52,7 @@
         prestations: [],
         loading: true,
         currentPage: 1,
-        perPage: 4
+        perPage: 3,
       };
     },
     computed: {
@@ -67,12 +68,12 @@
     methods: {
       async fetchPrestations() {
         try {
-          const user = JSON.parse(localStorage.getItem('auth_user_data'))
-          if (!user?.id || !user?.access) return
+          const user = JSON.parse(localStorage.getItem("auth_user_data"));
+          if (!user?.id || !user?.access) return;
 
           const response = await api.get(`commande/prestations_disponibles/`, {
-            headers: { Authorization: `Bearer ${user.access}` }
-          })
+            headers: { Authorization: `Bearer ${user.access}` },
+          });
           this.prestations = response.data;
         } catch (err) {
           console.error(err);
@@ -82,13 +83,18 @@
       },
       async accepter(prestaId) {
         try {
-          const user = JSON.parse(localStorage.getItem('auth_user_data'))
-          if (!user?.id || !user?.access) return
-          await api.post(`commande/${prestaId}/accepter/`,{},
-            { headers: { Authorization: `Bearer ${user}` },}
+          const user = JSON.parse(localStorage.getItem("auth_user_data"));
+          if (!user?.id || !user?.access) return;
+
+          await api.post(
+            `commande/${prestaId}/accepter/`,
+            {},
+            { headers: { Authorization: `Bearer ${user.access}` } }
           );
+
           this.prestations = this.prestations.filter((p) => p.id !== prestaId);
-          
+
+          // si plus d’éléments sur la page actuelle → revenir à la page précédente
           if (this.paginatedPrestations.length === 0 && this.currentPage > 1) {
             this.currentPage--;
           }
@@ -99,11 +105,11 @@
           alert("Erreur lors de l'acceptation");
         }
       },
-    },
-    changePage(page) {
-      if (page >= 1 && page <= this.totalPages) {
-        this.currentPage = page;
-      }
+      changePage(page) {
+        if (page >= 1 && page <= this.totalPages) {
+          this.currentPage = page;
+        }
+      },
     },
     mounted() {
       this.fetchPrestations();
