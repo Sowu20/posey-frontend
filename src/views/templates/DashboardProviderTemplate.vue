@@ -13,7 +13,7 @@
         <button class="btn" :class="currentView === 'stats' ? 'btn-primary' : 'btn-outline-primary'" @click="currentView = 'stats'">Vue d’ensemble</button>
         <button class="btn" :class="currentView === 'recues' ? 'btn-primary' : 'btn-outline-primary'" @click="currentView = 'recues'">Prestations reçues</button>
         <button class="btn" :class="currentView === 'refusees' ? 'btn-primary' : 'btn-outline-primary'" @click="currentView = 'refusees'">Prestations refusées</button>
-        <button class="btn" :class="currentView === 'commandes' ? 'btn-primary' : 'btn-outline-primary'" @click="currentView = 'commandes'">Commandes Acceptées</button>
+        <button class="btn" :class="currentView === 'commandes' ? 'btn-primary' : 'btn-outline-primary'" @click="currentView = 'commandes'">Commandes Assignées</button>
         <button class="btn" :class="currentView === 'prestations' ? 'btn-primary' : 'btn-outline-primary'" @click="currentView = 'prestations'">Prestations Disponibles</button>
       </div>
 
