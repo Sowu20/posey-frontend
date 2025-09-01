@@ -13,9 +13,7 @@
             <h5 class="card-title text-primary">{{ presta.titre }}</h5>
             <p class="card-text">{{ presta.description }}</p>
             <p class="fw-bold">Prix : {{ presta.prix }} FCFA</p>
-            <button class="btn btn-success btn-sm" @click="accepter(presta.id)">
-              Accepter
-            </button>
+            <button class="btn btn-success btn-sm" @click="accepter(presta.id)">Accepter</button>
           </div>
         </div>
       </div>
