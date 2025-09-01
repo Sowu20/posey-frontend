@@ -15,11 +15,7 @@
             <p class="card-text">{{ commande.description }}</p>
             <p><strong>Client :</strong> {{ commande.client }}</p>
             <p><strong>Prix :</strong> {{ commande.prix }} FCFA</p>
-            <span
-              class="badge"
-              :class="commande.statut === 'accepte' ? 'bg-success' : 'bg-warning'">
-              {{ commande.statut }}
-            </span>
+            <span class="badge" :class="commande.statut === 'accepte' ? 'bg-success' : 'bg-warning'">{{ commande.statut }}</span>
           </div>
         </div>
       </div>
