@@ -1,6 +1,6 @@
 <template>
   <div class="container py-4">
-    
+
     <div v-if="loading" class="text-center">
       <div class="spinner-border text-primary" role="status"></div>
     </div>
@@ -11,11 +11,29 @@
           <div class="card-body">
             <h5 class="card-title text-primary">{{ presta.titre }}</h5>
             <p class="card-text">{{ presta.description }}</p>
-            <p class="fw-bold">Prix : {{ presta.prix }} FCFA</p>
+            <!-- <p class="fw-bold">Prix : {{ presta.prix }} FCFA</p> -->
             <button class="btn btn-success btn-sm" @click="accepter(presta.id)">Accepter</button>
           </div>
         </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation" class="d-flex justify-content-center mt-3">
+          <ul class="pagination">
+            <li class="page-item" :class="{ disabled: currentPage === 1 }" @click="changePage(currentPage - 1)">
+              <a class="page-link" href="#">Précédent</a>
+            </li>
+
+            <li v-for="page in totalPages" :key="page" class="page-item" :class="{ active: currentPage === page }" @click="changePage(page)">
+              <a class="page-link" href="#">{{ page }}</a>
+            </li>
+
+            <li class="page-item" :class="{ disabled: currentPage === totalPages }" @click="changePage(currentPage + 1)">
+              <a class="page-link" href="#">Suivant</a>
+            </li>
+          </ul>
+        </nav>
       </div>
+
       <div v-else class="alert alert-info">
         Aucune prestation disponible pour le moment.
       </div>
@@ -32,7 +50,19 @@
       return {
         prestations: [],
         loading: true,
+        currentPage: 1,
+        perPage: 4
       };
+    },
+    computed: {
+      totalPages() {
+        return Math.ceil(this.prestations.length / this.perPage);
+      },
+      paginatedPrestations() {
+        const start = (this.currentPage - 1) * this.perPage;
+        const end = start + this.perPage;
+        return this.prestations.slice(start, end);
+      },
     },
     methods: {
       async fetchPrestations() {
@@ -58,12 +88,22 @@
             { headers: { Authorization: `Bearer ${user}` },}
           );
           this.prestations = this.prestations.filter((p) => p.id !== prestaId);
+          
+          if (this.paginatedPrestations.length === 0 && this.currentPage > 1) {
+            this.currentPage--;
+          }
+
           alert("Prestation acceptée avec succès !");
         } catch (err) {
           console.error(err);
           alert("Erreur lors de l'acceptation");
         }
       },
+    },
+    changePage(page) {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+      }
     },
     mounted() {
       this.fetchPrestations();
