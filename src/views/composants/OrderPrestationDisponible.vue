@@ -1,7 +1,6 @@
 <template>
-
   <div class="container py-4">
-    <!-- <h2 class="mb-4 text-primary fw-bold">Prestations disponibles dans ma catégorie</h2> -->
+    <h2 class="mb-4 text-primary fw-bold">Prestations disponibles dans ma catégorie</h2>
 
     <div v-if="loading" class="text-center">
       <div class="spinner-border text-primary" role="status"></div>
@@ -25,14 +24,13 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
   import api from '../services/api';
 
   export default {
-    name: 'OrderPrestationDisponible',
+    name: "PrestationsDisponibles",
     data() {
       return {
         prestations: [],
@@ -40,17 +38,17 @@
       };
     },
     methods: {
-      async fetchPrestations() {  
+      async fetchPrestations() {
         try {
-        const user = JSON.parse(localStorage.getItem('auth_user_data'))
-        if (!user?.id || !user?.access) return
+          const user = JSON.parse(localStorage.getItem('auth_user_data'))
+          if (!user?.id || !user?.access) return
 
-        const res = await api.get(`commande/prestations_disponibles/`, {
-          headers: { Authorization: `Bearer ${user.access}` }
-        })
-        this.prestations = res.data;
-        } catch (error) {
-          console.error("Erreur lors de l'affichage des prestations disponible", error)
+          const response = await api.get(`commande/prestations_disponibles/`, {
+            headers: { Authorization: `Bearer ${user.access}` }
+          })
+          this.prestations = response.data;
+        } catch (err) {
+          console.error(err);
         } finally {
           this.loading = false;
         }
@@ -59,19 +57,19 @@
         try {
           const user = JSON.parse(localStorage.getItem('auth_user_data'))
           if (!user?.id || !user?.access) return
-
           await api.post(`commande/${prestaId}/accepter/`,{},
-            { headers: { Authorization: `Bearer ${user.access}` }, }
+            { headers: { Authorization: `Bearer ${user}` },}
           );
-          this.prestations = this.prestations.filter((p) => p.id != prestaId);
-          alert("Commande acceptée avec succès !");
-        } catch (error) {
-          console.error("Erreur lors de l'acceptation de la commande", error)
+          this.prestations = this.prestations.filter((p) => p.id !== prestaId);
+          alert("Prestation acceptée avec succès !");
+        } catch (err) {
+          console.error(err);
+          alert("Erreur lors de l'acceptation");
         }
       },
-      mounted() {
-        this.fetchPrestations();
-      }
-    }
-  }
+    },
+    mounted() {
+      this.fetchPrestations();
+    },
+  };
 </script>
