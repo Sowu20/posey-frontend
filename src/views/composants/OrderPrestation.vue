@@ -56,6 +56,7 @@
         if (result.isConfirmed) {
           try {
             const user = JSON.parse(localStorage.getItem("auth_user_data"));
+            
             await api.post('commande/register_commande/', {
               prestation: presta.id,
               client: user.id,
