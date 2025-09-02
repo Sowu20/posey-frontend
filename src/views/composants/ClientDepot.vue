@@ -141,11 +141,13 @@
 
             if (res.data.message === "Paiement confirmé.") {
               clearInterval(interval)
+
               Swal.fire({
                 icon: 'success',
                 title: 'Dépôt réussi',
                 text: `Votre solde a été mis à jour : ${res.data.transaction.solde} FCFA`,
               })
+              
               this.$emit('depot-effectue', res.data)
             }
             else if (res.data.statut === "échec") {
