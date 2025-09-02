@@ -97,7 +97,7 @@
 
           Swal.fire({
             icon: 'success',
-            title: 'Paiement lancé',
+            title: 'Paiement lancé avec succès',
             text: 'Veuillez valider le paiement sur votre téléphone.',
             timer: 3000,
             showConfirmButton: false
