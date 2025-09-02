@@ -139,7 +139,7 @@
           try {
             const res = await api.post('portefeuille/verifier-paiement/', { tx_reference })
 
-            if (res.data.message === "Paiement confirmé.") {
+            if (res.data.message === "Paiement effectué avec succès.") {
               clearInterval(interval)
 
               Swal.fire({
@@ -147,7 +147,7 @@
                 title: 'Dépôt réussi',
                 text: `Votre solde a été mis à jour : ${res.data.transaction.solde} FCFA`,
               })
-              
+
               this.$emit('depot-effectue', res.data)
             }
             else if (res.data.statut === "échec") {
