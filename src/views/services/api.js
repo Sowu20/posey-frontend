@@ -3,7 +3,7 @@ import axios from 'axios'
 const token = localStorage.getItem('auth_token');
 
 const api = axios.create({
-  baseURL: "https://c0361efea3a5.ngrok-free.app/api/",
+  baseURL: "https://f5b4a298a7c1.ngrok-free.app/api/",
   headers: {
     ...(token && { Authorization: `Token ${token}` }),
     "Content-Type": "application/json",
