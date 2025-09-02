@@ -145,7 +145,7 @@
               Swal.fire({
                 icon: 'success',
                 title: 'Dépôt réussi',
-                text: `Votre solde a été mis à jour : ${res.data.transaction.portefeuille.solde} FCFA`,
+                text: `Montant : ${res.data.transaction.montant} FCFA`,
               })
 
               this.$emit('depot-effectue', res.data)
