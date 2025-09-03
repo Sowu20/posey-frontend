@@ -145,7 +145,7 @@
               Swal.fire({
                 icon: 'success',
                 title: 'Dépôt effectué avec succès',
-                text: `Montant su dépôt : ${res.data.transaction.montant} FCFA`,
+                text: `Montant du dépôt : ${res.data.transaction.montant} FCFA`,
               })
 
               this.$emit('depot-effectue', res.data)
