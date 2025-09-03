@@ -55,18 +55,26 @@
 
         if (result.isConfirmed) {
           try {
-            const user = JSON.parse(localStorage.getItem("auth_user_data"));
-            
-            await api.post('commande/register_commande/', {
-              prestation: presta.id,
-              client: user.id,
-              // prestataire: presta.prestataire,
+            const response = await api.post('commande/register_commande/', {
+              prestation_id: presta.id,
+              // client: user.id,
             });
 
-            Swal.fire("Succès", "Votre commande a été enregistrée ✅", "success");
+            Swal.fire("Succès ✅", response.data.message, "success");
+
+            if (response.data.nouveau_solde !== undefined) {
+              Swal.fire(
+                "Nouveau solde",
+                `Votre solde est maintenant de ${response.data.nouveau_solde} FCFA`,
+                "info"
+              );
+            }
           } catch (error) {
-            console.error(error);
-            Swal.fire("Erreur", "Impossible de passer la commande ❌", "error");
+            if (error.response && error.response.data.error) {
+              Swal.fire("Erreur ❌", error.response.data.error, "error");
+            } else {
+              Swal.fire("Erreur ❌", "Impossible de passer la commande", "error");
+            }
           }
         }
       },
