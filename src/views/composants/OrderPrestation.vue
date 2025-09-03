@@ -18,6 +18,48 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal de paiement -->
+    <div class="modal fade" id="paiementModal" tabindex="-1" aria-hidden="true" ref="paiementModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title">Paiement de la prestation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+            <p class="fw-bold">{{ prestationChoisie.titre }}</p>
+            <p>Prix : <span class="text-primary">{{ prestationChoisie.prix }}</span></p>
+            <div class="mb-3">
+              <label class="form-label">Numéro de Téléphone</label>
+              <input v-model="telephone" type="text" class="form-control">
+            </div>
+            <div class="mb-4">
+              <label class="form-label d-block mb-2">Méthode de paiement</label>
+              <div class="d-flex gap-3">
+                <div class="border rounded p-2 flex-fill text-center cursor-pointer"  :class="{ 'border-primary': methode === 'TMONEY' }"  @click="methode = 'TMONEY'">
+                  <img src="/img/mixx_by_yas.png" alt="TMoney" style="height: 40px; width: 40px;" />
+                  <p class="mt-2 mb-0 fw-semibold">Mixx By Yas</p>
+                </div>
+                <div class="border rounded p-2 flex-fill text-center cursor-pointer"  :class="{ 'border-primary': methode === 'FLOOZ' }"  @click="methode = 'FLOOZ'">
+                  <img src="/img/flooz.png" alt="Flooz" style="height: 40px; width: 40px;" />
+                  <p class="mt-2 mb-0 fw-semibold">Flooz</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-primary w-100" @click="payerCommande" :disabled="loading">
+              {{ loading ? "Traitement..." : "Payer et Commander" }}
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 
 </template>
@@ -25,6 +67,7 @@
 <script>
   import Swal from 'sweetalert2';
   import api from '../services/api';
+  import { Modal } from 'bootstrap';
 
   export default {
     name: 'OrderPrestation',
@@ -32,6 +75,11 @@
       return {
         prestations: [],
         categorieprestation: [],
+        prestationChoisie: null,
+        telephone: "",
+        methode: "",
+        loading: false,
+        paiementModal: null,
       };
     },
     methods: {
@@ -41,6 +89,73 @@
           this.prestations = response.data;
         } catch (error) {
           console.error("Erreur lors du chargement des prestations", error);
+        }
+      },
+      ouvrirModal(presta) {
+        this.prestationChoisie = presta;
+        this.telephone = "";
+        this.methode = "";
+        if (!this.paiementModal) {
+          this.paiementModal = new Modal(this.$refs.paiementModal);
+        }
+        this.paiementModal.show()
+      },
+      async payerCommande() {
+        if (!this.telephone || !this.methode) {
+          Swal.fire("Champs manquants", "Veuillez remplir tous les champs avant d'effectuer un paiement", "warning");
+          return;
+        }
+
+        const user = JSON.parse(localStorage.getItem("auth_user_data"))
+        if (!user) {
+          Swal.fire("Erreur", "Veuillez vous connecter pour effectuer une commande", "error");
+          return;
+        }
+
+        this.loading = true;
+        try {
+          // Lancer le paiement 
+          const response = await api.post("portefeuille/recharge/", {
+            user_id: user.id,
+            phone_number: this.telephone.replace(/\s/g, ""),
+            amount: parseFloat(this.prestationChoisie.prix),
+            network: this.methode,
+            description: `Paiement de la prestation ${this.prestationChoisie.titre}`,
+            type_transaction: "paiement",
+          });
+          const tx_reference = response.data.transaction.reference_externe;
+          Swal.fire("Paiement lancé avec succès", "Veuillez valider le paiement sur votre téléphone", "info");
+
+          // Vérifier le paiement
+          const verifier = setInterval(async () => {
+            try {
+              const res = await api.post('portefeuille/verifier-paiement/', { tx_reference })
+
+              if (res.data.message === "Paiement confirmé.") {
+                clearInterval(verifier);
+
+                // 3. Créer commande après succès paiement
+                await api.post("commande/register_commande/", {
+                  prestation: this.prestationChoisie.id,
+                  client: user.id,
+                });
+
+                Swal.fire("Succès", "Commande payée et enregistrée ✅", "success");
+                this.paiementModal.hide();
+              }
+              else if (res.data.message === "Paiement échoué") {
+                clearInterval(verifier);
+                Swal.fire("Échec", "Le paiement a échoué ❌", "error");
+              }
+            } catch (error) {
+              console.error("Erreur lors de la vérification", error)
+            }
+          }, 10000);
+        } catch (error) {
+          console.error("Erreur paiement :", error);
+          Swal.fire("Erreur", "Impossible de lancer le paiement ❌", "error");
+        } finally {
+          this.loading = false;
         }
       },
       async commander(presta) {
@@ -56,19 +171,12 @@
         if (result.isConfirmed) {
           try {
             const user = JSON.parse(localStorage.getItem("auth_user_data"));
-            if (!user?.id || !user?.access) return;
 
-            await api.get(`commande/register_commande/`, {
-              headers: { Authorization: `Bearer ${user.access}` },
+            await api.post('commande/register_commande/', {
               prestation: presta.id,
               client: user.id,
+              // prestataire: presta.prestataire,
             });
-            
-            // await api.post('commande/register_commande/', {
-            //   prestation: presta.id,
-            //   client: user.id,
-            //   // prestataire: presta.prestataire,
-            // });
 
             Swal.fire("Succès", "Votre commande a été enregistrée ✅", "success");
           } catch (error) {
