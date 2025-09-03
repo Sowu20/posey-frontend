@@ -58,31 +58,22 @@
             const user = JSON.parse(localStorage.getItem("auth_user_data"));
             if (!user?.id || !user?.access) return;
 
-            const response = await api.post(`commande/creer_commande/`, {
+            await api.get(`commande/register_commande/`, {
               headers: { Authorization: `Bearer ${user.access}` },
-              prestation_id: presta.id
+              prestation: presta.id,
+              client: user.id,
             });
-
-            // const response = await api.post('commande/creer_commande/', {
-            //   prestation_id: presta.id,
-            //   // client: user.id,
+            
+            // await api.post('commande/register_commande/', {
+            //   prestation: presta.id,
+            //   client: user.id,
+            //   // prestataire: presta.prestataire,
             // });
 
-            Swal.fire("Succès ✅", response.data.message, "success");
-
-            if (response.data.nouveau_solde !== undefined) {
-              Swal.fire(
-                "Nouveau solde",
-                `Votre solde est maintenant de ${response.data.nouveau_solde} FCFA`,
-                "info"
-              );
-            }
+            Swal.fire("Succès", "Votre commande a été enregistrée ✅", "success");
           } catch (error) {
-            if (error.response && error.response.data.error) {
-              Swal.fire("Erreur ❌", error.response.data.error, "error");
-            } else {
-              Swal.fire("Erreur ❌", "Impossible de passer la commande", "error");
-            }
+            console.error(error);
+            Swal.fire("Erreur", "Impossible de passer la commande ❌", "error");
           }
         }
       },
