@@ -55,7 +55,7 @@
 
         if (result.isConfirmed) {
           try {
-            const response = await api.post('commande/register_commande/', {
+            const response = await api.post('commande/creer_commande/', {
               prestation_id: presta.id,
               // client: user.id,
             });
