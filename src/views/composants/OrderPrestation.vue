@@ -55,6 +55,16 @@
 
         if (result.isConfirmed) {
           try {
+            const user = JSON.parse(localStorage.getItem('auth_user_data'))
+            if (!user || !user.id) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Utilisateur non connecté',
+                text: 'Veuillez vous connecter pour effectuer une commande.'
+              })
+              return
+            }
+
             const response = await api.post('commande/creer_commande/', {
               prestation_id: presta.id,
               // client: user.id,
