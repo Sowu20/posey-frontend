@@ -134,6 +134,7 @@
       },
       async verifierPaiement(tx_reference) {
         let tentatives = 0
+        
         const interval = setInterval(async () => {
           tentatives++
           try {
@@ -141,7 +142,6 @@
 
             if (res.data.message === "Paiement effectué avec succès.") {
               clearInterval(interval)
-
               Swal.fire({
                 icon: 'success',
                 title: 'Dépôt effectué avec succès',
