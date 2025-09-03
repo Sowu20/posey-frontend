@@ -97,7 +97,7 @@
 
           Swal.fire({
             icon: 'success',
-            title: 'Paiement lancé avec succès',
+            title: 'Paiement lancé avecsuccès',
             text: 'Veuillez valider le paiement sur votre téléphone.',
             timer: 3000,
             showConfirmButton: false
@@ -114,7 +114,7 @@
         } catch (error) {
           console.error("Erreur dépôt :", error)
 
-          // Gestion des erreurs spécifiques thgtmorof
+          // Gestion des erreurs spécifiques
           let errorMessage = 'Une erreur est survenue lors du dépôt.'
 
           if (error.response?.data?.detail) {
