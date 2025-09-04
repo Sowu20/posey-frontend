@@ -1,7 +1,5 @@
 <template>
-
   <div class="container my-4">
-    <!-- <h2 class="text-center mb-4">Commander Nos Prestations</h2> -->
     <div class="row">
       <div v-for="presta in prestations" :key="presta.id" class="col-md-4 mb-4">
         <div class="card shadow-sm h-100">
@@ -11,7 +9,7 @@
             <h5 class="card-title">{{ presta.titre }}</h5>
             <p class="card-text text-muted">{{ presta.description }}</p>
             <p class="fw-bold text-primary">{{ presta.prix }} FCFA</p>
-            <button class="btn btn-primary w-100" @click="commander(presta)">
+            <button class="btn btn-primary w-100" @click="ouvrirModal(presta)">
               Commander
             </button>
           </div>
@@ -23,54 +21,51 @@
     <div class="modal fade" id="paiementModal" tabindex="-1" aria-hidden="true" ref="paiementModal">
       <div class="modal-dialog">
         <div class="modal-content">
-
           <div class="modal-header">
             <h5 class="modal-title">Paiement de la prestation</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
-
           <div class="modal-body">
-            <p class="fw-bold">{{ prestationChoisie.titre }}</p>
-            <p>Prix : <span class="text-primary">{{ prestationChoisie.prix }}</span></p>
+            <p class="fw-bold">{{ prestationChoisie?.titre }}</p>
+            <p>Prix : <span class="text-primary">{{ prestationChoisie?.prix }} FCFA</span></p>
+
             <div class="mb-3">
               <label class="form-label">Numéro de Téléphone</label>
-              <input v-model="telephone" type="text" class="form-control">
+              <input v-model="telephone" type="text" class="form-control" placeholder="Ex: 99 00 00 00" />
             </div>
+
             <div class="mb-4">
               <label class="form-label d-block mb-2">Méthode de paiement</label>
               <div class="d-flex gap-3">
-                <div class="border rounded p-2 flex-fill text-center cursor-pointer"  :class="{ 'border-primary': methode === 'TMONEY' }"  @click="methode = 'TMONEY'">
+                <div class="border rounded p-2 flex-fill text-center cursor-pointer" :class="{ 'border-primary': methode === 'TMONEY' }" @click="methode = 'TMONEY'">
                   <img src="/img/mixx_by_yas.png" alt="TMoney" style="height: 40px; width: 40px;" />
                   <p class="mt-2 mb-0 fw-semibold">Mixx By Yas</p>
                 </div>
-                <div class="border rounded p-2 flex-fill text-center cursor-pointer"  :class="{ 'border-primary': methode === 'FLOOZ' }"  @click="methode = 'FLOOZ'">
+                <div class="border rounded p-2 flex-fill text-center cursor-pointer" :class="{ 'border-primary': methode === 'FLOOZ' }" @click="methode = 'FLOOZ'">
                   <img src="/img/flooz.png" alt="Flooz" style="height: 40px; width: 40px;" />
                   <p class="mt-2 mb-0 fw-semibold">Flooz</p>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="modal-footer">
             <button class="btn btn-primary w-100" @click="payerCommande" :disabled="loading">
               {{ loading ? "Traitement..." : "Payer et Commander" }}
             </button>
           </div>
-
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
-  import Swal from 'sweetalert2';
-  import api from '../services/api';
-  import { Modal } from 'bootstrap';
+  import Swal from "sweetalert2";
+  import api from "../services/api";
+  import { Modal } from "bootstrap";
 
   export default {
-    name: 'OrderPrestation',
+    name: "OrderPrestation",
     data() {
       return {
         prestations: [],
@@ -85,7 +80,7 @@
     methods: {
       async getPrestations() {
         try {
-          const response = await api.get('prestation/prestations_avec_prix/');
+          const response = await api.get("prestation/prestations_avec_prix/");
           this.prestations = response.data;
         } catch (error) {
           console.error("Erreur lors du chargement des prestations", error);
@@ -98,38 +93,40 @@
         if (!this.paiementModal) {
           this.paiementModal = new Modal(this.$refs.paiementModal);
         }
-        this.paiementModal.show()
+        this.paiementModal.show();
       },
       async payerCommande() {
         if (!this.telephone || !this.methode) {
-          Swal.fire("Champs manquants", "Veuillez remplir tous les champs avant d'effectuer un paiement", "warning");
+          Swal.fire("Champs manquants", "Veuillez remplir tous les champs.", "warning");
           return;
         }
 
-        const user = JSON.parse(localStorage.getItem("auth_user_data"))
+        const user = JSON.parse(localStorage.getItem("auth_user_data"));
         if (!user) {
-          Swal.fire("Erreur", "Veuillez vous connecter pour effectuer une commande", "error");
+          Swal.fire("Erreur", "Veuillez vous connecter pour commander.", "error");
           return;
         }
 
         this.loading = true;
         try {
-          // Lancer le paiement 
-          const response = await api.post("portefeuille/recharge/", {
+          // 1. Lancer paiement PayGate
+          const resp = await api.post("portefeuille/recharge/", {
             user_id: user.id,
             phone_number: this.telephone.replace(/\s/g, ""),
             amount: parseFloat(this.prestationChoisie.prix),
             network: this.methode,
-            description: `Paiement de la prestation ${this.prestationChoisie.titre}`,
+            description: `Paiement de prestation ${this.prestationChoisie.titre}`,
             type_transaction: "paiement",
           });
-          const tx_reference = response.data.transaction.reference_externe;
-          Swal.fire("Paiement lancé avec succès", "Veuillez valider le paiement sur votre téléphone", "info");
 
-          // Vérifier le paiement
+          const tx_reference = resp.data.transaction.reference_externe;
+
+          Swal.fire("Paiement lancé", "Veuillez valider le paiement sur votre téléphone.", "info");
+
+          // 2. Vérifier paiement
           const verifier = setInterval(async () => {
             try {
-              const res = await api.post('portefeuille/verifier-paiement/', { tx_reference })
+              const res = await api.post("portefeuille/verifier-paiement/", { tx_reference });
 
               if (res.data.message === "Paiement confirmé.") {
                 clearInterval(verifier);
@@ -147,10 +144,11 @@
                 clearInterval(verifier);
                 Swal.fire("Échec", "Le paiement a échoué ❌", "error");
               }
-            } catch (error) {
-              console.error("Erreur lors de la vérification", error)
+            } catch (err) {
+              console.error("Erreur vérification paiement", err);
             }
           }, 10000);
+
         } catch (error) {
           console.error("Erreur paiement :", error);
           Swal.fire("Erreur", "Impossible de lancer le paiement ❌", "error");
@@ -158,36 +156,18 @@
           this.loading = false;
         }
       },
-      async commander(presta) {
-        const result = await Swal.fire({
-          title: `Voulez-vous commander : ${presta.titre} ?`,
-          text: `Prix : ${presta.prix} FCFA`,
-          icon: "question",
-          showCancelButton: true,
-          confirmButtonText: "Oui, commander",
-          cancelButtonText: "Annuler",
-        });
-
-        if (result.isConfirmed) {
-          try {
-            const user = JSON.parse(localStorage.getItem("auth_user_data"));
-
-            await api.post('commande/register_commande/', {
-              prestation: presta.id,
-              client: user.id,
-              // prestataire: presta.prestataire,
-            });
-
-            Swal.fire("Succès", "Votre commande a été enregistrée ✅", "success");
-          } catch (error) {
-            console.error(error);
-            Swal.fire("Erreur", "Impossible de passer la commande ❌", "error");
-          }
-        }
-      },
     },
     mounted() {
       this.getPrestations();
     },
-  }
+  };
 </script>
+
+<style scoped>
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .border-primary {
+    border: 2px solid #0d6efd !important;
+  }
+</style>
