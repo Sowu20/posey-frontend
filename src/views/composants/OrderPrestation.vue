@@ -96,11 +96,6 @@
         this.paiementModal.show();
       },
       async payerCommande() {
-        if (!this.telephone || !this.methode) {
-          Swal.fire("Champs manquants", "Veuillez remplir tous les champs.", "warning");
-          return;
-        }
-
         const user = JSON.parse(localStorage.getItem("auth_user_data"));
         if (!user) {
           Swal.fire("Erreur", "Veuillez vous connecter pour commander.", "error");
@@ -109,49 +104,19 @@
 
         this.loading = true;
         try {
-          // 1. Lancer paiement PayGate
-          const resp = await api.post("portefeuille/recharge/", {
-            user_id: user.id,
-            phone_number: this.telephone.replace(/\s/g, ""),
-            amount: parseFloat(this.prestationChoisie.prix),
-            network: this.methode,
-            description: `Paiement de prestation ${this.prestationChoisie.titre}`,
-            type_transaction: "paiement",
+          const resp = await api.post("commande/creer_commande/", {
+            prestation_id: this.prestationChoisie.id,
           });
 
-          const tx_reference = resp.data.transaction.reference_externe;
-
-          Swal.fire("Paiement lancé", "Veuillez valider le paiement sur votre téléphone.", "info");
-
-          // 2. Vérifier paiement
-          const verifier = setInterval(async () => {
-            try {
-              const res = await api.post("portefeuille/verifier-paiement/", { tx_reference });
-
-              if (res.data.message === "Paiement confirmé.") {
-                clearInterval(verifier);
-
-                // 3. Créer commande après succès paiement
-                await api.post("commande/register_commande/", {
-                  prestation: this.prestationChoisie.id,
-                  client: user.id,
-                });
-
-                Swal.fire("Succès", "Commande payée et enregistrée ✅", "success");
-                this.paiementModal.hide();
-              }
-              else if (res.data.message === "Paiement échoué") {
-                clearInterval(verifier);
-                Swal.fire("Échec", "Le paiement a échoué ❌", "error");
-              }
-            } catch (err) {
-              console.error("Erreur vérification paiement", err);
-            }
-          }, 10000);
+          Swal.fire("Succès", resp.data.message, "success");
+          this.paiementModal.hide();
 
         } catch (error) {
-          console.error("Erreur paiement :", error);
-          Swal.fire("Erreur", "Impossible de lancer le paiement ❌", "error");
+          if (error.response && error.response.data.error) {
+            Swal.fire("Erreur", error.response.data.error, "error");
+          } else {
+            Swal.fire("Erreur", "Une erreur est survenue ❌", "error");
+          }
         } finally {
           this.loading = false;
         }
