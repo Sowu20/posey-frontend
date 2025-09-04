@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const token = localStorage.getItem('auth_token');
-const user = user?.access || null;
+// const user = user?.access || null;
 
 const api = axios.create({
   baseURL: "https://condos-representations-distributed-frog.trycloudflare.com/api/",

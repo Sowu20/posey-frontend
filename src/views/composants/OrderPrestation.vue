@@ -104,10 +104,11 @@
 
         this.loading = true;
         try {
-          const resp = await api.post("commande/creer_commande/", {
-            // headers: { Authorization: `Bearer ${user.access}` },
-            prestation_id: presta.id,
-          });
+          const resp = await api.post(
+            "commande/creer_commande/",
+            { prestation_id: presta.id },
+            { headers: { Authorization: `Bearer ${user.access}` } }
+          );
 
           Swal.fire("Succès", resp.data.message, "success");
           // this.paiementModal.hide();
