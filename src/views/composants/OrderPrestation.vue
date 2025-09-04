@@ -9,7 +9,7 @@
             <h5 class="card-title">{{ presta.titre }}</h5>
             <p class="card-text text-muted">{{ presta.description }}</p>
             <p class="fw-bold text-primary">{{ presta.prix }} FCFA</p>
-            <button class="btn btn-primary w-100" @click="ouvrirModal(presta)">
+            <button class="btn btn-primary w-100" @click="payerCommande(presta)">
               Commander
             </button>
           </div>
@@ -18,7 +18,7 @@
     </div>
 
     <!-- Modal de paiement -->
-    <div class="modal fade" id="paiementModal" tabindex="-1" aria-hidden="true" ref="paiementModal">
+    <!-- <div class="modal fade" id="paiementModal" tabindex="-1" aria-hidden="true" ref="paiementModal">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -55,14 +55,14 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
   import Swal from "sweetalert2";
   import api from "../services/api";
-  import { Modal } from "bootstrap";
+  // import { Modal } from "bootstrap";
 
   export default {
     name: "OrderPrestation",
@@ -71,8 +71,8 @@
         prestations: [],
         categorieprestation: [],
         prestationChoisie: null,
-        telephone: "",
-        methode: "",
+        // telephone: "",
+        // methode: "",
         loading: false,
         paiementModal: null,
       };
@@ -86,15 +86,15 @@
           console.error("Erreur lors du chargement des prestations", error);
         }
       },
-      ouvrirModal(presta) {
-        this.prestationChoisie = presta;
-        this.telephone = "";
-        this.methode = "";
-        if (!this.paiementModal) {
-          this.paiementModal = new Modal(this.$refs.paiementModal);
-        }
-        this.paiementModal.show();
-      },
+      // ouvrirModal(presta) {
+      //   this.prestationChoisie = presta;
+      //   this.telephone = "";
+      //   this.methode = "";
+      //   if (!this.paiementModal) {
+      //     this.paiementModal = new Modal(this.$refs.paiementModal);
+      //   }
+      //   this.paiementModal.show();
+      // },
       async payerCommande() {
         const user = JSON.parse(localStorage.getItem('auth_user_data'))
         if (!user || !user.id) {
@@ -109,7 +109,7 @@
           });
 
           Swal.fire("Succès", resp.data.message, "success");
-          this.paiementModal.hide();
+          // this.paiementModal.hide();
 
         } catch (error) {
           if (error.response && error.response.data.error) {
