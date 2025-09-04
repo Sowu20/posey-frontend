@@ -105,7 +105,7 @@
         this.loading = true;
         try {
           const resp = await api.post("commande/creer_commande/", {
-            headers: { Authorization: `Bearer ${user.access}` },
+            // headers: { Authorization: `Bearer ${user.access}` },
             prestation_id: presta.id,
           });
 
