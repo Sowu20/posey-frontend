@@ -96,8 +96,8 @@
         this.paiementModal.show();
       },
       async payerCommande() {
-        const user = JSON.parse(localStorage.getItem("auth_user_data"));
-        if (!user) {
+        const user = JSON.parse(localStorage.getItem('auth_user_data'))
+        if (!user || !user.id) {
           Swal.fire("Erreur", "Veuillez vous connecter pour commander.", "error");
           return;
         }
