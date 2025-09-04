@@ -50,7 +50,7 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-primary w-100" @click="payerCommande" :disabled="loading">
-              {{ loading ? "Traitement..." : "Payer et Commander" }}
+              {{ loading ? "Traitement..." : "Commander" }}
             </button>
           </div>
         </div>
