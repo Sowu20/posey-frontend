@@ -70,7 +70,7 @@
       return {
         prestations: [],
         categorieprestation: [],
-        prestationChoisie: null,
+        // prestationChoisie: null,
         // telephone: "",
         // methode: "",
         loading: false,
@@ -95,7 +95,7 @@
       //   }
       //   this.paiementModal.show();
       // },
-      async payerCommande() {
+      async payerCommande(presta) {
         const user = JSON.parse(localStorage.getItem('auth_user_data'))
         if (!user || !user.id) {
           Swal.fire("Erreur", "Veuillez vous connecter pour commander.", "error");
@@ -105,7 +105,7 @@
         this.loading = true;
         try {
           const resp = await api.post("commande/creer_commande/", {
-            prestation_id: this.prestationChoisie.id,
+            prestation_id: presta.id,
           });
 
           Swal.fire("Succès", resp.data.message, "success");
