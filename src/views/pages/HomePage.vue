@@ -57,7 +57,7 @@
                     </span>
                   </div>
                 </div>
-                <button class="btn btn-primary mt-auto w-100">Contacter</button>
+                <button class="btn btn-primary mt-auto w-100" @click="$router.push({ name: 'prestataire', params: { id: prestataire.id } })">Contacter</button>
               </div>
             </div>
           </div>
