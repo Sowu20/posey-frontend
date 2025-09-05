@@ -27,6 +27,12 @@
           <div class="mt-2 text-success">
             <strong>Prestations réalisées :</strong> {{ nombrePrestations }}
           </div>
+
+          <!-- <div class="mt-auto">
+            <button class="btn btn-primary w-100" @click="envoyerDemande">
+              Envoyer une demande
+            </button>
+          </div> -->
         </div>
       </div>
     </div>
