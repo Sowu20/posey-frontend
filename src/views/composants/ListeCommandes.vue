@@ -32,11 +32,12 @@
           <tbody>
             <tr v-for="(commande, index) in commandes" :key="commande.id">
               <td>{{ index + 1 }}</td>
-              <td>{{ commande.titre_prestation }}</td>
+              <td>{{ commande.titre }}</td>
               <td>{{ formatDate(commande.date_commande) }}</td>
+              <td>{{ commande.client }}</td>
               <td>
                 <span v-if="commande.prestataire">
-                  {{ commande.prestataire.nom }} {{ commande.prestataire.prenom }}
+                  {{ commande.prestataire}}
                 </span>
                 <span v-else class="text-muted">Non assigné</span>
               </td>
