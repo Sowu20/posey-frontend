@@ -134,7 +134,6 @@
       },
       async verifierPaiement(tx_reference) {
         let tentatives = 0
-        
         const interval = setInterval(async () => {
           tentatives++
           try {
