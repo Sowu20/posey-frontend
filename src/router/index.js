@@ -13,6 +13,8 @@ import OrderPage from '@/views/pages/OrderPage.vue'
 import ListOrdersPage from '@/views/pages/ListOrdersPage.vue'
 import DashboardProviderPage from '@/views/pages/DashboardProviderPage.vue'
 import DashboardAdminPage from '@/views/pages/DashboardAdminPage.vue'
+import ForgotPasswordPage from '@/views/pages/ForgotPasswordPage.vue'
+import ResetPasswordPage from '@/views/pages/ResetPasswordPage.vue'
 import Swal from 'sweetalert2'
 
 const routes = [
@@ -112,6 +114,16 @@ const routes = [
         })
       }
     }
+  },
+  {
+    name: 'forgot_password',
+    path: '/forgot_password',
+    component: ForgotPasswordPage,
+  },
+  {
+    name: 'reset_password',
+    path: '/reset_password',
+    component: ResetPasswordPage,
   }
 ]
 
