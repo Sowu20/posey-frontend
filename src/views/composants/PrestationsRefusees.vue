@@ -81,7 +81,7 @@
     async mounted() {
       try {
         const res = await api.get('/prestation/refusees/toutes/')
-        this.prestations = res.data
+        this.prestations = res.data.sort((a,b) => new Date(b.date_demande) - new Date(a.date_demande))
 
         // SweetAlert après chargement
         // Swal.fire({
