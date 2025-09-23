@@ -181,7 +181,9 @@
         const id = userData.id
         const res = await api.get(`/prestation/prestataire/${id}`)
 
-        this.prestations = res.data.prestations.map(p => ({ ...p, loading: false }))
+        this.prestations = res.data.prestations
+          .map(p => ({ ...p, loading: false }))
+          .sort((a,b) => new Date(b.date_demande) - new Date(a.date_demande))
       } catch (error) {
         console.error("Erreur lors du chargement des prestations :", error)
       }
