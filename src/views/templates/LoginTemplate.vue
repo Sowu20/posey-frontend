@@ -6,7 +6,7 @@
           <h1 class="text-primary fw-bold">POSEY</h1>
           <h2 class="h4">Connectez-vous à votre compte</h2>
           <p class="text-muted small">
-            Ou<router-link to="/register" class="text-decoration-none text-primary">créez votre compte</router-link>
+            Ou <router-link to="/register" class="text-decoration-none text-primary">créez votre compte</router-link>
           </p>
         </div>
 
@@ -69,7 +69,7 @@
               const userWithTokens = {
                   ...response.data.user,
                   access: response.data.access,
-                  refresh: response.data.refresh 
+                  refresh: response.data.refresh
               };
 
               localStorage.setItem('auth_user_data', JSON.stringify(userWithTokens));
