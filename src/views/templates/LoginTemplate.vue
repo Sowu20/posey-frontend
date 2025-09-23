@@ -25,6 +25,12 @@
           <button type="submit" class="btn btn-primary w-100">
             Se connecter
           </button>
+
+          <p class="text-end mt-2">
+            <router-link to="/forgot_password" class="text-decoration-none text-primary">
+              Mot de passe oublié ?
+            </router-link>
+          </p>
         </form>
       </div>
     </div>
