@@ -16,13 +16,13 @@
 <script>
   import api from '../services/api';
   import Swal from 'sweetalert2';
-  
+
   export default {
     name: 'ForgotPasswordTemplate',
     data() {
       return {
         email: ''
-      }; 
+      };
     },
     methods: {
       async submitEmail() {
@@ -30,7 +30,7 @@
           const res = await api.post('reset_password/', { email: this.email });
           Swal.fire("Succès", res.data.message, "success");
         } catch (error) {
-          Swal.fire("Une erreur est survenue", error)
+          Swal.fire("Erreur", error.response?.data?.error || "Une erreur est survenue", "error");
         }
       },
     },

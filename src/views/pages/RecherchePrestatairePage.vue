@@ -30,12 +30,12 @@
 
           <div class="col-md-3">
             <label for="quartier">Quartier</label>
-            <input type="text" class="form-control" v-model="selectedQuartier" />
+            <input type="text" class="form-control" placeholder="Saisir le quartier" v-model="selectedQuartier" />
           </div>
 
           <div class="col-md-3">
             <label for="ville">Ville</label>
-            <input type="text" class="form-control" v-model="selectedVille" />
+            <input type="text" class="form-control" placeholder="Saisir la ville" v-model="selectedVille" />
           </div>
 
           <!-- Bouton réinitialisation -->
