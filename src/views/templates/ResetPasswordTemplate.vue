@@ -36,12 +36,11 @@
           return;
         }
 
-        const { token } = this.$route.params;
+        const { uid, token } = this.$route.params;
 
         try {
-          const res = await api.post(`reset_password_confirm/`, {
-            token: token,
-            new_password: this.password,
+          const res = await api.post(`reset_password_confirm/${uid}/${token}`, {
+            password: this.password,
           });
           Swal.fire("Succès", res.data.message, "success");
           this.$router.push("/login");
