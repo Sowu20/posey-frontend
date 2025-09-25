@@ -47,7 +47,6 @@
         } catch (error) {
           Swal.fire("Erreur", error.response?.data?.error || "Lien invalide ou expiré!", "error");
         }
-
       }
     }
   }
