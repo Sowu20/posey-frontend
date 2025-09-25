@@ -27,7 +27,7 @@
     methods: {
       async submitEmail() {
         try {
-          const res = await api.post('reset_password/', { email: this.email });
+          const res = await api.post('user/reset_password/', { email: this.email });
           Swal.fire("Succès", res.data.message, "success");
         } catch (error) {
           Swal.fire("Erreur", error.response?.data?.error || "Une erreur est survenue", "error");
