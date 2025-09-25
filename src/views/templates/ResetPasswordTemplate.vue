@@ -42,10 +42,10 @@
           const res = await api.post(`user/reset_password_confirm/${uid}/${token}`, {
             password: this.password,
           });
-          Swal.fire("Succès", res.data.message, "success");
+          await Swal.fire("Succès", res.data.message, "success");
           this.$router.push("/login");
         } catch (error) {
-          Swal.fire("Erreur", error.response?.data?.error || "Lien invalide ou expiré!", "error");
+          await Swal.fire("Erreur", error.response?.data?.error || "Lien invalide ou expiré!", "error");
         }
       }
     }

@@ -124,6 +124,7 @@ const routes = [
     name: 'reset_password',
     path: '/reset_password/:uid/:token',
     component: ResetPasswordPage,
+    props: true
   }
 ]
 
