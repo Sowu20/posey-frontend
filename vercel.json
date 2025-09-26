@@ -2,7 +2,7 @@
   "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://posey-frontend-y8so.vercel.app/api/$1"
+            "destination": "https://doctors-nose-represented-www.trycloudflare.com/api/$1"
         },
         { 
             "source": "/(.*)", 
