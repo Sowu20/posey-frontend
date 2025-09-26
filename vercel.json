@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "https://posey-frontend-y8so.vercel.app/api/$1"
+        },
+        { 
+            "source": "/(.*)", 
+            "destination": "/index.html" 
+        }
+    ]
+}
