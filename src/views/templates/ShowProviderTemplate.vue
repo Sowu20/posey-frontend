@@ -46,6 +46,8 @@
       <div class="row g-3">
         <div class="col-md-4" v-for="service in services" :key="service.id">
           <div class="card h-100 p-3 shadow-sm">
+            <img v-if="service.image" :src="formatImage(service.img)" class="card-img-top" alt="Image service" style="height: 200px; object-fit: cover;" >
+            <img v-else src="/img/default-service.png" class="card-img-top" alt="Image par défaut" style="height: 200px; object-fit: cover;">
             <h5 class="fw-bold">{{ service.nom }}</h5>
             <p class="text-muted">{{ service.description }}</p>
             <p><strong>Prix :</strong>{{ service.prix }}</p>
@@ -100,9 +102,9 @@
       const services = ref([])
 
       const formatImage = (imagePath) => {
-        if (!imagePath) return '/img/default-avatar.png'
+        if (!imagePath) return '/img/default-service.png'
         if (imagePath.startsWith('http')) return imagePath
-        return `https://42492b2bb689.ngrok-free.app${imagePath}`
+        return `http://127.0.0.1:8000/${imagePath}`
       }
 
       const commanderService = async (service) => {
