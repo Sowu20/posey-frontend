@@ -153,7 +153,7 @@
         }
       })
 
-      return { prestataire, noteMoyenne, nombrePrestations, commentaires, formatImage, commanderService }
+      return { prestataire, noteMoyenne, nombrePrestations, commentaires, services, formatImage, commanderService }
     }
   }
 </script>
