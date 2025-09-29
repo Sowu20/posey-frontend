@@ -49,7 +49,7 @@
             <h5 class="fw-bold">{{ service.nom }}</h5>
             <p class="text-muted">{{ service.description }}</p>
             <p><strong>Prix :</strong>{{ service.prix }}</p>
-            <button class="btn btn-primary w-100" @click="commanderService(service.id)">Commander ce service</button>
+            <button class="btn btn-primary w-100" @click="commanderService(service)">Commander ce service</button>
           </div>
         </div>
       </div>
@@ -83,6 +83,7 @@
 
 <script>
   import api from '../services/api'
+  import Swal from 'sweetalert2'
   import { ref, onMounted } from 'vue'
   import { useRoute } from 'vue-router'
 
@@ -104,16 +105,29 @@
         return `https://42492b2bb689.ngrok-free.app${imagePath}`
       }
 
-      const commanderService = async (serviceId) => {
-        try {
-          await api.post('commande/register_commande/', {
-            client: localStorage.getItem("auth_user_data"),
-            prestataire: prestataireId,
-            service: serviceId
-          })
-          alert("Votre commande a été envoyée au prestataire !")
-        } catch (error) {
-          console.error("Erreur lors de la commande!", error)
+      const commanderService = async (service) => {
+        const result = await Swal.fire({
+          title: `Voulez-vous commander : ${service.nom} ?`,
+          text: `Prix : ${service.prix} FCFA`,
+          icone: "question",
+          showCancelButton: true,
+          confirmButtonText: "Oui, commander",
+          cancelButtonText: "Annuler",
+        });
+
+        if (result.isConfirmed) {
+          try {
+            const user = JSON.parse(localStorage.getItem("auth_user_data"));
+            await api.post('commande/register_commande/', {
+              prestataire: prestataireId,
+              client: user.id,
+              service: service.id
+            })
+            Swal.fire("Succès", "Votre commande a été enregistrée ✅", "success");
+          } catch (error) {
+            console.error(error)
+            Swal.fire("Erreur", "Impossible de passer la commande ❌", "error");
+          }
         }
       }
 
