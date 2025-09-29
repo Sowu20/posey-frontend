@@ -46,7 +46,7 @@
       <div class="row g-3">
         <div class="col-md-4" v-for="service in services" :key="service.id">
           <div class="card h-100 p-3 shadow-sm">
-            <img v-if="service.image" :src="formatImage(service.img)" class="card-img-top" alt="Image service" style="height: 200px; object-fit: cover;" >
+            <img v-if="service.image" :src="formatImage(service.image)" class="card-img-top" alt="Image service" style="height: 200px; object-fit: cover;" >
             <img v-else src="/img/default-service.png" class="card-img-top" alt="Image par défaut" style="height: 200px; object-fit: cover;">
             <h5 class="fw-bold">{{ service.nom }}</h5>
             <p class="text-muted">{{ service.description }}</p>
