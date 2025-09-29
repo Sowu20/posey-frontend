@@ -140,7 +140,7 @@
             api.get(`/note/prestataire-note/${prestataireId}/`),
             api.get(`/prestation/terminees/${prestataireId}/`),
             api.get(`/note/commentaires/${prestataireId}/`),
-            api.get(`/list_service/prestataire/${prestataireId}/`)
+            api.get(`/service/list_service/${prestataireId}/`)
           ])
 
           prestataire.value = userResponse.data
