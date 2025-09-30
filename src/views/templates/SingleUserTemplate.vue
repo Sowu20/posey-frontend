@@ -4,15 +4,20 @@
       <!-- Header utilisateur -->
       <div class="bg-primary text-white px-4 py-5 d-flex align-items-center">
         <div class="me-4 position-relative rounded-circle">
-          <img src="/img/default-avatar.png" class="rounded-circle border border-white" width="100" height="100" alt="Avatar" />
-          <input type="file" ref="fileInput" @change="handleImageChange" accept="image/*" class="position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer" />
+          <img :src="previewImage || '/img/default-avatar.png'" class="rounded-circle border border-white" width="100" height="100" alt="Avatar"/>
+          <input type="file" ref="fileInput" @change="handleImageChange" accept="image/*" class="position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer"/>
         </div>
         <div>
           <h2 class="mb-1">{{ formData.prenom }} {{ formData.nom }}</h2>
           <p class="mb-0">
             {{ user.type_compte }}
-            <span v-if="isPrestataire"> - Catégorie : {{ user.categorie_nom || 'Non défini' }}</span>
+            <span v-if="isPrestataire">
+              - Catégorie : {{ user.categorie_nom || "Non défini" }}
+            </span>
           </p>
+          <a href="javascript:void(0)" class="text-warning" @click="openPasswordModal">
+            🔑 Changer mon mot de passe
+          </a>
         </div>
       </div>
 
@@ -53,7 +58,7 @@
             <div class="col-md-6" v-if="isPrestataire">
               <label class="form-label">Catégorie</label>
               <select v-model.number="formData.categorie" class="form-select">
-                <option v-for="cat in categories" :value="cat.id" :key="cat.id">
+                <option v-for="cat in categorieData" :value="cat.id" :key="cat.id">
                   {{ cat.nom }}
                 </option>
               </select>
@@ -61,18 +66,69 @@
           </div>
 
           <div class="d-flex justify-content-between mt-4">
-            <button type="button" class="btn btn-outline-danger" @click="deleteUser">Supprimer mon compte</button>
+            <button type="button" class="btn btn-outline-danger" @click="deleteUser">
+              Supprimer mon compte
+            </button>
             <button type="submit" class="btn btn-primary">Enregistrer</button>
           </div>
         </form>
+      </div>
+    </div>
 
+    <!-- Modal Changement Mot de Passe -->
+    <div class="modal fade" id="passwordModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Changer mon mot de passe</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <form @submit.prevent="changePassword">
+            <div class="modal-body">
+              <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+              <div v-if="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+              <div class="mb-3">
+                <label class="form-label">Nouveau mot de passe</label>
+                <input
+                  type="password"
+                  v-model="passwordData.new_password"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Confirmer le mot de passe</label>
+                <input
+                  type="password"
+                  v-model="passwordData.confirm_password"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Annuler
+              </button>
+              <button type="submit" class="btn btn-primary">Mettre à jour</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import api from '../services/api'
+  import api from "../services/api"
+  import { Modal } from "bootstrap"
 
   export default {
     data() {
@@ -92,6 +148,11 @@
         previewImage: "",
         successMessage: null,
         errorMessage: null,
+        passwordData: {
+          new_password: "",
+          confirm_password: "",
+        },
+        passwordModal: null,
       }
     },
     computed: {
@@ -112,7 +173,7 @@
             quartier: res.data.quartier,
             categorie: res.data.categorie,
           }
-          this.previewImage = res.data.image || "/default-avatar.png"
+          this.previewImage = res.data.image || "/img/default-avatar.png"
         } catch {
           this.errorMessage = "Erreur lors du chargement de l'utilisateur"
         }
@@ -164,10 +225,38 @@
           this.errorMessage = "Erreur lors de la suppression du compte."
         }
       },
+      openPasswordModal() {
+        if (!this.passwordModal) {
+          this.passwordModal = new Modal(document.getElementById("passwordModal"))
+        }
+        this.passwordModal.show()
+      },
+      async changePassword() {
+        if (this.passwordData.new_password !== this.passwordData.confirm_password) {
+          this.errorMessage = "Les mots de passe ne correspondent pas."
+          return
+        }
+        try {
+          await api.put(`user/change_password/${this.userId}/`, {
+            new_password: this.passwordData.new_password,
+          })
+          this.successMessage = "Mot de passe mis à jour ✅"
+          this.errorMessage = null
+
+          setTimeout(() => {
+            this.passwordModal.hide()
+            this.passwordData.new_password = ""
+            this.passwordData.confirm_password = ""
+            this.successMessage = null
+          }, 1500)
+        } catch {
+          this.errorMessage = "Erreur lors du changement de mot de passe ❌"
+          this.successMessage = null
+        }
+      },
     },
     created() {
       const user = localStorage.getItem("auth_user_data")
-      console.log("USER LOCAL:", user)
       if (user) {
         this.userId = JSON.parse(user).id
         this.fetchUser()
