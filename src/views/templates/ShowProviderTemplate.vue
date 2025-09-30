@@ -124,7 +124,7 @@
               prestataire: prestataireId,
               client: user.id,
               service: service.id,
-              prestation: null
+              prestation: service.prestation_categorie
             })
             Swal.fire("Succès", "Votre commande a été enregistrée ✅", "success");
           } catch (error) {
