@@ -237,7 +237,7 @@
           return
         }
         try {
-          await api.put(`user/change_password/${this.userId}/`, {
+          await api.put(`user/change_password/`, {
             new_password: this.passwordData.new_password,
           })
           this.successMessage = "Mot de passe mis à jour ✅"
