@@ -129,7 +129,6 @@
 <script>
   import api from "../services/api"
   import { Modal } from "bootstrap"
-  import Swal from "sweetalert2";
 
   export default {
     data() {
@@ -238,11 +237,11 @@
           return
         }
         try {
-          const user = JSON.parse(localStorage.getItem("auth_user_data"));
-          if (!user?.id || !user?.access) {
-            Swal.fire("Erreur", "Veuillez vous connecter pour continuer!");
-            return;
-          }
+          // const user = JSON.parse(localStorage.getItem("auth_user_data"));
+          // if (!user?.id || !user?.access) {
+          //   Swal.fire("Erreur", "Veuillez vous connecter pour continuer!");
+          //   return;
+          // }
           await api.put(`user/change_password/${this.userId}/`, {
             new_password: this.passwordData.new_password,
           })
