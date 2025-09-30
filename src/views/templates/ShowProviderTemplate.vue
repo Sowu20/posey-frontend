@@ -118,7 +118,7 @@
         loading.value = true;
         try {
           const response = await api.post("commande/creer_commande/",
-            { prestation_id: service.id },
+            { service_id: service.id },
             { headers: { Authorization: `Bearer ${user.access}` } }
           );
           Swal.fire("Succès", response.data.message, "success");
