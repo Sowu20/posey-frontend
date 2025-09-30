@@ -108,30 +108,54 @@
       }
 
       const commanderService = async (service) => {
-        const result = await Swal.fire({
-          title: `Voulez-vous commander : ${service.nom} ?`,
-          text: `Prix : ${service.prix} FCFA`,
-          icone: "question",
-          showCancelButton: true,
-          confirmButtonText: "Oui, commander",
-          cancelButtonText: "Annuler",
-        });
-
-        if (result.isConfirmed) {
-          try {
-            const user = JSON.parse(localStorage.getItem("auth_user_data"));
-            await api.post('commande/register_commande/', {
-              prestataire: prestataireId,
-              client: user.id,
-              service: service.id,
-              prestation: service.prestation
-            })
-            Swal.fire("Succès", "Votre commande a été enregistrée ✅", "success");
-          } catch (error) {
-            console.error(error)
-            Swal.fire("Erreur", "Impossible de passer la commande ❌", "error");
-          }
+        const user = JSON.parse(localStorage.getItem("auth_user_data"));
+        if (!user?.id || !user?.access) {
+          Swal.fire("Erreur", "Veuillez vous connecter pour commander!");
+          return;
         }
+
+        this.loading = true;
+        try {
+          const response = await api.post("commande/creer_commande/",
+            { prestation_id: service.id },
+            { headers: { Authorization: `Bearer ${user.access}` } }
+          );
+          Swal.fire("Succès", response.data.message, "success");
+
+        } catch (error) {
+          if (error.response && error.response.data.error) {
+            Swal.fire("Erreur", error.response.data.error, "error");
+          } else {
+            Swal.fire("Erreur", "Une erreur est survenue ❌", "error");
+          }
+        } finally {
+          this.loading = false;
+        }
+
+        // const result = await Swal.fire({
+        //   title: `Voulez-vous commander : ${service.nom} ?`,
+        //   text: `Prix : ${service.prix} FCFA`,
+        //   icone: "question",
+        //   showCancelButton: true,
+        //   confirmButtonText: "Oui, commander",
+        //   cancelButtonText: "Annuler",
+        // });
+
+        // if (result.isConfirmed) {
+        //   try {
+        //     const user = JSON.parse(localStorage.getItem("auth_user_data"));
+        //     await api.post('commande/register_commande/', {
+        //       prestataire: prestataireId,
+        //       client: user.id,
+        //       service: service.id,
+        //       prestation: service.prestation
+        //     })
+        //     Swal.fire("Succès", "Votre commande a été enregistrée ✅", "success");
+        //   } catch (error) {
+        //     console.error(error)
+        //     Swal.fire("Erreur", "Impossible de passer la commande ❌", "error");
+        //   }
+        // }
       }
 
       onMounted(async () => {
