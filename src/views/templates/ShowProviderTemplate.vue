@@ -97,6 +97,7 @@
 
       const prestataire = ref(null)
       const noteMoyenne = ref(null)
+      const loading = ref(null)
       const nombrePrestations = ref(0)
       const commentaires = ref([])
       const services = ref([])
@@ -114,7 +115,7 @@
           return;
         }
 
-        this.loading = true;
+        loading.value = true;
         try {
           const response = await api.post("commande/creer_commande/",
             { prestation_id: service.id },
@@ -129,7 +130,7 @@
             Swal.fire("Erreur", "Une erreur est survenue ❌", "error");
           }
         } finally {
-          this.loading = false;
+          loading.value = false;
         }
 
         // const result = await Swal.fire({
@@ -178,7 +179,7 @@
         }
       })
 
-      return { prestataire, noteMoyenne, nombrePrestations, commentaires, services, formatImage, commanderService }
+      return { prestataire, noteMoyenne, nombrePrestations, commentaires, services, loading, formatImage, commanderService }
     }
   }
 </script>
