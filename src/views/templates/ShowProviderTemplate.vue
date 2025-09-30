@@ -123,7 +123,8 @@
             await api.post('commande/register_commande/', {
               prestataire: prestataireId,
               client: user.id,
-              service: service.id
+              service: service.id,
+              prestation: service.prestataion
             })
             Swal.fire("Succès", "Votre commande a été enregistrée ✅", "success");
           } catch (error) {
