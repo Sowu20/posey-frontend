@@ -98,7 +98,7 @@
       };
     },
     methods: {
-      async fetchService() {
+      async fetchServices() {
         try {
           const user = JSON.parse(localStorage.getItem("auth_user_data"));
           if (!user?.id) {
