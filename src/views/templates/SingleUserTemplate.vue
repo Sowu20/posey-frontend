@@ -240,7 +240,7 @@
           const user = JSON.parse(localStorage.getItem("auth_user_data"));
           if (!user?.id || !user?.access) return;
 
-          const response = await api.put(`user/change_password/`,
+          await api.put(`user/change_password/`,
             {
               new_password: this.passwordData.new_password,
             },

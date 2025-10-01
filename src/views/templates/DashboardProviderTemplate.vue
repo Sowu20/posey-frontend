@@ -15,6 +15,7 @@
         <button class="btn" :class="currentView === 'refusees' ? 'btn-primary' : 'btn-outline-primary'" @click="currentView = 'refusees'">Prestations refusées</button>
         <button class="btn" :class="currentView === 'commandes' ? 'btn-primary' : 'btn-outline-primary'" @click="currentView = 'commandes'">Commandes</button>
         <button class="btn" :class="currentView === 'prestations' ? 'btn-primary' : 'btn-outline-primary'" @click="currentView = 'prestations'">Prestations Disponibles</button>
+        <button class="btn" :class="currentView === 'services' ? 'btn-primary' : 'btn-outline-primary'" @click="currentView = 'services'">Services</button>
       </div>
 
       <!-- Affichage dynamique -->
@@ -23,6 +24,7 @@
       <PrestationsRefusees v-if="currentView === 'refusees'" />
       <OrderListCommande v-if="currentView === 'commandes'" />
       <OrderPrestationDisponible v-if="currentView === 'prestations'" />
+      <ServicesProvider v-if="currentView === 'services'" />
 
     </div>
   </div>
@@ -34,6 +36,7 @@
   import PrestationsRefusees from '../composants/PrestationsRefusees.vue'
   import OrderListCommande from '../composants/OrderListCommande.vue'
   import OrderPrestationDisponible from '../composants/OrderPrestationDisponible.vue'
+  import ServicesProvider from '../composants/ServicesProvider.vue'
 
   export default {
     name: 'DashboardProviderTemplate',
@@ -42,7 +45,8 @@
       PrestationsRecues,
       PrestationsRefusees,
       OrderListCommande,
-      OrderPrestationDisponible
+      OrderPrestationDisponible,
+      ServicesProvider
     },
     setup() {
       const formatImage = (imagePath) => {
