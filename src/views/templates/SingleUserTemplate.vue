@@ -237,9 +237,20 @@
           return
         }
         try {
-          await api.put(`user/change_password/`, {
-            new_password: this.passwordData.new_password,
-          })
+          const user = JSON.parse(localStorage.getItem("auth_user_data"));
+          if (!user?.id || !user?.access) return;
+
+          const response = await api.put(`user/change_password/`, {
+            {
+              headers: { Authorization: `Bearer ${user.access}` },
+            },
+            {
+              new_password: this.passwordData.new_password,
+            }
+          });
+          // await api.put(`user/change_password/`, {
+          //   new_password: this.passwordData.new_password,
+          // })
           this.successMessage = "Mot de passe mis à jour ✅"
           this.errorMessage = null
 
