@@ -42,7 +42,7 @@
             <div class="modal-body">
               <div class="mb-3">
                 <label class="form-label">Nom</label>
-                <input type="text" v-model="form.nom" class="">
+                <input type="text" v-model="form.nom" class="form-control">
               </div>
               <div class="mb-3">
                 <label class="form-label">Catégorie</label>
@@ -100,7 +100,13 @@
     methods: {
       async fetchService() {
         try {
-          const res = await api.get('service/mes_services/');
+          const user = JSON.parse(localStorage.getItem("auth_user_data"));
+          if (!user?.id) {
+            this.errorMessage = "Utilisateur non authentifié";
+            return;
+          }
+
+          const res = await api.get(`/service/list_service/${user.id}/`);
           this.services = res.data;
         } catch {
           this.errorMessage = "Erreur lors du chargement des services"
