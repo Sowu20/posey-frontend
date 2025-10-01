@@ -161,7 +161,7 @@
             console.error("Erreur vérification paiement :", error)
           }
 
-          if (tentatives >= 12) {
+          if (tentatives >= 7) {
             clearInterval(interval)
             Swal.fire({
               icon: 'error',
