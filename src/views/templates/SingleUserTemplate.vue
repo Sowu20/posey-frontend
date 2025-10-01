@@ -15,9 +15,6 @@
               - Catégorie : {{ user.categorie_nom || "Non défini" }}
             </span>
           </p>
-          <a href="javascript:void(0)" class="text-warning" @click="openPasswordModal">
-            🔑 Changer mon mot de passe
-          </a>
         </div>
       </div>
 
@@ -28,6 +25,9 @@
       <!-- Formulaire -->
       <div class="p-4">
         <h4 class="mb-4">Modifier mes informations</h4>
+        <a href="javascript:void(0)" class="text-primary" @click="openPasswordModal">
+            Changer mon mot de passe
+        </a>
         <form @submit="updateUser">
           <div class="row g-3">
             <div class="col-md-6">
