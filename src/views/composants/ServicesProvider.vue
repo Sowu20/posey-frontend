@@ -3,12 +3,12 @@
     <h3 class="mb-4">Mes Services</h3>
 
     <!-- Messages -->
-    <div v-if="successMessage" class="alert alert-success">Message de succès</div>
-    <div v-if="errorMessage" class="alert alert-danger">Message d'échec</div>
+    <div v-if="successMessage" class="alert alert-success">{{ successMessage }}</div>
+    <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 
     <!-- Liste des services -->
     <div class="row">
-      <div v-for="service in services" :key="service.id" class="col-md-4 mb-3">
+      <div v-for="service in paginatedServices" :key="service.id" class="col-md-4 mb-3">
         <div class="card shadow-sm h-100">
           <img :src="service.image || '/img/default-service.png'" class="card-img-top" alt="services">
           <div class="card-body">
@@ -24,6 +24,21 @@
         </div>
       </div>
     </div>
+
+    <!-- Pagination -->
+    <nav v-if="totalPages > 1" class="mt-4">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" :class="{ disabled: currentPage === 1 }">
+          <button class="page-link" @click="changePage(currentPage - 1)">Précédent</button>
+        </li>
+        <li v-for="page in totalPages" :key="page" class="page-item" :class="{ active: page === currentPage }">
+          <button class="page-link" @click="changePage(page)">{{ page }}</button>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+          <button class="page-link" @click="changePage(currentPage + 1)">Suivant</button>
+        </li>
+      </ul>
+    </nav>
 
     <!-- Ajout d'un service -->
     <div class="text-center mt-4">
@@ -46,7 +61,7 @@
               </div>
               <div class="mb-3">
                 <label class="form-label">Catégorie</label>
-                <select class="form-select" required>
+                <select v-model="form.categorie" class="form-select" required>
                   <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.nom }}</option>
                 </select>
               </div>
@@ -79,6 +94,7 @@
   import { Modal } from 'bootstrap';
 
   export default {
+    name: 'ServicesProvider',
     data() {
       return {
         services: [],
@@ -95,7 +111,18 @@
         modal: null,
         successMessage: null,
         errorMessage: null,
+        currentPage: 1,
+        perPage: 3,
       };
+    },
+    computed: {
+      totalPages() {
+        return Math.ceil(this.services.length / this.perPage);
+      },
+      paginatedServices() {
+        const start = (this.currentPage - 1) * this.perPage;
+        return this.services.slice(start, start + this.perPage);
+      }
     },
     methods: {
       async fetchServices() {
@@ -108,8 +135,9 @@
 
           const res = await api.get(`/service/list_service/${user.id}/`);
           this.services = res.data;
+          this.currentPage = 1; 
         } catch {
-          this.errorMessage = "Erreur lors du chargement des services"
+          this.errorMessage = "Erreur lors du chargement des services";
         }
       },
       async fetchCategories() {
@@ -117,7 +145,7 @@
           const res = await api.get('prestation/detail_categorie/');
           this.categories = res.data;
         } catch {
-          this.errorMessage = "Erreur lors du chargement des catégories"
+          this.errorMessage = "Erreur lors du chargement des catégories";
         }
       },
       handleImage(e) {
@@ -138,7 +166,7 @@
           this.form = { id: null, nom: "", categorie: "", description: "", prix: null, image: null };
         }
 
-        if(!this.modal) {
+        if (!this.modal) {
           this.modal = new Modal(document.getElementById("serviceModal"));
         }
         this.modal.show();
@@ -180,11 +208,15 @@
           this.errorMessage = "Erreur lors de la suppression ❌";
         }
       },
+      changePage(page) {
+        if (page >= 1 && page <= this.totalPages) {
+          this.currentPage = page;
+        }
+      }
     },
     created() {
       this.fetchServices();
       this.fetchCategories();
     },
-    name: 'ServicesProvider',
   }
 </script>
