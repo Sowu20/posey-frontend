@@ -1,7 +1,5 @@
 <template>
   <div class="container py-5">
-    <h3 class="mb-4">Mes Services</h3>
-
     <!-- Messages -->
     <div v-if="successMessage" class="alert alert-success">{{ successMessage }}</div>
     <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
