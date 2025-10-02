@@ -133,7 +133,7 @@
 
           const res = await api.get(`/service/list_service/${user.id}/`);
           this.services = res.data;
-          this.currentPage = 1; 
+          this.currentPage = 1;
         } catch {
           this.errorMessage = "Erreur lors du chargement des services";
         }
