@@ -11,7 +11,7 @@
           <label for="confirm">Confirmer le mot de passe</label>
           <input v-model="confirmPassword" type="password" class="form-control" required />
         </div>
-        <button type="submit" class="btn btn-success w-100">Réinitialiser</button>
+        <button type="submit" class="btn btn-primary w-100">Réinitialiser</button>
       </form>
     </div>
   </div>
