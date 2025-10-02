@@ -5,7 +5,7 @@
       <form @submit.prevent="submitEmail">
         <div class="mb-3">
           <label for="email">Saisir votre e-mail</label>
-          <input v-model="email" type="email" class="form-control" required />
+          <input id="email" v-model="email" type="email" class="form-control" required />
         </div>
         <button type="submit" class="btn btn-primary w-100">Envoyer</button>
       </form>

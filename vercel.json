@@ -2,7 +2,7 @@
   "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://divide-surgeon-story-gmt.trycloudflare.com/api/$1"
+            "destination": "https://utc-showtimes-kentucky-documents.trycloudflare.com/api/$1"
         },
         { 
             "source": "/(.*)",
