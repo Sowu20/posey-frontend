@@ -2,7 +2,7 @@
   "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://cottages-personally-july-ways.trycloudflare.com/api/$1"
+            "destination": "https://discrete-adrian-appeared-scout.trycloudflare.com/api/$1"
         },
         { 
             "source": "/(.*)",
