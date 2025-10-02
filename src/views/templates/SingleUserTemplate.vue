@@ -81,12 +81,7 @@
         <div class="modal-content">
           <div class="modal-header bg-primary text-white">
             <h5 class="modal-title">Changer mon mot de passe</h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <form @submit.prevent="changePassword">
             <div class="modal-body">
@@ -95,22 +90,12 @@
 
               <div class="mb-3">
                 <label class="form-label">Nouveau mot de passe</label>
-                <input
-                  type="password"
-                  v-model="passwordData.new_password"
-                  class="form-control"
-                  required
-                />
+                <input type="password" v-model="passwordData.new_password" class="form-control" required />
               </div>
 
               <div class="mb-3">
                 <label class="form-label">Confirmer le mot de passe</label>
-                <input
-                  type="password"
-                  v-model="passwordData.confirm_password"
-                  class="form-control"
-                  required
-                />
+                <input type="password" v-model="passwordData.confirm_password" class="form-control" required />
               </div>
             </div>
             <div class="modal-footer">
