@@ -177,9 +177,9 @@
             });
             Swal.fire("Succès", "Service modifié ✅", "success");
           } else {
-            await api.post("service/register_service/", formData, /*{
+            await api.post("service/register_service/", formData, {
               headers: { "Content-Type": "multipart/form-data" },
-            }*/);
+            });
             Swal.fire("Succès", "Service ajouté ✅", "success");
           }
 
