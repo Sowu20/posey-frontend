@@ -149,6 +149,7 @@
         if (this.isEdit && service) {
           this.form = {
             id: service.id,
+            prestataire: service.prestataire,
             nom: service.nom,
             categorie: service.categorie,
             description: service.description,
