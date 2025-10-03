@@ -177,8 +177,16 @@
             });
             Swal.fire("Succès", "Service modifié ✅", "success");
           } else {
+            const user = JSON.parse(localStorage.getItem("auth_user_data"));
+            if (!user?.id || !user?.access) {
+              Swal.fire("Erreur", "Veuillez vous connecter pour commander!");
+              return;
+            }
+
             await api.post("service/register_service/", formData, {
-              headers: { "Content-Type": "multipart/form-data" },
+              headers: { "Content-Type": "multipart/form-data",
+                "Authorization": `Bearer ${user.access}`
+               },
             });
             Swal.fire("Succès", "Service ajouté ✅", "success");
           }
