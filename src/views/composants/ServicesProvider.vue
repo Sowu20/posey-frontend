@@ -1,9 +1,5 @@
 <template>
   <div class="container py-5">
-    <!-- Messages -->
-    <div v-if="successMessage" class="alert alert-success">{{ successMessage }}</div>
-    <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-
     <!-- Liste des services -->
     <div class="row">
       <div v-for="service in paginatedServices" :key="service.id" class="col-md-4 mb-3">
@@ -55,7 +51,7 @@
             <div class="modal-body">
               <div class="mb-3">
                 <label class="form-label">Nom</label>
-                <input type="text" v-model="form.nom" class="form-control">
+                <input type="text" v-model="form.nom" class="form-control" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Catégorie</label>
@@ -65,11 +61,11 @@
               </div>
               <div class="mb-3">
                 <label class="form-label">Description</label>
-                <textarea v-model="form.description" class="form-control"></textarea>
+                <textarea v-model="form.description" class="form-control" required></textarea>
               </div>
               <div class="mb-3">
                 <label class="form-label">Prix</label>
-                <input type="number" v-model="form.prix" class="form-control" step="0.01" />
+                <input type="number" v-model="form.prix" class="form-control" step="0.01" required />
               </div>
               <div class="mb-3">
                 <label class="form-label">Image</label>
@@ -90,6 +86,7 @@
 <script>
   import api from '../services/api';
   import { Modal } from 'bootstrap';
+  import Swal from 'sweetalert2';
 
   export default {
     name: 'ServicesProvider',
@@ -107,8 +104,6 @@
         },
         isEdit: false,
         modal: null,
-        successMessage: null,
-        errorMessage: null,
         currentPage: 1,
         perPage: 3,
       };
@@ -127,7 +122,7 @@
         try {
           const user = JSON.parse(localStorage.getItem("auth_user_data"));
           if (!user?.id) {
-            this.errorMessage = "Utilisateur non authentifié";
+            Swal.fire("Erreur", "Utilisateur non authentifié", "error");
             return;
           }
 
@@ -135,7 +130,7 @@
           this.services = res.data;
           this.currentPage = 1;
         } catch {
-          this.errorMessage = "Erreur lors du chargement des services";
+          Swal.fire("Erreur", "Impossible de charger les services", "error");
         }
       },
       async fetchCategories() {
@@ -143,7 +138,7 @@
           const res = await api.get('prestation/detail_categorie/');
           this.categories = res.data;
         } catch {
-          this.errorMessage = "Erreur lors du chargement des catégories";
+          Swal.fire("Erreur", "Impossible de charger les catégories", "error");
         }
       },
       handleImage(e) {
@@ -180,30 +175,38 @@
             await api.put(`service/mes_services/${this.form.id}/`, formData, {
               headers: { "Content-Type": "multipart/form-data" },
             });
-            this.successMessage = "Service modifié ✅";
+            Swal.fire("Succès", "Service modifié ✅", "success");
           } else {
             await api.post("services/mes_services/", formData, {
               headers: { "Content-Type": "multipart/form-data" },
             });
-            this.successMessage = "Service ajouté ✅";
+            Swal.fire("Succès", "Service ajouté ✅", "success");
           }
 
-          this.errorMessage = null;
           this.modal.hide();
           this.fetchServices();
         } catch {
-          this.errorMessage = "Erreur lors de l'enregistrement ❌";
-          this.successMessage = null;
+          Swal.fire("Erreur", "Impossible d'enregistrer le service", "error");
         }
       },
       async deleteService(id) {
-        if (!confirm("Voulez-vous vraiment supprimer ce service ?")) return;
-        try {
-          await api.delete(`services/mes_services/${id}/`);
-          this.successMessage = "Service supprimé ✅";
-          this.fetchServices();
-        } catch {
-          this.errorMessage = "Erreur lors de la suppression ❌";
+        const result = await Swal.fire({
+          title: "Êtes-vous sûr ?",
+          text: "Cette action est irréversible",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Oui, supprimer",
+          cancelButtonText: "Annuler"
+        });
+
+        if (result.isConfirmed) {
+          try {
+            await api.delete(`services/mes_services/${id}/`);
+            Swal.fire("Succès", "Service supprimé ✅", "success");
+            this.fetchServices();
+          } catch {
+            Swal.fire("Erreur", "Impossible de supprimer le service", "error");
+          }
         }
       },
       changePage(page) {
@@ -216,5 +219,5 @@
       this.fetchServices();
       this.fetchCategories();
     },
-  }
+  };
 </script>
