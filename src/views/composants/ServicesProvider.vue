@@ -172,12 +172,12 @@
           }
 
           if (this.isEdit) {
-            await api.put(`service/mes_services/${this.form.id}/`, formData, {
+            await api.put(`service/update_service/${this.form.id}/`, formData, {
               headers: { "Content-Type": "multipart/form-data" },
             });
             Swal.fire("Succès", "Service modifié ✅", "success");
           } else {
-            await api.post("services/mes_services/", formData, {
+            await api.post("service/register_service/", formData, {
               headers: { "Content-Type": "multipart/form-data" },
             });
             Swal.fire("Succès", "Service ajouté ✅", "success");
@@ -201,7 +201,7 @@
 
         if (result.isConfirmed) {
           try {
-            await api.delete(`services/mes_services/${id}/`);
+            await api.delete(`service/delete_service/${id}/`);
             Swal.fire("Succès", "Service supprimé ✅", "success");
             this.fetchServices();
           } catch {
