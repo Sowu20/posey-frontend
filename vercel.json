@@ -2,7 +2,7 @@
   "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://discrete-adrian-appeared-scout.trycloudflare.com/api/$1"
+            "destination": "https://van-triple-posts-provisions.trycloudflare.com/api/$1"
         },
         { 
             "source": "/(.*)",
