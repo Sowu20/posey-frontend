@@ -9,7 +9,7 @@
             <h5 class="card-title">{{ service.nom }}</h5>
             <p class="card-text">{{ service.description }}</p>
             <div class="mt-auto">
-              <p class="card-text"><strong>Catégorie: </strong>{{ service.categorie_nom }}</p>
+              <p><strong>Catégorie: </strong>{{ service.categorie_nom }}</p>
               <p><strong>Prix: </strong>{{ service.prix }} FCFA</p>
             </div>
             <!-- <p><strong>Prix: </strong>{{ service.prix }} FCFA</p>
