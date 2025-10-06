@@ -73,7 +73,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                       <div>
                         <router-link class="btn btn-outline-primary btn-sm me-2" :to="`/prestataire/${prestataire.id}`">Voir profil</router-link>
-                        <button class="btn btn-primary btn-sm">Contacter</button>
+                        <!-- <button class="btn btn-primary btn-sm">Contacter</button> -->
                       </div>
                     </div>
                   </div>
