@@ -4,7 +4,7 @@ const token = localStorage.getItem('auth_token');
 // const user = user?.access || null;
 
 const api = axios.create({
-  baseURL: "https://promotes-hearing-armor-nobody.trycloudflare.com/api/",
+  baseURL: "https://upon-allows-unix-projected.trycloudflare.com/api/",
   headers: {
     ...(token && { Authorization: `Token ${token}` }),
     "Content-Type": "application/json",

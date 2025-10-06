@@ -2,7 +2,7 @@
   "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://promotes-hearing-armor-nobody.trycloudflare.com/api/$1"
+            "destination": "https://upon-allows-unix-projected.trycloudflare.com/api/$1"
         },
         { 
             "source": "/(.*)",
