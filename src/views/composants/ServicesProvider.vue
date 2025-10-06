@@ -8,8 +8,12 @@
           <div class="card-body">
             <h5 class="card-title">{{ service.nom }}</h5>
             <p class="card-text">{{ service.description }}</p>
-            <p><strong>Prix: </strong>{{ service.prix }} FCFA</p>
-            <p class="card-text">{{ service.categorie_nom }}</p>
+            <div class="mt-auto">
+              <p class="card-text"><strong>Catégorie: </strong>{{ service.categorie_nom }}</p>
+              <p><strong>Prix: </strong>{{ service.prix }} FCFA</p>
+            </div>
+            <!-- <p><strong>Prix: </strong>{{ service.prix }} FCFA</p>
+            <p class="card-text">{{ service.categorie_nom }}</p> -->
           </div>
           <div class="card-footer d-flex justify-content-between">
             <button class="btn btn-sm btn-warning" @click="openModal('edit', service)">Modifier</button>
