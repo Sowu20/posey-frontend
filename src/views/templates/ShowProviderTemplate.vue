@@ -50,8 +50,9 @@
             <img v-else src="/img/default-service.png" class="card-img-top" alt="Image par défaut" style="height: 200px; object-fit: cover;">
             <h5 class="fw-bold">{{ service.nom }}</h5>
             <p class="text-muted">{{ service.description }}</p>
-            <p><strong>Prix :</strong>{{ service.prix }} FCFA</p>
+            <!-- <p><strong>Prix :</strong>{{ service.prix }} FCFA</p> -->
             <div class="mt-auto">
+              <p><strong>Prix :</strong>{{ service.prix }} FCFA</p>
               <button class="btn btn-primary w-100" @click="commanderService(service)">Commander ce service</button>
             </div>
           </div>
