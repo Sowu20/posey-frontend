@@ -51,7 +51,9 @@
             <h5 class="fw-bold">{{ service.nom }}</h5>
             <p class="text-muted">{{ service.description }}</p>
             <p><strong>Prix :</strong>{{ service.prix }} FCFA</p>
-            <button class="btn btn-primary w-100" @click="commanderService(service)">Commander ce service</button>
+            <div class="mt-auto">
+              <button class="btn btn-primary w-100" @click="commanderService(service)">Commander ce service</button>
+            </div>
           </div>
         </div>
       </div>
