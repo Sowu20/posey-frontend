@@ -2,7 +2,7 @@
   "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://rebel-original-exclude-coupled.trycloudflare.com/api/$1"
+            "destination": "https://curves-essays-lands-drama.trycloudflare.com/api/$1"
         },
         { 
             "source": "/(.*)",
