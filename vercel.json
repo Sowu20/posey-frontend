@@ -2,7 +2,7 @@
   "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://curves-essays-lands-drama.trycloudflare.com/api/$1"
+            "destination": "https://casino-statutes-wallpapers-mountains.trycloudflare.com/api/$1"
         },
         { 
             "source": "/(.*)",
