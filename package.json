@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "stitch:fetch": "node scripts/fetch-stitch-screens.mjs",
+    "stitch:list": "node scripts/fetch-stitch-screens.mjs --list-projects",
+    "stitch:screens": "node scripts/fetch-stitch-screens.mjs --list-screens"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
