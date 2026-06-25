@@ -28,3 +28,10 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Stitch API key (never commit)
+.env
+.env.*
+
+# Optional: uncomment to ignore exported Stitch assets
+# design/stitch/
