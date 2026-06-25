@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Deposit Funds | ServiceConnect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#444651",
+                    "primary": "#b4c5ff",
+                    "surface-container": "#1a202c",
+                    "on-primary-fixed": "#00174c",
+                    "inverse-primary": "#0052de",
+                    "inverse-on-surface": "#2a303d",
+                    "on-primary-container": "#e2e6ff",
+                    "outline-variant": "#434655",
+                    "on-primary": "#00297a",
+                    "tertiary-fixed-dim": "#ffb59b",
+                    "inverse-surface": "#dde2f4",
+                    "on-tertiary-fixed": "#380d00",
+                    "background-dark": "#101622",
+                    "on-primary-fixed-variant": "#003daa",
+                    "on-secondary-container": "#b3b4c1",
+                    "tertiary": "#ffb59b",
+                    "surface-tint": "#b4c5ff",
+                    "surface-container-low": "#161c28",
+                    "on-tertiary": "#5c1a00",
+                    "on-surface-variant": "#c3c5d8",
+                    "surface-container-lowest": "#080e1a",
+                    "on-secondary": "#2e303a",
+                    "error-container": "#93000a",
+                    "card-bg": "#1d1f28",
+                    "surface-container-highest": "#2f3542",
+                    "on-tertiary-container": "#ffe1d7",
+                    "surface-light": "#f6f6f8",
+                    "secondary-container": "#444651",
+                    "primary-container": "#135bec",
+                    "surface-container-high": "#242a37",
+                    "background": "#0d131f",
+                    "on-surface": "#dde2f4",
+                    "border-subtle": "#434655",
+                    "secondary-fixed": "#e1e1ef",
+                    "secondary-fixed-dim": "#c5c5d2",
+                    "outline": "#8d90a1",
+                    "surface-bright": "#333946",
+                    "on-secondary-fixed": "#191b24",
+                    "on-error": "#690005",
+                    "secondary": "#c5c5d2",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed": "#ffdbcf",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "tertiary-container": "#b93d00",
+                    "surface-variant": "#2f3542",
+                    "surface": "#0d131f",
+                    "surface-dim": "#0d131f",
+                    "on-background": "#dde2f4",
+                    "on-tertiary-fixed-variant": "#812800",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#dbe1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap-md": "4rem",
+                    "section-gap-lg": "6rem",
+                    "margin-mobile": "1rem",
+                    "stack-lg": "2rem",
+                    "gutter": "1.5rem",
+                    "stack-md": "1rem",
+                    "stack-sm": "0.5rem",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "title-lg": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "display-lg-mobile": ["Manrope"],
+                    "display-lg": ["Manrope"],
+                    "label-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "title-lg": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg": ["60px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0d131f;
+            color: #dde2f4;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1a202c;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #434655;
+            border-radius: 10px;
+        }
+        .glass-panel {
+            background: rgba(29, 31, 40, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(67, 70, 85, 0.5);
+        }
+    </style>
+</head>
+<body class="dark bg-background text-on-background">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant shadow-lg">
+<nav class="flex justify-between items-center px-6 py-4 max-w-[1280px] mx-auto w-full">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary">ServiceConnect</span>
+<div class="hidden md:flex gap-6">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Marketplace</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Providers</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Support</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="chat_bubble">chat_bubble</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Close-up professional studio portrait of a corporate executive in a dark blue suit, smiling confidently against a soft-focus dark grey background. The lighting is crisp and cinematic, emphasizing a modern corporate aesthetic with high contrast and sharp details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyBVHgzVabGrA23keNdsXFiFwzferToUPJv6z3CCO-K3Ougr16KsB66ZmSYPtfaYHBinigkMY_ngdI3gzNB5JG8pk-2-J8pka8VCf2Mjrpkr6G4IJZdkNBniw0hNPi17K_tZjfqMdhlNAK70sGoX1rV4HjECw9hpWb-khJWdunPUOhNDiMF0zyr5-mdHVXSgV0FMztD_fPphM0R7U_UiIlKAQm3OUtNBLCNyOVRrNCX7Uwdhd_3Z2WFHiW4uIc19sGB7UQdiSYMyiE"/>
+</div>
+</div>
+</nav>
+</header>
+<main class="pt-24 pb-12 px-6 max-w-[1280px] mx-auto min-h-screen">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Side Navigation - Hidden on Mobile, Fixed Sidebar on Desktop -->
+<aside class="hidden lg:flex lg:col-span-3 flex-col gap-2">
+<div class="p-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-md text-label-md">Finance</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-label-md text-label-md">Messages</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</div>
+<div class="mt-8 px-4">
+<div class="bg-surface-container-high p-4 rounded-xl border border-outline-variant">
+<p class="font-label-md text-on-surface-variant mb-2">Current Balance</p>
+<h3 class="font-headline-md text-primary">$1,240.50</h3>
+<p class="text-[10px] text-on-surface-variant mt-1 uppercase tracking-wider">Securely Encrypted</p>
+</div>
+</div>
+</aside>
+<!-- Main Form Canvas -->
+<section class="lg:col-span-6 flex flex-col gap-6">
+<div class="flex flex-col gap-2 mb-4">
+<h1 class="font-headline-md text-headline-md text-on-surface">Deposit Funds</h1>
+<p class="font-body-md text-on-surface-variant">Add capital to your wallet to pay for services and manage your provider subscriptions.</p>
+</div>
+<!-- Step 1: Amount Input -->
+<div class="glass-panel p-6 rounded-2xl shadow-lg">
+<div class="flex items-center gap-3 mb-6">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<h2 class="font-title-lg text-title-lg text-on-surface">1. Choose Amount</h2>
+</div>
+<div class="relative mb-6">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-primary font-headline-md">$</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant focus:border-primary rounded-xl py-5 pl-10 pr-6 text-2xl font-bold text-on-surface outline-none transition-all" id="deposit-amount" placeholder="0.00" type="number"/>
+</div>
+<div class="grid grid-cols-4 gap-3">
+<button class="py-2 px-4 rounded-lg bg-surface-container border border-outline-variant hover:border-primary hover:text-primary transition-all font-label-md" onclick="document.getElementById('deposit-amount').value='50'">+$50</button>
+<button class="py-2 px-4 rounded-lg bg-surface-container border border-outline-variant hover:border-primary hover:text-primary transition-all font-label-md" onclick="document.getElementById('deposit-amount').value='100'">+$100</button>
+<button class="py-2 px-4 rounded-lg bg-surface-container border border-outline-variant hover:border-primary hover:text-primary transition-all font-label-md" onclick="document.getElementById('deposit-amount').value='500'">+$500</button>
+<button class="py-2 px-4 rounded-lg bg-surface-container border border-outline-variant hover:border-primary hover:text-primary transition-all font-label-md" onclick="document.getElementById('deposit-amount').value='1000'">+$1k</button>
+</div>
+</div>
+<!-- Step 2: Payment Method -->
+<div class="glass-panel p-6 rounded-2xl shadow-lg">
+<div class="flex items-center gap-3 mb-6">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="credit_card">credit_card</span>
+</div>
+<h2 class="font-title-lg text-title-lg text-on-surface">2. Payment Method</h2>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Credit Card Option -->
+<label class="relative flex items-center p-4 rounded-xl border border-primary bg-primary-container/10 cursor-pointer transition-all hover:bg-primary-container/20 group">
+<input checked="" class="hidden" name="payment_method" type="radio"/>
+<div class="flex items-center gap-4 w-full">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-on-surface">Credit / Debit Card</p>
+<p class="text-[12px] text-on-surface-variant">Visa, Mastercard, Amex</p>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</label>
+<!-- PayPal Option -->
+<label class="relative flex items-center p-4 rounded-xl border border-outline-variant bg-surface-container/50 cursor-pointer transition-all hover:bg-surface-container-high group">
+<input class="hidden" name="payment_method" type="radio"/>
+<div class="flex items-center gap-4 w-full">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="account_balance">account_balance</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-on-surface">PayPal Express</p>
+<p class="text-[12px] text-on-surface-variant">Instant secure transfer</p>
+</div>
+</div>
+</label>
+<!-- Bank Transfer Option -->
+<label class="relative flex items-center p-4 rounded-xl border border-outline-variant bg-surface-container/50 cursor-pointer transition-all hover:bg-surface-container-high group">
+<input class="hidden" name="payment_method" type="radio"/>
+<div class="flex items-center gap-4 w-full">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary" data-icon="domain">domain</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-on-surface">Bank Wire Transfer</p>
+<p class="text-[12px] text-on-surface-variant">Processing time: 1-3 business days</p>
+</div>
+</div>
+</label>
+</div>
+</div>
+<button class="w-full py-5 bg-primary-container text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-primary/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+                    Secure Deposit Now
+                </button>
+<p class="text-center font-label-sm text-on-surface-variant">
+                    By proceeding, you agree to ServiceConnect's 
+                    <a class="text-primary hover:underline transition-all" href="#">Billing Terms</a>.
+                </p>
+</section>
+<!-- Transaction Summary & Info -->
+<section class="lg:col-span-3 flex flex-col gap-6">
+<div class="glass-panel p-6 rounded-2xl">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-6">Recent Activity</h3>
+<div class="flex flex-col gap-4 max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
+<!-- History Item 1 -->
+<div class="flex justify-between items-start pb-4 border-b border-outline-variant/30">
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface">Deposit Card</span>
+<span class="text-[12px] text-on-surface-variant">Oct 24, 2024</span>
+</div>
+<span class="font-label-md text-primary">+$450.00</span>
+</div>
+<!-- History Item 2 -->
+<div class="flex justify-between items-start pb-4 border-b border-outline-variant/30">
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface">Service Fee</span>
+<span class="text-[12px] text-on-surface-variant">Oct 22, 2024</span>
+</div>
+<span class="font-label-md text-error">-$12.50</span>
+</div>
+<!-- History Item 3 -->
+<div class="flex justify-between items-start pb-4 border-b border-outline-variant/30">
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface">Deposit PayPal</span>
+<span class="text-[12px] text-on-surface-variant">Oct 15, 2024</span>
+</div>
+<span class="font-label-md text-primary">+$200.00</span>
+</div>
+<!-- History Item 4 -->
+<div class="flex justify-between items-start pb-4 border-b border-outline-variant/30">
+<div class="flex flex-col">
+<span class="font-label-md text-on-surface">Bank Transfer</span>
+<span class="text-[12px] text-on-surface-variant">Oct 10, 2024</span>
+</div>
+<span class="font-label-md text-primary">+$1,000.00</span>
+</div>
+</div>
+<button class="w-full mt-4 text-center font-label-sm text-primary hover:underline py-2">View Full Statement</button>
+</div>
+<div class="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/50">
+<div class="flex flex-col gap-4 text-on-surface-variant">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user">verified_user</span>
+<div class="flex flex-col">
+<p class="font-label-md text-on-surface">PCI DSS Compliant</p>
+<p class="text-[12px]">Your payment data is fully encrypted and never stored on our servers.</p>
+</div>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="support_agent">support_agent</span>
+<div class="flex flex-col">
+<p class="font-label-md text-on-surface">24/7 Priority Support</p>
+<p class="text-[12px]">Issue with your deposit? Our finance team is available around the clock.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Aesthetic Image/Banner -->
+<div class="rounded-2xl h-48 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent z-10"></div>
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Abstract cinematic background showing high-speed data flow and digital particles in shades of deep navy and electric blue. The style is professional and corporate, conveying security, speed, and reliable technology with a clean bokeh effect." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjW7ZMS_FwXq3XqB9bWpPN1MjdWTWZ7PRdaR2RfMUQ1IVZJ90jqQKH8K2ef8ztiXTdxtMfiLM_4iA1b5ccZStPK6ZZhw7T5SSxIuq77gyZqbQD3h22eOeReQNQ02FnnR48g2zUTOUBPjYOJm-LPPWoqZh997_zk4PxHMENQyWBhYjKE6tdaFmE37lKpoESUefy1H9wGV-lVxfwVtmsWxs6Af3RjT_TsIJAvdibr7EyJMnlALBXgzKS5pzriB2mjqRpX06xZHvG1nCg"/>
+<div class="absolute bottom-4 left-4 z-20">
+<p class="font-label-md text-white">Trust Center</p>
+<p class="text-[10px] text-primary uppercase font-bold">Reliability Guaranteed</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto border-t border-outline-variant bg-background-dark">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-[1280px] mx-auto w-full">
+<div class="flex flex-col items-center md:items-start gap-4 mb-8 md:mb-0">
+<span class="font-title-lg text-title-lg text-primary">ServiceConnect</span>
+<p class="font-label-sm text-label-sm text-on-secondary-container">© 2024 ServiceConnect. Professional Reliability Guaranteed.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-4">
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary underline transition-all" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary underline transition-all" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary underline transition-all" href="#">Cookie Policy</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary underline transition-all" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+<script>
+        // Interactive Selection Logic
+        const paymentLabels = document.querySelectorAll('label');
+        paymentLabels.forEach(label => {
+            label.addEventListener('click', () => {
+                // Reset all
+                paymentLabels.forEach(l => {
+                    l.classList.remove('border-primary', 'bg-primary-container/10');
+                    l.classList.add('border-outline-variant', 'bg-surface-container/50');
+                    const check = l.querySelector('.material-symbols-outlined[data-icon="check_circle"]');
+                    if (check) check.remove();
+                });
+
+                // Set Active
+                label.classList.add('border-primary', 'bg-primary-container/10');
+                label.classList.remove('border-outline-variant', 'bg-surface-container/50');
+                
+                const checkSpan = document.createElement('span');
+                checkSpan.className = 'material-symbols-outlined text-primary';
+                checkSpan.setAttribute('data-icon', 'check_circle');
+                checkSpan.style.fontVariationSettings = "'FILL' 1";
+                checkSpan.innerText = 'check_circle';
+                label.querySelector('.flex').appendChild(checkSpan);
+            });
+        });
+
+        // Numeric Input Polish
+        const amountInput = document.getElementById('deposit-amount');
+        amountInput.addEventListener('blur', (e) => {
+            const val = parseFloat(e.target.value);
+            if (!isNaN(val)) {
+                e.target.value = val.toFixed(2);
+            }
+        });
+    </script>
+</body></html>

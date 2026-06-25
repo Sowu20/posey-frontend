@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profil Prestataire - Jean Dupont</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#135bec",
+            "background-light": "#f6f6f8",
+            "background-dark": "#111722",
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+  </style>
+</head>
+<body class="font-display bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-[#111722] dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- TopNavBar -->
+<div class="w-full px-4 sm:px-10 md:px-20 lg:px-40 py-5">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#232f48] px-4 md:px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<span class="material-symbols-outlined text-4xl">hub</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">Plateforme Services</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-[#92a4c9] flex border-none bg-[#232f48] items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#232f48] focus:border-none h-full placeholder:text-[#92a4c9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search" value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4 md:gap-8">
+<div class="hidden lg:flex items-center gap-9">
+<a class="text-white text-sm font-medium leading-normal" href="#">Trouver des prestataires</a>
+<a class="text-white text-sm font-medium leading-normal" href="#">Projets</a>
+<a class="text-white text-sm font-medium leading-normal" href="#">Messages</a>
+<a class="text-white text-sm font-medium leading-normal" href="#">Aide</a>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Publier un projet</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#232f48] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDLR-DIDzaLQ_GmuLxzdKZ9x088C-kNHpzT_v-nQ2JiMhcpepG_VJQjN_ahkI6_ObCmOY9cDpMQixcq6IoONDnxbQfuKR2tbHECBiAkCiMz-kVYbO9BLODC0c_foCOw1KJLBknEG4tkc6LMTkU8tqBvh-iVV4IOz4q41alSZ1NeQpKwuInZj1GMRi8t0ZfoBv2PCVyxIbA9IBqoT-eziHw5GaISX4QoZlkZLmJPkhBDgc1xZ8GgSePUwRJKerqp0IjdjHGE2M3Onbci");'></div>
+</div>
+</header>
+</div>
+<!-- Main Content -->
+<main class="w-full px-4 sm:px-10 md:px-20 lg:px-40 py-5">
+<div class="layout-content-container mx-auto flex max-w-[1280px] flex-col flex-1 gap-8">
+<!-- ProfileHeader -->
+<div class="flex p-4 @container bg-[#1a2333] rounded-xl border border-[#232f48]">
+<div class="flex w-full flex-col gap-4 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center">
+<div class="flex flex-col @[420px]:flex-row gap-6">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-32 w-32 shrink-0" data-alt="Profile picture of Jean Dupont" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAP07ISME51N5vwlGpC7k264A5TDB-8YoLG5dcoRnWw42jz59bwVmLTmt1LvYySajDajTsZYC9URYN3veYjSuYnArJA4lvDdWlqZEVi5LS07yN249jWzAecdndLxwR2ZN1lVbMxQePUOs41tXu_EPTG6F1SQjbnoMNIksJrWKb7x7sMyhocO46FIxqrtXPX5H05zTQUkSAX_FyBCqpMasKJgcMWTe8gLIlkJzaCQe7iq2qJ8vwIhjdVipCxTemH9QCzWvY47XAaHtco");'></div>
+<div class="flex flex-col justify-center gap-1">
+<p class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Jean Dupont</p>
+<p class="text-primary text-lg font-semibold leading-normal">Développeur Web Full-Stack</p>
+<p class="text-[#92a4c9] text-base font-normal leading-normal">Paris, France</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="inline-flex items-center gap-1 text-xs font-semibold bg-green-500/20 text-green-400 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined !text-sm">verified</span>
+                          Membre Vérifié
+                      </span>
+<span class="inline-flex items-center gap-1 text-xs font-semibold bg-amber-500/20 text-amber-400 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined !text-sm">workspace_premium</span>
+                          Top Prestataire
+                      </span>
+</div>
+</div>
+</div>
+<div class="flex w-full max-w-[480px] gap-3 @[480px]:w-auto @[520px]:flex-col @[640px]:flex-row">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#232f48] text-white text-sm font-bold leading-normal tracking-[0.015em] flex-1 @[480px]:flex-auto">
+<span class="truncate">Contacter</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] flex-1 @[480px]:flex-auto">
+<span class="truncate">Demander un devis</span>
+</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Sidebar -->
+<aside class="lg:col-span-1 flex flex-col gap-6">
+<!-- Info Card -->
+<div class="bg-[#1a2333] p-6 rounded-xl border border-[#232f48] flex flex-col gap-4">
+<h3 class="text-white text-lg font-bold">Informations Clés</h3>
+<div class="flex flex-col gap-3 text-[#c1d2f5]">
+<div class="flex justify-between items-center"><span>Taux Journalier</span><span class="font-semibold text-white">À partir de 450€</span></div>
+<div class="flex justify-between items-center"><span>Disponibilité</span><span class="font-semibold text-white">Immédiate</span></div>
+<div class="flex justify-between items-center"><span>Compétences</span></div>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs font-medium bg-[#324467] text-[#e0eaff] px-2.5 py-1 rounded-full">React</span>
+<span class="text-xs font-medium bg-[#324467] text-[#e0eaff] px-2.5 py-1 rounded-full">Node.js</span>
+<span class="text-xs font-medium bg-[#324467] text-[#e0eaff] px-2.5 py-1 rounded-full">TypeScript</span>
+<span class="text-xs font-medium bg-[#324467] text-[#e0eaff] px-2.5 py-1 rounded-full">GraphQL</span>
+<span class="text-xs font-medium bg-[#324467] text-[#e0eaff] px-2.5 py-1 rounded-full">Tailwind CSS</span>
+</div>
+</div>
+</div>
+<!-- Stats Card -->
+<div class="bg-[#1a2333] p-6 rounded-xl border border-[#232f48] flex flex-col gap-4">
+<h3 class="text-white text-lg font-bold">Statistiques</h3>
+<div class="grid grid-cols-2 gap-4 text-center">
+<div class="flex flex-col"><span class="text-2xl font-bold text-white">87</span><span class="text-[#92a4c9] text-sm">Projets terminés</span></div>
+<div class="flex flex-col"><span class="text-2xl font-bold text-white">99%</span><span class="text-[#92a4c9] text-sm">Taux de réussite</span></div>
+<div class="flex flex-col"><span class="text-2xl font-bold text-white">8+</span><span class="text-[#92a4c9] text-sm">Années d'expérience</span></div>
+<div class="flex flex-col"><span class="text-2xl font-bold text-white">&lt; 1h</span><span class="text-[#92a4c9] text-sm">Taux de réponse</span></div>
+</div>
+</div>
+<!-- Social Card -->
+<div class="bg-[#1a2333] p-6 rounded-xl border border-[#232f48] flex flex-col gap-4">
+<h3 class="text-white text-lg font-bold">Réseaux Professionnels</h3>
+<div class="flex flex-col gap-3">
+<a class="flex items-center gap-3 text-[#c1d2f5] hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">link</span><span>Portfolio Personnel</span></a>
+<a class="flex items-center gap-3 text-[#c1d2f5] hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">code</span><span>GitHub</span></a>
+<a class="flex items-center gap-3 text-[#c1d2f5] hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">group</span><span>LinkedIn</span></a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<div class="bg-[#1a2333] rounded-xl border border-[#232f48]">
+<!-- Tabs -->
+<div class="pb-3">
+<div class="flex border-b border-[#324467] px-4 gap-8">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-white pb-[13px] pt-4" href="#">
+<p class="text-white text-sm font-bold leading-normal tracking-[0.015em]">À Propos</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#92a4c9] pb-[13px] pt-4 hover:text-white" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Services</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#92a4c9] pb-[13px] pt-4 hover:text-white" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Portfolio</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#92a4c9] pb-[13px] pt-4 hover:text-white" href="#">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">Avis (124)</p>
+</a>
+</div>
+</div>
+<!-- Tab Content -->
+<div class="p-6">
+<!-- About Section -->
+<div id="about-content">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Biographie</h2>
+<p class="text-[#c1d2f5] text-base font-normal leading-relaxed mt-4">
+                                Développeur web passionné avec plus de 8 ans d'expérience dans la création d'applications web modernes, réactives et performantes. Spécialisé dans l'écosystème JavaScript, je maîtrise React, Node.js et TypeScript pour construire des solutions full-stack robustes et évolutives.
+                                <br/><br/>
+                                Mon objectif est de transformer vos idées en produits numériques de haute qualité qui répondent non seulement à vos besoins, mais dépassent également vos attentes. J'accorde une grande importance à la communication, à la transparence et au respect des délais.
+                            </p>
+</div>
+<!-- Services Section (Example, can be dynamically shown) -->
+<div class="hidden" id="services-content">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] mb-4">Mes Services</h2>
+<div class="flex flex-col gap-4">
+<!-- Service Card 1 -->
+<div class="border border-[#232f48] rounded-lg p-4">
+<h3 class="text-lg font-bold text-white">Développement d'application web sur mesure</h3>
+<p class="text-[#92a4c9] mt-1">Création d'une application complète de A à Z, du back-end au front-end.</p>
+<p class="text-primary font-semibold mt-2">À partir de 5000€</p>
+</div>
+<!-- Service Card 2 -->
+<div class="border border-[#232f48] rounded-lg p-4">
+<h3 class="text-lg font-bold text-white">Intégration d'API tierces</h3>
+<p class="text-[#92a4c9] mt-1">Connexion de votre application à des services externes (Paiement, Cartographie, etc.).</p>
+<p class="text-primary font-semibold mt-2">Sur devis</p>
+</div>
+</div>
+</div>
+<!-- Portfolio Section (Example) -->
+<div class="hidden" id="portfolio-content">
+<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] mb-4">Portfolio</h2>
+<div class="grid grid-cols-1 @[400px]:grid-cols-2 gap-4">
+<div class="aspect-video bg-cover bg-center rounded-lg" data-alt="Portfolio item 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYWUBNu5KZaVrC0sRx4e4d9VySYSiBXdlwZnOqWUxpXFAETYwgiHDO9ENLdfcHaWO2cMRSj2sA3y8JJuf9bPHRKUOpAFMVBDk8WGSI81glzreWDisC8airEZAbSZd1Lh--vkCq7m9htje0tHyXcp3jeR_uw1lpHO4P_mu-to0KU0UnKh1-pYfR4SUiltbd49YKirNsTSfh1f9RXlV3EoUzLdDYiXZMu-35vM81F2qOVVDQ3HvFDu9f5mZVBJQDNheKcVOEA6z0jvnW');"></div>
+<div class="aspect-video bg-cover bg-center rounded-lg" data-alt="Portfolio item 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAKT0frD0jrgaxLBey0XmxD3Yc7o9jn1x1xa-AKLObtCQcwHkE8s-ry_J7c69CRq607YXzSlMSqlo2KJ2mRFVv5WI9wWl5vSZelO5j4Q5sLb-QMMdUY2xq6wBAmkzNx0Uh4TsnIC_0LFFr-OUPobEO2SE3eg_oi9Oxt-StmnEqTAYpz-Fu8T3k7sM2-vNrO5-oE2sJ-a96XYRnd9i_yCqNgjdXDRY5YlLUzbJyZlCA85QW7Y7d_cFedqNVw4XiEC5ftficbWVf8gXs5');"></div>
+<div class="aspect-video bg-cover bg-center rounded-lg" data-alt="Portfolio item 3" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3StX3wRVL1w1_lCPmtZNGWaKdxL_Ozl4VQUnku362rRAYJ1jX2IXT1otLZ6IxlLSFdHeh3bk6UdXNPPW9QCCk2nkaZ6AzE5j7CzhkTQslnHNJss_9MYvdlrD5tSBKyqtCuRdKHyCPCmLIGe4o4Tp8vjTpJGYSApUe51s2N_k7ry97EbtMrr7ZKZa_zpIVh6H3En-WDiGYDQQ0isBiL-YcKN8AhM9fbNGZ-RgMUHYPvo9Pp4Oma6pxxmy8Sxi9Olc6k4O-1j7E_aUK');"></div>
+<div class="aspect-video bg-cover bg-center rounded-lg" data-alt="Portfolio item 4" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDUPV9X5Wv-sR_oveKGwohqONM919FX-qKiC7Vr9TsE-c8L6rSKZyUdkdYy5V5h_TQyC5KWur-1IQLwWHi9otbuJT2Jv50aqAyxs_w14yYYRxpcFPtWfc5k5Al0ejNrtT-3hWD0qEf5H-zVgMijcpwy5LiRxu63X-5AKmFGpK40gHIksUpL80ywBppmpfa2kVz8w6DgaMLUF21OAzCGveGXXV1EP5bCiSzF1BTPddNAElm9QJ8-Ww3RsI32WBsa3nwTHNF6JJz21OVv');"></div>
+</div>
+</div>
+<!-- Reviews Section (Example) -->
+<div class="hidden" id="reviews-content">
+<div class="flex flex-wrap gap-x-8 gap-y-6 p-4">
+<div class="flex flex-col gap-2">
+<p class="text-white text-4xl font-black leading-tight tracking-[-0.033em]">4.8</p>
+<div class="flex gap-0.5">
+<span class="material-symbols-outlined fill text-primary !text-lg">star</span>
+<span class="material-symbols-outlined fill text-primary !text-lg">star</span>
+<span class="material-symbols-outlined fill text-primary !text-lg">star</span>
+<span class="material-symbols-outlined fill text-primary !text-lg">star</span>
+<span class="material-symbols-outlined fill text-primary !text-lg">star_half</span>
+</div>
+<p class="text-white text-base font-normal leading-normal">124 avis</p>
+</div>
+<div class="grid min-w-[200px] max-w-[400px] flex-1 grid-cols-[20px_1fr_40px] items-center gap-y-3">
+<p class="text-white text-sm font-normal leading-normal">5</p>
+<div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#324467]"><div class="rounded-full bg-primary" style="width: 85%;"></div></div>
+<p class="text-[#92a4c9] text-sm font-normal leading-normal text-right">85%</p>
+<p class="text-white text-sm font-normal leading-normal">4</p>
+<div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#324467]"><div class="rounded-full bg-primary" style="width: 12%;"></div></div>
+<p class="text-[#92a4c9] text-sm font-normal leading-normal text-right">12%</p>
+<p class="text-white text-sm font-normal leading-normal">3</p>
+<div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#324467]"><div class="rounded-full bg-primary" style="width: 2%;"></div></div>
+<p class="text-[#92a4c9] text-sm font-normal leading-normal text-right">2%</p>
+<p class="text-white text-sm font-normal leading-normal">2</p>
+<div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#324467]"><div class="rounded-full bg-primary" style="width: 1%;"></div></div>
+<p class="text-[#92a4c9] text-sm font-normal leading-normal text-right">1%</p>
+<p class="text-white text-sm font-normal leading-normal">1</p>
+<div class="flex h-2 flex-1 overflow-hidden rounded-full bg-[#324467]"><div class="rounded-full bg-primary" style="width: 0%;"></div></div>
+<p class="text-[#92a4c9] text-sm font-normal leading-normal text-right">0%</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

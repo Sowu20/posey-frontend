@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login &amp; Registration | ServiceConnect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#444651",
+                        "primary": "#b4c5ff",
+                        "surface-container": "#1a202c",
+                        "on-primary-fixed": "#00174c",
+                        "inverse-primary": "#0052de",
+                        "inverse-on-surface": "#2a303d",
+                        "on-primary-container": "#e2e6ff",
+                        "outline-variant": "#434655",
+                        "on-primary": "#00297a",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "inverse-surface": "#dde2f4",
+                        "on-tertiary-fixed": "#380d00",
+                        "background-dark": "#101622",
+                        "on-primary-fixed-variant": "#003daa",
+                        "on-secondary-container": "#b3b4c1",
+                        "tertiary": "#ffb59b",
+                        "surface-tint": "#b4c5ff",
+                        "surface-container-low": "#161c28",
+                        "on-tertiary": "#5c1a00",
+                        "on-surface-variant": "#c3c5d8",
+                        "surface-container-lowest": "#080e1a",
+                        "on-secondary": "#2e303a",
+                        "error-container": "#93000a",
+                        "card-bg": "#1d1f28",
+                        "surface-container-highest": "#2f3542",
+                        "on-tertiary-container": "#ffe1d7",
+                        "surface-light": "#f6f6f8",
+                        "secondary-container": "#444651",
+                        "primary-container": "#135bec",
+                        "surface-container-high": "#242a37",
+                        "background": "#0d131f",
+                        "on-surface": "#dde2f4",
+                        "border-subtle": "#434655",
+                        "secondary-fixed": "#e1e1ef",
+                        "secondary-fixed-dim": "#c5c5d2",
+                        "outline": "#8d90a1",
+                        "surface-bright": "#333946",
+                        "on-secondary-fixed": "#191b24",
+                        "on-error": "#690005",
+                        "secondary": "#c5c5d2",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#ffdbcf",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "tertiary-container": "#b93d00",
+                        "surface-variant": "#2f3542",
+                        "surface": "#0d131f",
+                        "surface-dim": "#0d131f",
+                        "on-background": "#dde2f4",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#dbe1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "title-lg": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "display-lg-mobile": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "title-lg": ["20px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "display-lg": ["60px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #0d131f; color: #dde2f4; margin: 0; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { backdrop-filter: blur(12px); background: rgba(29, 31, 40, 0.7); }
+        .tab-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        input:focus { ring: 2px solid #135bec; border-color: transparent; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #434655; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation (Shell Supressed: No) - Logo only for Focus -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant px-6 py-4 flex justify-between items-center">
+<div class="font-headline-md text-headline-md font-bold text-primary">ServiceConnect</div>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 flex items-center gap-2" href="/">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="font-label-md text-label-md">Back to Home</span>
+</a>
+</header>
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4 md:px-0">
+<div class="max-w-[1100px] w-full grid grid-cols-1 md:grid-cols-2 gap-0 overflow-hidden rounded-xl shadow-2xl bg-card-bg border border-outline-variant">
+<!-- Branding/Image Side -->
+<div class="hidden md:flex flex-col relative overflow-hidden bg-surface-container-lowest">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full opacity-60 bg-cover bg-center" data-alt="A professional workspace with sleek, modern technology and soft blue atmospheric lighting. The scene features a high-end office environment with blurred city lights in the background, conveying corporate reliability and premium service. Dark tones dominate the palette with electric blue highlights, mirroring the ServiceConnect brand identity. The mood is sophisticated, calm, and focused." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA6f_cDtwbPUdQV8asxjdxDTXMuwTXo9DX1gVrYlizVi5TXds0KPVGVG4fsDRPk7N3_hKyqBN2NYnfq811mY4jamnjODQOV_22-5UcSlFgmjt3LgHOYCFLQxmGqLDM6N-f7AmbdehHHn-5BodhimyJkyIOBXufnHro_wjS-Lkbbb3aKvq3-3GLiYnFUMzpCgeasEy7GrE29CC8Opj36g1X8-w-kKRmDmMtD3INRjEejecoG2_ab59LkrAqSjf4xkhHN0Or184Da7Hbm')"></div>
+</div>
+<div class="relative z-10 h-full p-12 flex flex-col justify-end bg-gradient-to-t from-background-dark via-background-dark/40 to-transparent">
+<h1 class="font-display-lg text-display-lg text-white mb-6">Professional Reliability Guaranteed.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                        Join the most trusted network of service providers and clients globally. Efficient, trustworthy, and organized.
+                    </p>
+<div class="mt-8 flex items-center gap-4">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-background-dark overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a smiling professional woman in business casual attire, soft office lighting, high-quality digital photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8JBtojhaOu_Va5ycUiuQqZa5gpBsuynby6Q2FlN3S1MuFR4HvgXn-fgKEmTRBi8rET7DMGd4e41TD8SuGc38cP6AJpK2O3xXgdvKDV98hkOR-I4EqGi4V3l3bxOx8z2u0V2RyzggrOttJZLoP8TBQZyvGZx2ET1Bx4utBQ7nBFddJBxo8GY20cmSU3cM4fxPrcXsp9RZR1Zy2F7NuySKsom4B9t_xqViK3GJ2gnMyCMhI30fIqVw7BJlCykGpFHPBmZZcwXS_My-E"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-background-dark overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Professional man with glasses smiling warmly, corporate portrait style, minimalist background with dark blue tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUvj6CYjoqO-dUXYlSWIyD7Uhl37bP7N9xkI31rdyJUxKhBJKTqrSv9IrnmvQdopo5v9GLsgs_S8X8PZbdWUjxKyBbd-Uwj3ClfWfIz72KiVUhNFo7M2pT9CGDbyDKDHlZxHIfy12cwJvd1d3Pk8lhZQ8nmQn8b6YMIsLDlzatHu60CErFx-KWGEYoa-S5Lyleix-xepNbeS9dXVZF0TMKrUSaFf7MYjtfDEKgVqUwXv0BJH_lfZKcPqpsZFcG8NGFFQs4KcpNDIEJ"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-background-dark overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A diverse professional team member looking into the camera, professional lighting, modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsHdP0nogm7DML9gOumTaz88H3c_JkcytyKvIvZj7xALCxjs2Iy-zxCgloaCklc2j1Fup4SGGZ9vpuYzUrvKeWqHrnMFVwfM-cZM7bv5AewiEJlrH00gANcz5bvL_DdevKbpGJ-9XuFu9-3RR2u3bHwj9GlMbSQwSQqqM7CaYwy0elx0IHqT-27Y4qGSYZta2hRuTvr8maypz2nGmYkCOWtE7taWSJPKIAuOWiosnPdG-2D911I5XSf3yUqyhQd-Z0fO-ZsjNnDDgj"/>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Trusted by 10k+ businesses</span>
+</div>
+</div>
+</div>
+<!-- Form Side -->
+<div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-card-bg">
+<!-- Tab Headers -->
+<div class="flex gap-8 mb-10 border-b border-outline-variant">
+<button class="pb-4 font-title-lg text-title-lg tab-transition border-b-2 border-primary text-primary" id="tab-login" onclick="switchTab('login')">Sign In</button>
+<button class="pb-4 font-title-lg text-title-lg tab-transition border-b-2 border-transparent text-on-surface-variant hover:text-primary" id="tab-signup" onclick="switchTab('signup')">Create Account</button>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+<button class="flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-surface-container-high border border-outline-variant hover:bg-surface-container-highest transition-colors active:scale-95 duration-200">
+<svg class="w-5 h-5" viewbox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path></svg>
+<span class="font-label-md text-label-md">Google</span>
+</button>
+<button class="flex items-center justify-center gap-3 py-3 px-4 rounded-lg bg-surface-container-high border border-outline-variant hover:bg-surface-container-highest transition-colors active:scale-95 duration-200">
+<svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.165 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"></path></svg>
+<span class="font-label-md text-label-md">GitHub</span>
+</button>
+</div>
+<div class="relative flex items-center justify-center mb-8">
+<div class="w-full border-t border-outline-variant"></div>
+<span class="absolute bg-card-bg px-4 font-label-sm text-label-sm text-on-surface-variant">OR EMAIL</span>
+</div>
+<!-- Sign In Form -->
+<form class="space-y-5" id="form-login">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface">Email Address</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="name@company.com" type="email"/>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between">
+<label class="font-label-md text-label-md text-on-surface">Password</label>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Forgot password?</a>
+</div>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex items-center gap-2 pt-2">
+<input class="w-4 h-4 rounded border-outline-variant bg-surface-container text-primary-container focus:ring-primary-container" id="remember" type="checkbox"/>
+<label class="font-label-md text-label-md text-on-surface-variant" for="remember">Remember me for 30 days</label>
+</div>
+<button class="w-full py-4 bg-primary-container text-white font-bold rounded-lg shadow-lg hover:opacity-90 active:scale-95 transition-all mt-4" type="submit">
+                        Sign In to Account
+                    </button>
+</form>
+<!-- Sign Up Form (Hidden) -->
+<form class="space-y-5 hidden" id="form-signup">
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface">First Name</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="John" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface">Last Name</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Doe" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface">Email Address</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="name@company.com" type="email"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface">Password</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-4 py-3 text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Create a strong password" type="password"/>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">
+                        By creating an account, you agree to our <a class="text-primary hover:underline" href="#">Terms of Service</a> and <a class="text-primary hover:underline" href="#">Privacy Policy</a>.
+                    </p>
+<button class="w-full py-4 bg-primary-container text-white font-bold rounded-lg shadow-lg hover:opacity-90 active:scale-95 transition-all mt-2" type="submit">
+                        Create Your Account
+                    </button>
+</form>
+<p class="mt-10 text-center font-label-md text-label-md text-on-surface-variant">
+                    Need help? <a class="text-primary font-bold hover:underline" href="#">Contact Support</a>
+</p>
+</div>
+</div>
+</main>
+<!-- Footer (Shell Visibility: Yes) -->
+<footer class="w-full mt-auto border-t border-outline-variant bg-background-dark">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 max-w-[1280px] mx-auto w-full">
+<p class="font-label-sm text-label-sm text-on-secondary-container mb-4 md:mb-0">© 2024 ServiceConnect. Professional Reliability Guaranteed.</p>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-all" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-all" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-all" href="#">Cookie Policy</a>
+<a class="font-label-sm text-label-sm text-on-secondary-container hover:text-primary transition-all" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+<script>
+        function switchTab(type) {
+            const loginTab = document.getElementById('tab-login');
+            const signupTab = document.getElementById('tab-signup');
+            const loginForm = document.getElementById('form-login');
+            const signupForm = document.getElementById('form-signup');
+
+            if (type === 'login') {
+                loginTab.classList.add('border-primary', 'text-primary');
+                loginTab.classList.remove('border-transparent', 'text-on-surface-variant');
+                signupTab.classList.remove('border-primary', 'text-primary');
+                signupTab.classList.add('border-transparent', 'text-on-surface-variant');
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+            } else {
+                signupTab.classList.add('border-primary', 'text-primary');
+                signupTab.classList.remove('border-transparent', 'text-on-surface-variant');
+                loginTab.classList.remove('border-primary', 'text-primary');
+                loginTab.classList.add('border-transparent', 'text-on-surface-variant');
+                signupForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            }
+        }
+
+        // Add subtle animation to input fields on focus
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label').style.color = '#b4c5ff';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label').style.color = '#dde2f4';
+            });
+        });
+    </script>
+</body></html>

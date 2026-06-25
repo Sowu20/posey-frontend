@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tableau de Bord Client</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#135bec",
+            "background-light": "#f6f6f8",
+            "background-dark": "#101622",
+            // Custom colors from user request
+            "primary-light": "#4A90E2",
+            "bg-light-mode": "#F4F7FA",
+            "container-light-mode": "#FFFFFF",
+            "text-dark-gray": "#333333",
+            "text-light-gray": "#777777",
+            "status-green": "#2ECC71",
+            "status-orange": "#F39C12",
+            "status-blue": "#3498DB",
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+    .material-symbols-outlined.fill {
+        font-variation-settings: 'FILL' 1;
+    }
+  </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="flex h-screen w-full">
+<!-- SideNavBar -->
+<aside class="flex w-64 flex-col border-r border-slate-200 bg-container-light-mode px-4 py-6 dark:border-slate-800 dark:bg-background-dark">
+<div class="flex items-center gap-3 px-3 pb-6">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-light">
+<span class="material-symbols-outlined text-white">grid_view</span>
+</div>
+<div class="flex flex-col">
+<h1 class="font-bold text-text-dark-gray dark:text-white">Plateforme</h1>
+<p class="text-sm text-text-light-gray">Espace Client</p>
+</div>
+</div>
+<nav class="flex flex-1 flex-col gap-2">
+<a class="flex items-center gap-3 rounded-lg bg-primary-light/10 px-3 py-2 text-primary-light" href="#">
+<span class="material-symbols-outlined fill">dashboard</span>
+<p class="font-semibold">Tableau de bord</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-light-gray hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">work</span>
+<p class="font-medium">Mes Demandes</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-light-gray hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">mail</span>
+<p class="font-medium">Messages</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-light-gray hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">credit_card</span>
+<p class="font-medium">Paiements</p>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-light-gray hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<p class="font-medium">Mon Profil</p>
+</a>
+</nav>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-10 px-4 bg-primary-light text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="truncate">Nouvelle Demande</span>
+</button>
+</aside>
+<!-- Main Content -->
+<div class="flex flex-1 flex-col overflow-y-auto">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-slate-200 bg-container-light-mode/80 px-8 py-4 backdrop-blur-sm dark:border-slate-800 dark:bg-background-dark/80">
+<label class="relative flex h-10 w-full max-w-sm items-center">
+<span class="material-symbols-outlined absolute left-3 text-text-light-gray">search</span>
+<input class="form-input h-full w-full rounded-lg border-slate-300 bg-bg-light-mode pl-10 pr-4 text-text-dark-gray placeholder:text-text-light-gray focus:border-primary-light focus:ring-primary-light/50 dark:border-slate-700 dark:bg-slate-800 dark:text-white" placeholder="Rechercher une demande..." type="text"/>
+</label>
+<div class="flex flex-1 items-center justify-end gap-4">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-cover bg-center" data-alt="Avatar de Jean Dupont" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTBRaaPkrOb3QsfIywmj7f2_KCplurZTssJfXG9nTWcry8Y6VB9mkbQgcnuGsJZtnE2qhaNXusodJI5uHQ5h2EqYzwK9u4-zLRxy2_Vwnj07XklV8by2Az8YY0dtXgpjdK_YVpSj4MdzqJvBDcznfT_khB7MpRfLgslLaJ4J6-hQdQHztulMrkE45_A2AbAhXMjLCzDEbM7T-tSNChxbpTyKgNhehqxFjCf4t3-H3iIUb2u8PtOlRd7U0R2Pgn4m-dX1upHcSnF240');"></div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex flex-1 flex-col gap-6 p-8 lg:flex-row">
+<!-- Main column -->
+<div class="flex flex-1 flex-col gap-6">
+<!-- PageHeading -->
+<div>
+<h1 class="text-3xl font-bold text-text-dark-gray dark:text-white">Bonjour, Jean Dupont !</h1>
+<p class="text-text-light-gray">Voici un aperçu de vos activités récentes.</p>
+</div>
+<!-- Stats -->
+<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+<div class="flex flex-col gap-2 rounded-xl border border-slate-200 bg-container-light-mode p-6 dark:border-slate-800 dark:bg-slate-900">
+<p class="font-medium text-text-dark-gray dark:text-slate-300">Demandes Actives</p>
+<p class="text-3xl font-bold tracking-tight text-text-dark-gray dark:text-white">5</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl border border-slate-200 bg-container-light-mode p-6 dark:border-slate-800 dark:bg-slate-900">
+<p class="font-medium text-text-dark-gray dark:text-slate-300">Propositions Reçues</p>
+<p class="text-3xl font-bold tracking-tight text-text-dark-gray dark:text-white">12</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl border border-slate-200 bg-container-light-mode p-6 dark:border-slate-800 dark:bg-slate-900">
+<p class="font-medium text-text-dark-gray dark:text-slate-300">Projets en Cours</p>
+<p class="text-3xl font-bold tracking-tight text-text-dark-gray dark:text-white">3</p>
+</div>
+</div>
+<!-- Data Table -->
+<div class="flex flex-col gap-4">
+<h2 class="text-xl font-bold text-text-dark-gray dark:text-white">Mes Demandes Récentes</h2>
+<div class="overflow-hidden rounded-xl border border-slate-200 bg-container-light-mode dark:border-slate-800 dark:bg-slate-900">
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-slate-200 text-sm dark:divide-slate-800">
+<thead class="bg-slate-50 dark:bg-slate-800/50">
+<tr>
+<th class="px-6 py-3 text-left font-semibold text-text-dark-gray dark:text-slate-300" scope="col">Titre de la demande</th>
+<th class="px-6 py-3 text-left font-semibold text-text-dark-gray dark:text-slate-300" scope="col">Catégorie</th>
+<th class="px-6 py-3 text-left font-semibold text-text-dark-gray dark:text-slate-300" scope="col">Date</th>
+<th class="px-6 py-3 text-left font-semibold text-text-dark-gray dark:text-slate-300" scope="col">Statut</th>
+<th class="relative px-6 py-3" scope="col"><span class="sr-only">Actions</span></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+<tr>
+<td class="whitespace-nowrap px-6 py-4 font-medium text-text-dark-gray dark:text-white">Rénovation de la cuisine</td>
+<td class="whitespace-nowrap px-6 py-4 text-text-light-gray">Rénovation</td>
+<td class="whitespace-nowrap px-6 py-4 text-text-light-gray">12 juil. 2024</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-status-orange/10 px-2.5 py-0.5 text-xs font-semibold text-status-orange">En attente</span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-right">
+<button class="font-semibold text-primary-light hover:underline">Voir les propositions</button>
+</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap px-6 py-4 font-medium text-text-dark-gray dark:text-white">Création de logo pour startup</td>
+<td class="whitespace-nowrap px-6 py-4 text-text-light-gray">Design Graphique</td>
+<td class="whitespace-nowrap px-6 py-4 text-text-light-gray">10 juil. 2024</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-status-green/10 px-2.5 py-0.5 text-xs font-semibold text-status-green">Terminé</span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-right">
+<button class="font-semibold text-primary-light hover:underline">Détails</button>
+</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap px-6 py-4 font-medium text-text-dark-gray dark:text-white">Réparation de la plomberie</td>
+<td class="whitespace-nowrap px-6 py-4 text-text-light-gray">Plomberie</td>
+<td class="whitespace-nowrap px-6 py-4 text-text-light-gray">05 juil. 2024</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-status-blue/10 px-2.5 py-0.5 text-xs font-semibold text-status-blue">Nouveau</span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-right">
+<button class="font-semibold text-primary-light hover:underline">Voir les propositions</button>
+</td>
+</tr>
+<tr>
+<td class="whitespace-nowrap px-6 py-4 font-medium text-text-dark-gray dark:text-white">Développement site e-commerce</td>
+<td class="whitespace-nowrap px-6 py-4 text-text-light-gray">Développement Web</td>
+<td class="whitespace-nowrap px-6 py-4 text-text-light-gray">01 juil. 2024</td>
+<td class="whitespace-nowrap px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-status-orange/10 px-2.5 py-0.5 text-xs font-semibold text-status-orange">En attente</span>
+</td>
+<td class="whitespace-nowrap px-6 py-4 text-right">
+<button class="font-semibold text-primary-light hover:underline">Voir les propositions</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- Right column / Activity Feed -->
+<aside class="w-full lg:w-80 lg:flex-shrink-0">
+<div class="rounded-xl border border-slate-200 bg-container-light-mode p-6 dark:border-slate-800 dark:bg-slate-900">
+<h3 class="mb-4 text-lg font-bold text-text-dark-gray dark:text-white">Activité Récente</h3>
+<ul class="space-y-4">
+<li class="flex gap-4">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/50">
+<span class="material-symbols-outlined text-green-600 dark:text-green-400">receipt_long</span>
+</div>
+<div>
+<p class="font-medium text-text-dark-gray dark:text-slate-200">Nouvelle proposition</p>
+<p class="text-sm text-text-light-gray">Plombier Pro vous a envoyé une offre.</p>
+<p class="text-xs text-text-light-gray/70">il y a 2 heures</p>
+</div>
+</li>
+<li class="flex gap-4">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400">chat</span>
+</div>
+<div>
+<p class="font-medium text-text-dark-gray dark:text-slate-200">Nouveau message</p>
+<p class="text-sm text-text-light-gray">Alice, la designer, vous a contacté.</p>
+<p class="text-xs text-text-light-gray/70">hier</p>
+</div>
+</li>
+<li class="flex gap-4">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/50">
+<span class="material-symbols-outlined text-purple-600 dark:text-purple-400">paid</span>
+</div>
+<div>
+<p class="font-medium text-text-dark-gray dark:text-slate-200">Paiement effectué</p>
+<p class="text-sm text-text-light-gray">Le paiement pour le projet de logo est validé.</p>
+<p class="text-xs text-text-light-gray/70">il y a 3 jours</p>
+</div>
+</li>
+</ul>
+</div>
+</aside>
+</main>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ServiceConnect - Trouvez le prestataire idéal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16 border-b border-gray-200 dark:border-gray-700">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold">ServiceConnect</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Comment ça marche</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Catégories</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Tarifs</a>
+</nav>
+<div class="flex items-center gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-gray-800 text-sm font-bold hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
+<span class="truncate">Se connecter</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors">
+<span class="truncate">S'inscrire</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<!-- HeroSection -->
+<section class="py-20 md:py-32">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="relative flex min-h-[480px] flex-col gap-8 items-center justify-center text-center p-8 rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-900">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Professionals collaborating in a modern office environment." style="background-image: linear-gradient(rgba(16, 22, 34, 0.7), rgba(16, 22, 34, 0.7)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuCtzYqgVTFTJ8QNbz5Pq-H3AL6fyBK7azV3ff832TVUbTKzrcFZtmL9kFDY7KiL-N90cp5o0ugnDtIwpZQGYgKWwQjGLOlMVuImtQZeSgUIFqlRhG2neL-DutK_703Yw2mkmuVIgwCbxBlV4dILpa5T-A3OA2Jq4ighzFvZjq8X3JJoGsv2BpqYFXyRyNXQiAYY-QTLO6ecqE-WzrvR4NhOrXzK7L5X0h9NGDVfoK7eVrztuAD4gflK5NHwiC8JgDF6_WpbPOWMmo5s');"></div>
+<div class="relative flex flex-col gap-4">
+<h1 class="text-white text-4xl md:text-6xl font-black tracking-tighter">Trouvez le prestataire idéal pour tous vos projets</h1>
+<p class="text-gray-300 text-base md:text-lg max-w-2xl mx-auto">Recherchez, comparez et réservez des milliers de professionnels qualifiés près de chez vous.</p>
+</div>
+<div class="relative w-full max-w-2xl">
+<div class="flex items-stretch rounded-lg shadow-lg bg-white dark:bg-gray-800">
+<div class="flex items-center pl-4 pr-2">
+<span class="material-symbols-outlined text-gray-400">search</span>
+</div>
+<input class="form-input flex-1 border-0 bg-transparent focus:ring-0 placeholder:text-gray-400 text-base py-4" placeholder="Quel service recherchez-vous ? (ex: Plombier, Développeur web...)" type="text"/>
+<div class="p-1.5">
+<button class="flex items-center justify-center rounded-md h-full px-6 bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-colors">
+<span>Rechercher</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FeatureSection ("Comment ça marche") -->
+<section class="py-16 md:py-24 bg-white dark:bg-gray-900/50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12">
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight">Simple, rapide et fiable</h2>
+<p class="mt-4 text-lg text-gray-600 dark:text-gray-400">Notre plateforme vous guide à chaque étape pour une expérience sans tracas.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="flex flex-col items-center text-center p-8 rounded-xl bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-800">
+<div class="flex items-center justify-center size-12 rounded-full bg-primary/10 text-primary mb-5">
+<span class="material-symbols-outlined">search</span>
+</div>
+<h3 class="text-xl font-bold mb-2">Recherchez</h3>
+<p class="text-gray-600 dark:text-gray-400">Décrivez votre besoin et découvrez une sélection de profils pertinents.</p>
+</div>
+<div class="flex flex-col items-center text-center p-8 rounded-xl bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-800">
+<div class="flex items-center justify-center size-12 rounded-full bg-primary/10 text-primary mb-5">
+<span class="material-symbols-outlined">rule</span>
+</div>
+<h3 class="text-xl font-bold mb-2">Comparez</h3>
+<p class="text-gray-600 dark:text-gray-400">Consultez les avis, portfolios et tarifs pour faire le meilleur choix.</p>
+</div>
+<div class="flex flex-col items-center text-center p-8 rounded-xl bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-800">
+<div class="flex items-center justify-center size-12 rounded-full bg-primary/10 text-primary mb-5">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<h3 class="text-xl font-bold mb-2">Réservez</h3>
+<p class="text-gray-600 dark:text-gray-400">Engagez votre prestataire en toute sécurité via notre plateforme.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-16 md:py-24">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12">
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight">Ils nous font confiance</h2>
+<p class="mt-4 text-lg text-gray-600 dark:text-gray-400">Découvrez ce que nos utilisateurs disent de ServiceConnect.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="p-8 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
+<p class="text-gray-600 dark:text-gray-400 mb-6">"J'ai trouvé un graphiste exceptionnel pour mon nouveau logo en moins de 24h. La plateforme est intuitive et les profils sont de grande qualité. Je recommande vivement !"</p>
+<div class="flex items-center">
+<img class="w-12 h-12 rounded-full mr-4" data-alt="Portrait of a satisfied female customer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9hJDWAjGGRTqcx0mDRl_PvhfPfud4RsHE6RvLo5nrRoPOs7RZB8H-AJ36kyoMNY2BLPyRBrWUfplVVjH7LzS9lXvB9_qJ7xq_wXYube4sfsk44BNp-6kTR2aVtn2DQlOk4ppsspnUzQxgKdqTudjWMViyazrPc2GGVh82FC8bcI6mmu7E9Td555ZtxepsEHvGw8yDfvKRx9bU8WU8sCCr8W5XHbmGejDDbpPfw_Nd7C-qYbfrL7ocamqUAwsqdhhYibpH9vB9v-A7"/>
+<div>
+<p class="font-bold">Sophie Dubois</p>
+<p class="text-sm text-gray-500">CEO, Startup Créative</p>
+</div>
+</div>
+</div>
+<div class="p-8 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
+<p class="text-gray-600 dark:text-gray-400 mb-6">"En tant que plombier, ServiceConnect a transformé mon activité. Je reçois des demandes qualifiées tous les jours et je peux gérer mon planning facilement. C'est un gain de temps énorme."</p>
+<div class="flex items-center">
+<img class="w-12 h-12 rounded-full mr-4" data-alt="Portrait of a satisfied male service provider" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq9T2ZjPsdeKkCX-OzadkXkWo7yuFwZVsmlo42_oB5tmX4PLNJNy9ueWUnujxchZkMeGLNLPLMISZC9YKf9SgtZ8uVqCUgPCR7gwHqwPJpvw-8DM3N1PzWNMXn0EatUKpPhRWi-sU70dDIQzNesfZapYTrmw4y5e_ekvv10NjGS9sbvzpjLlqSw_EVGSFAxb43HDK8eZCOnj3q445_eGfNQzurgdJm7K9CHWzMTlocmIV07ZIm_yv9LqsXPptaVkve-X0DpKygqCjN"/>
+<div>
+<p class="font-bold">Marc Petit</p>
+<p class="text-sm text-gray-500">Artisan Plombier</p>
+</div>
+</div>
+</div>
+<div class="p-8 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800">
+<p class="text-gray-600 dark:text-gray-400 mb-6">"Le processus de comparaison est fantastique. J'ai pu consulter plusieurs devis et portfolios avant de choisir le coach sportif parfait pour mes besoins. Service client au top !"</p>
+<div class="flex items-center">
+<img class="w-12 h-12 rounded-full mr-4" data-alt="Portrait of another satisfied female customer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDun1A2iGk1qZ4gZtvS8EuUZz6v4ncDLFVCmrlCfsXxFu9EnTD1qxIj7WwOZBHeehb9l8f-d75ZqcsmITI15zJ_q-FUKN7jtV7P826P-A3yZHjeXNhAO6guAK9UkKqobg8YcWKGy-DA3r0pjs0hl0KrwsPHAIWA0WHUzObKQ-kIvXofvHeZGEPnZs8npImPoV8l9iZsq60-QP4Dm84xWlFkwzOP1PxFkKznz119vWkYI2plnAsZvr-FcpRqGanBppyYcS0p7zoLUHmd"/>
+<div>
+<p class="font-bold">Laura Martin</p>
+<p class="text-sm text-gray-500">Particulier</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA for Providers -->
+<section class="py-16 md:py-24">
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-primary text-white rounded-xl p-10 md:p-16 text-center">
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight">Vous êtes un professionnel ?</h2>
+<p class="mt-4 text-lg max-w-2xl mx-auto text-primary/80">Développez votre clientèle, gérez vos projets facilement et rejoignez une communauté de milliers de prestataires qualifiés.</p>
+<div class="mt-8">
+<button class="flex min-w-[160px] mx-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-white text-primary text-base font-bold hover:bg-gray-200 transition-colors">
+<span>Devenir prestataire</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-background-light dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="space-y-4">
+<h3 class="text-sm font-bold tracking-wider uppercase">À propos</h3>
+<ul class="space-y-2">
+<li><a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Qui sommes-nous ?</a></li>
+<li><a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Carrières</a></li>
+<li><a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Presse</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h3 class="text-sm font-bold tracking-wider uppercase">Support</h3>
+<ul class="space-y-2">
+<li><a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Centre d'aide</a></li>
+<li><a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Nous contacter</a></li>
+<li><a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">FAQ</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h3 class="text-sm font-bold tracking-wider uppercase">Légal</h3>
+<ul class="space-y-2">
+<li><a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Conditions Générales</a></li>
+<li><a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary" href="#">Politique de confidentialité</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h3 class="text-sm font-bold tracking-wider uppercase">Suivez-nous</h3>
+<div class="flex space-x-4">
+<!-- Placeholder for social icons -->
+<a class="text-gray-500 hover:text-primary" href="#">Twitter</a>
+<a class="text-gray-500 hover:text-primary" href="#">Facebook</a>
+<a class="text-gray-500 hover:text-primary" href="#">LinkedIn</a>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-500">
+<p>© 2024 ServiceConnect. Tous droits réservés.</p>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

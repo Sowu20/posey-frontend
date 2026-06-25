@@ -1,0 +1,143 @@
+{
+  "name": "projects/16931726087476600818",
+  "title": "Page d'accueil",
+  "visibility": "PRIVATE",
+  "createTime": "2025-11-24T11:58:59.143627Z",
+  "updateTime": "2026-06-24T17:17:36.319441Z",
+  "projectType": "TEXT_TO_UI_PRO",
+  "thumbnailScreenshot": {
+    "name": "projects/16931726087476600818/files/3dfd061fb7b549558fcec9a8a7a99f30",
+    "downloadUrl": "https://lh3.googleusercontent.com/aida/AP1WRLsqSbipCUkAgwf__Yyi0X-QYGoeVb7Q4VxJv5iySwR9p60Ou10JvQd-HwiAHbtsdmaQ3Siz65i-sQe1g70-1dv1V4AI5n7F98Ib8ihpuzwlZAPyHai6kBZS5EZIc7d0YOoJVXXTZgJe2ZgihENNGq6HxtsPmst7ZJdOOF2kfd3MQSH14p8B6_4oY8YuXsgPFiYXRjvjiYG2tEEgh5vR-thRIqVQJdxZHDQ4m48TgCcAvZmeV0V3lY4OGjQH"
+  },
+  "origin": "STITCH",
+  "deviceType": "DESKTOP",
+  "designTheme": {
+    "colorMode": "DARK",
+    "font": "MANROPE",
+    "roundness": "ROUND_EIGHT",
+    "customColor": "#135bec",
+    "saturation": 3
+  },
+  "screenInstances": [
+    {
+      "id": "0344afb3faa74110892d78480604244a",
+      "sourceScreen": "projects/16931726087476600818/screens/0344afb3faa74110892d78480604244a",
+      "x": 2368,
+      "y": 5201,
+      "width": 1280,
+      "height": 3187
+    },
+    {
+      "id": "1a90bb361e66430f81b92b9b5dad192a",
+      "sourceScreen": "projects/16931726087476600818/screens/1a90bb361e66430f81b92b9b5dad192a",
+      "x": 2688,
+      "y": 2660,
+      "width": 1280,
+      "height": 2285
+    },
+    {
+      "id": "2235b9fc254b4e1b8f88e569c30bbec1",
+      "sourceScreen": "projects/16931726087476600818/screens/2235b9fc254b4e1b8f88e569c30bbec1",
+      "x": 7744,
+      "y": 5201,
+      "width": 1280,
+      "height": 1024
+    },
+    {
+      "id": "3ae6682b58054b6aa05fcbf11daa79f5",
+      "sourceScreen": "projects/16931726087476600818/screens/3ae6682b58054b6aa05fcbf11daa79f5",
+      "x": 1344,
+      "y": 2660,
+      "width": 1280,
+      "height": 1391
+    },
+    {
+      "id": "5fa451dc296842ed9ce680cc619747dd",
+      "sourceScreen": "projects/16931726087476600818/screens/5fa451dc296842ed9ce680cc619747dd",
+      "x": -36,
+      "y": -3806,
+      "width": 1280,
+      "height": 2790
+    },
+    {
+      "id": "6477ffe1763f49cab89c5f0ba172ee66",
+      "sourceScreen": "projects/16931726087476600818/screens/6477ffe1763f49cab89c5f0ba172ee66",
+      "y": 2029,
+      "width": 1280,
+      "height": 1024
+    },
+    {
+      "id": "6feae31c8de742b3a8e36e95f6b96f1e",
+      "sourceScreen": "projects/16931726087476600818/screens/6feae31c8de742b3a8e36e95f6b96f1e",
+      "x": 5056,
+      "y": 5201,
+      "width": 1280,
+      "height": 1339
+    },
+    {
+      "id": "8fb4127669f6461d92b965d107c31565",
+      "sourceScreen": "projects/16931726087476600818/screens/8fb4127669f6461d92b965d107c31565",
+      "x": 11776,
+      "y": 5201,
+      "width": 1280,
+      "height": 1653
+    },
+    {
+      "id": "ac2b7d40f6a94c0484995ca5666afd80",
+      "sourceScreen": "projects/16931726087476600818/screens/ac2b7d40f6a94c0484995ca5666afd80",
+      "y": 886,
+      "width": 1280,
+      "height": 1081
+    },
+    {
+      "id": "assets_c45af0d976254f4ca4d03f6a2397d866",
+      "y": 5201,
+      "width": 960,
+      "height": 540,
+      "sourceAsset": "assets/c45af0d976254f4ca4d03f6a2397d866",
+      "type": "DESIGN_SYSTEM_INSTANCE"
+    },
+    {
+      "id": "b69a17faacf14738bb9d262a107cb9f5",
+      "sourceScreen": "projects/16931726087476600818/screens/b69a17faacf14738bb9d262a107cb9f5",
+      "x": 6400,
+      "y": 5201,
+      "width": 1280,
+      "height": 1024
+    },
+    {
+      "id": "bcdea5fe791c4e76ada3f373cf57b9ec",
+      "sourceScreen": "projects/16931726087476600818/screens/bcdea5fe791c4e76ada3f373cf57b9ec",
+      "x": 3712,
+      "y": 5201,
+      "width": 1280,
+      "height": 1283
+    },
+    {
+      "id": "bcf4922525674fc5ba0fb86c1d35cdf9",
+      "sourceScreen": "projects/16931726087476600818/screens/bcf4922525674fc5ba0fb86c1d35cdf9",
+      "y": 1773,
+      "width": 1280,
+      "height": 1024
+    },
+    {
+      "id": "bdf80bafab5840fb912a9ef9d5adaaec",
+      "sourceScreen": "projects/16931726087476600818/screens/bdf80bafab5840fb912a9ef9d5adaaec",
+      "x": 9088,
+      "y": 5201,
+      "width": 1280,
+      "height": 1253
+    },
+    {
+      "id": "fc78a6829481434dadd9ff374960e12e",
+      "sourceScreen": "projects/16931726087476600818/screens/fc78a6829481434dadd9ff374960e12e",
+      "x": 1024,
+      "y": 5201,
+      "width": 1280,
+      "height": 1283
+    }
+  ],
+  "metadata": {
+    "userRole": "OWNER"
+  }
+}

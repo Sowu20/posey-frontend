@@ -1,0 +1,142 @@
+{
+  "name": "assets/c45af0d976254f4ca4d03f6a2397d866",
+  "designSystem": {
+    "displayName": "ServiceConnect Modern Pro",
+    "styleGuidelines": "## Brand & Style\n\nServiceConnect embodies a **Corporate / Modern** aesthetic that prioritizes professional reliability and transactional clarity. The brand personality is efficient, trustworthy, and organized, catering to both high-end service providers and discerning clients.\n\nThe design style utilizes a refined dark-mode foundation with high-action primary accents. It avoids unnecessary decorative elements, opting instead for a systematic approach where hierarchy is established through clear typographic scaling and purposeful contrast. The interface should feel \"utilitarian yet premium,\" using spacious layouts and subtle depth to guide the user through complex workflows with ease.\n\n## Layout & Spacing\n\nThe system follows a **Fixed Grid** philosophy for desktop, centering content within a 1280px container. \n\n- **Grid:** A 12-column layout is used for complex pages, while feature sections often utilize a 3-column simple grid.\n- **Vertical Rhythm:** Sections are separated by large white space blocks (64px to 128px) to allow the eye to rest and clearly delineate different value propositions.\n- **Mobile Adaptivity:** For small screens, the layout collapses to a single column with 16px (1rem) side margins. The sticky header remains fixed to provide constant access to navigation and CTA buttons.\n\n## Elevation & Depth\n\nHierarchy is achieved through **Tonal Layering** and **Subtle Shadows**:\n\n- **Level 0 (Background):** Base color `#101622`.\n- **Level 1 (Cards/Sections):** Slightly lighter `#1d1f28` with a 1px border of `#434655` to define edges in dark mode.\n- **Level 2 (Interactive/Floating):** Use `shadow-lg` (soft, diffused black shadow) for elements like search bars and dropdown menus to suggest they sit above the page content.\n- **Overlays:** Hero sections use a 70% opacity dark overlay on background images to ensure text legibility while maintaining environmental context.\n\n## Components\n\n### Buttons\n- **Primary:** Background `#135bec`, text white, bold weight. Hover state: 90% opacity or slightly darker blue.\n- **Secondary/Ghost:** Background `#32343e` or transparent with border. Used for \"Log In\" or secondary actions.\n- **Large CTA:** Increased padding (12px 24px) for high-conversion areas.\n\n### Input Fields\n- **Search Bar:** Large, white background (in light mode) or dark gray (in dark mode). Includes a leading icon and a trailing primary button for a \"single-unit\" look.\n- **Border:** 1px solid, color `#434655`. Focus state: 2px solid `#135bec`.\n\n### Cards\n- **Testimonial Cards:** Background `#1d1f28`, 1px border. Includes a 48px avatar, bold name, and muted secondary label (e.g., job title).\n- **Feature Cards:** Centered icon in a tinted circle (`primary/10%`), followed by a bold title and 2-3 lines of body text.\n\n### Navigation\n- **Top Nav:** Sticky with a backdrop-blur (80% opacity background). Links use `label-md` with primary color transitions on hover.",
+    "theme": {
+      "colorMode": "DARK",
+      "font": "MANROPE",
+      "roundness": "ROUND_EIGHT",
+      "customColor": "#135bec",
+      "headlineFont": "MANROPE",
+      "bodyFont": "MANROPE",
+      "labelFont": "MANROPE",
+      "namedColors": {
+        "background": "#0d131f",
+        "background-dark": "#101622",
+        "border-subtle": "#434655",
+        "card-bg": "#1d1f28",
+        "error": "#ffb4ab",
+        "error_container": "#93000a",
+        "inverse_on_surface": "#2a303d",
+        "inverse_primary": "#0052de",
+        "inverse_surface": "#dde2f4",
+        "on_background": "#dde2f4",
+        "on_error": "#690005",
+        "on_error_container": "#ffdad6",
+        "on_primary": "#00297a",
+        "on_primary_container": "#e2e6ff",
+        "on_primary_fixed": "#00174c",
+        "on_primary_fixed_variant": "#003daa",
+        "on_secondary": "#2e303a",
+        "on_secondary_container": "#b3b4c1",
+        "on_secondary_fixed": "#191b24",
+        "on_secondary_fixed_variant": "#444651",
+        "on_surface": "#dde2f4",
+        "on_surface_variant": "#c3c5d8",
+        "on_tertiary": "#5c1a00",
+        "on_tertiary_container": "#ffe1d7",
+        "on_tertiary_fixed": "#380d00",
+        "on_tertiary_fixed_variant": "#812800",
+        "outline": "#8d90a1",
+        "outline_variant": "#434655",
+        "primary": "#b4c5ff",
+        "primary_container": "#135bec",
+        "primary_fixed": "#dbe1ff",
+        "primary_fixed_dim": "#b4c5ff",
+        "secondary": "#c5c5d2",
+        "secondary_container": "#444651",
+        "secondary_fixed": "#e1e1ef",
+        "secondary_fixed_dim": "#c5c5d2",
+        "surface": "#0d131f",
+        "surface-light": "#f6f6f8",
+        "surface_bright": "#333946",
+        "surface_container": "#1a202c",
+        "surface_container_high": "#242a37",
+        "surface_container_highest": "#2f3542",
+        "surface_container_low": "#161c28",
+        "surface_container_lowest": "#080e1a",
+        "surface_dim": "#0d131f",
+        "surface_tint": "#b4c5ff",
+        "surface_variant": "#2f3542",
+        "tertiary": "#ffb59b",
+        "tertiary_container": "#b93d00",
+        "tertiary_fixed": "#ffdbcf",
+        "tertiary_fixed_dim": "#ffb59b"
+      },
+      "designMd": "---\nname: ServiceConnect Modern Pro\ncolors:\n  surface: '#0d131f'\n  surface-dim: '#0d131f'\n  surface-bright: '#333946'\n  surface-container-lowest: '#080e1a'\n  surface-container-low: '#161c28'\n  surface-container: '#1a202c'\n  surface-container-high: '#242a37'\n  surface-container-highest: '#2f3542'\n  on-surface: '#dde2f4'\n  on-surface-variant: '#c3c5d8'\n  inverse-surface: '#dde2f4'\n  inverse-on-surface: '#2a303d'\n  outline: '#8d90a1'\n  outline-variant: '#434655'\n  surface-tint: '#b4c5ff'\n  primary: '#b4c5ff'\n  on-primary: '#00297a'\n  primary-container: '#135bec'\n  on-primary-container: '#e2e6ff'\n  inverse-primary: '#0052de'\n  secondary: '#c5c5d2'\n  on-secondary: '#2e303a'\n  secondary-container: '#444651'\n  on-secondary-container: '#b3b4c1'\n  tertiary: '#ffb59b'\n  on-tertiary: '#5c1a00'\n  tertiary-container: '#b93d00'\n  on-tertiary-container: '#ffe1d7'\n  error: '#ffb4ab'\n  on-error: '#690005'\n  error-container: '#93000a'\n  on-error-container: '#ffdad6'\n  primary-fixed: '#dbe1ff'\n  primary-fixed-dim: '#b4c5ff'\n  on-primary-fixed: '#00174c'\n  on-primary-fixed-variant: '#003daa'\n  secondary-fixed: '#e1e1ef'\n  secondary-fixed-dim: '#c5c5d2'\n  on-secondary-fixed: '#191b24'\n  on-secondary-fixed-variant: '#444651'\n  tertiary-fixed: '#ffdbcf'\n  tertiary-fixed-dim: '#ffb59b'\n  on-tertiary-fixed: '#380d00'\n  on-tertiary-fixed-variant: '#812800'\n  background: '#0d131f'\n  on-background: '#dde2f4'\n  surface-variant: '#2f3542'\n  surface-light: '#f6f6f8'\n  background-dark: '#101622'\n  card-bg: '#1d1f28'\n  border-subtle: '#434655'\ntypography:\n  display-lg:\n    fontFamily: Manrope\n    fontSize: 60px\n    fontWeight: '800'\n    lineHeight: '1.1'\n    letterSpacing: -0.04em\n  display-lg-mobile:\n    fontFamily: Manrope\n    fontSize: 36px\n    fontWeight: '800'\n    lineHeight: '1.2'\n    letterSpacing: -0.02em\n  headline-md:\n    fontFamily: Manrope\n    fontSize: 32px\n    fontWeight: '700'\n    lineHeight: '1.3'\n  title-lg:\n    fontFamily: Manrope\n    fontSize: 20px\n    fontWeight: '700'\n    lineHeight: '1.4'\n  body-lg:\n    fontFamily: Manrope\n    fontSize: 18px\n    fontWeight: '400'\n    lineHeight: '1.6'\n  body-md:\n    fontFamily: Manrope\n    fontSize: 16px\n    fontWeight: '400'\n    lineHeight: '1.5'\n  label-md:\n    fontFamily: Manrope\n    fontSize: 14px\n    fontWeight: '600'\n    lineHeight: '1.2'\n    letterSpacing: 0.01em\n  label-sm:\n    fontFamily: Manrope\n    fontSize: 12px\n    fontWeight: '500'\n    lineHeight: '1.2'\nrounded:\n  sm: 0.25rem\n  DEFAULT: 0.5rem\n  md: 0.75rem\n  lg: 1rem\n  xl: 1.5rem\n  full: 9999px\nspacing:\n  container-max: 1280px\n  section-gap-lg: 6rem\n  section-gap-md: 4rem\n  gutter: 1.5rem\n  margin-mobile: 1rem\n  stack-sm: 0.5rem\n  stack-md: 1rem\n  stack-lg: 2rem\n---\n\n## Brand & Style\n\nServiceConnect embodies a **Corporate / Modern** aesthetic that prioritizes professional reliability and transactional clarity. The brand personality is efficient, trustworthy, and organized, catering to both high-end service providers and discerning clients.\n\nThe design style utilizes a refined dark-mode foundation with high-action primary accents. It avoids unnecessary decorative elements, opting instead for a systematic approach where hierarchy is established through clear typographic scaling and purposeful contrast. The interface should feel \"utilitarian yet premium,\" using spacious layouts and subtle depth to guide the user through complex workflows with ease.\n\n## Colors\n\nThe palette is anchored by **Vivid Blue (#135bec)**, used exclusively for primary actions and brand identifiers to maintain a high signal-to-noise ratio. \n\nThe dark theme uses a deep navy-black (`#101622`) for the primary background, layered with lighter charcoal and slate grays for containers and surfaces to create structural depth. Functional colors follow standard conventions: Success is implied by the primary blue in this context, while muted grays (`#8d90a1`) handle non-interactive borders and secondary text. The use of high-contrast white text on dark backgrounds ensures AA/AAA accessibility for all critical information.\n\n## Typography\n\nThe system utilizes **Manrope** across all roles to achieve a modern, geometric, yet highly legible feel. \n\n- **Headlines:** Use heavy weights (700-800) with tight letter-spacing for a \"display\" impact in hero sections.\n- **Body Text:** Set at 16px for standard content with a generous 1.5-1.6 line height to prevent fatigue in dense service descriptions.\n- **Hierarchy:** High contrast in weight (from ExtraBold to Regular) is the primary tool for distinguishing information types, rather than relying solely on color.\n- **Scale:** On mobile, display sizes must aggressively downscale to maintain readability without excessive horizontal scrolling.\n\n## Layout & Spacing\n\nThe system follows a **Fixed Grid** philosophy for desktop, centering content within a 1280px container. \n\n- **Grid:** A 12-column layout is used for complex pages, while feature sections often utilize a 3-column simple grid.\n- **Vertical Rhythm:** Sections are separated by large white space blocks (64px to 128px) to allow the eye to rest and clearly delineate different value propositions.\n- **Mobile Adaptivity:** For small screens, the layout collapses to a single column with 16px (1rem) side margins. The sticky header remains fixed to provide constant access to navigation and CTA buttons.\n\n## Elevation & Depth\n\nHierarchy is achieved through **Tonal Layering** and **Subtle Shadows**:\n\n- **Level 0 (Background):** Base color `#101622`.\n- **Level 1 (Cards/Sections):** Slightly lighter `#1d1f28` with a 1px border of `#434655` to define edges in dark mode.\n- **Level 2 (Interactive/Floating):** Use `shadow-lg` (soft, diffused black shadow) for elements like search bars and dropdown menus to suggest they sit above the page content.\n- **Overlays:** Hero sections use a 70% opacity dark overlay on background images to ensure text legibility while maintaining environmental context.\n\n## Shapes\n\nThe design uses a **Rounded** shape language to soften the corporate professional feel. \n\n- **Primary Containers:** 0.75rem (`rounded-xl`) to 1rem for main cards and hero containers.\n- **Buttons & Inputs:** 0.5rem (`rounded-lg`) for a balanced, modern touch.\n- **Small Elements:** 0.25rem (`rounded-md`) for internal search buttons or small tags.\n- **Icons:** Housed in circular containers (`rounded-full`) when used as decorative accents in feature lists.\n\n## Components\n\n### Buttons\n- **Primary:** Background `#135bec`, text white, bold weight. Hover state: 90% opacity or slightly darker blue.\n- **Secondary/Ghost:** Background `#32343e` or transparent with border. Used for \"Log In\" or secondary actions.\n- **Large CTA:** Increased padding (12px 24px) for high-conversion areas.\n\n### Input Fields\n- **Search Bar:** Large, white background (in light mode) or dark gray (in dark mode). Includes a leading icon and a trailing primary button for a \"single-unit\" look.\n- **Border:** 1px solid, color `#434655`. Focus state: 2px solid `#135bec`.\n\n### Cards\n- **Testimonial Cards:** Background `#1d1f28`, 1px border. Includes a 48px avatar, bold name, and muted secondary label (e.g., job title).\n- **Feature Cards:** Centered icon in a tinted circle (`primary/10%`), followed by a bold title and 2-3 lines of body text.\n\n### Navigation\n- **Top Nav:** Sticky with a backdrop-blur (80% opacity background). Links use `label-md` with primary color transitions on hover.",
+      "colorVariant": "FIDELITY",
+      "overridePrimaryColor": "#135bec",
+      "overrideSecondaryColor": "#32343e",
+      "overrideNeutralColor": "#101622",
+      "spacingScale": 2,
+      "typography": {
+        "body-lg": {
+          "fontFamily": "Manrope",
+          "fontSize": "18px",
+          "fontWeight": "400",
+          "lineHeight": "1.6"
+        },
+        "body-md": {
+          "fontFamily": "Manrope",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "lineHeight": "1.5"
+        },
+        "display-lg": {
+          "fontFamily": "Manrope",
+          "fontSize": "60px",
+          "fontWeight": "800",
+          "lineHeight": "1.1",
+          "letterSpacing": "-0.04em"
+        },
+        "display-lg-mobile": {
+          "fontFamily": "Manrope",
+          "fontSize": "36px",
+          "fontWeight": "800",
+          "lineHeight": "1.2",
+          "letterSpacing": "-0.02em"
+        },
+        "headline-md": {
+          "fontFamily": "Manrope",
+          "fontSize": "32px",
+          "fontWeight": "700",
+          "lineHeight": "1.3"
+        },
+        "label-md": {
+          "fontFamily": "Manrope",
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "lineHeight": "1.2",
+          "letterSpacing": "0.01em"
+        },
+        "label-sm": {
+          "fontFamily": "Manrope",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "lineHeight": "1.2"
+        },
+        "title-lg": {
+          "fontFamily": "Manrope",
+          "fontSize": "20px",
+          "fontWeight": "700",
+          "lineHeight": "1.4"
+        }
+      },
+      "spacing": {
+        "container-max": "1280px",
+        "gutter": "1.5rem",
+        "margin-mobile": "1rem",
+        "section-gap-lg": "6rem",
+        "section-gap-md": "4rem",
+        "stack-lg": "2rem",
+        "stack-md": "1rem",
+        "stack-sm": "0.5rem"
+      },
+      "headlineFontFamily": "Manrope",
+      "bodyFontFamily": "Manrope",
+      "labelFontFamily": "Manrope"
+    }
+  },
+  "version": "1"
+}

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PrestatairePro - Trouvez le prestataire idéal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,0" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#333333] dark:text-gray-200">
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-b-[#232f48] bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4 sm:px-6 lg:px-10 py-3">
+<div class="flex items-center gap-4 text-gray-800 dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">PrestatairePro</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-center gap-8">
+<div class="flex items-center gap-9">
+<a class="text-gray-600 dark:text-white text-sm font-medium leading-normal" href="#">Découvrir</a>
+<a class="text-gray-600 dark:text-white text-sm font-medium leading-normal" href="#">Missions</a>
+<a class="text-gray-600 dark:text-white text-sm font-medium leading-normal" href="#">Messages</a>
+<a class="text-gray-600 dark:text-white text-sm font-medium leading-normal" href="#">Aide</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Devenir prestataire</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-gray-100 dark:bg-[#232f48] text-gray-700 dark:text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCkAnkJB8_8afTjZzBNRzKM4_d6EQuWbvaBzkW3LnEgbZ5wJ1ObH0qgO3-9ytzm4OUa0YBMTI9shT1T52IHTD-LYpxFA43iYv_RdUuA79S0OYLNgMQE8JSDoppVGlTMtGVlYDeQQBhLJXh6_pVTc6GQf_H-XSXPt_2f9gECX_G7AIME4WlEEQkujUWb8c_y8AZ_fFNGmQ0-XBaWOBDdctTPENgyMagAJhb49B5-EciF3wqCOCOx8UoiBCFLPFoEUyXBXZA9j8IAJ9X7");'></div>
+</div>
+</header>
+<main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col gap-8">
+<div class="flex flex-col gap-3">
+<p class="text-gray-800 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Trouvez le prestataire idéal pour vos besoins</p>
+<p class="text-gray-500 dark:text-[#92a4c9] text-base font-normal leading-normal">Recherchez par service, mot-clé et localisation pour trouver le bon expert.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_1fr_auto] gap-4">
+<label class="flex flex-col min-w-40 h-14 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-gray-400 dark:text-[#92a4c9] flex border border-gray-200 dark:border-[#232f48] bg-white dark:bg-[#232f48] items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-800 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary border border-gray-200 dark:border-[#232f48] bg-white dark:bg-[#232f48] focus:border-primary/50 h-full placeholder:text-gray-400 dark:placeholder:text-[#92a4c9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Service, mot-clé (ex: Plombier, cours de yoga...)" value=""/>
+</div>
+</label>
+<label class="flex flex-col min-w-40 h-14 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-gray-400 dark:text-[#92a4c9] flex border border-gray-200 dark:border-[#232f48] bg-white dark:bg-[#232f48] items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-800 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary border border-gray-200 dark:border-[#232f48] bg-white dark:bg-[#232f48] focus:border-primary/50 h-full placeholder:text-gray-400 dark:placeholder:text-[#92a4c9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Localisation (ex: Paris, Lyon...)" value=""/>
+</div>
+</label>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-6 bg-primary text-white text-base font-bold">
+<span class="truncate">Rechercher</span>
+</button>
+</div>
+</div>
+<div class="mt-12 grid grid-cols-1 lg:grid-cols-4 gap-8">
+<!-- Sidebar -->
+<aside class="lg:col-span-1">
+<div class="sticky top-28 flex flex-col gap-6 bg-white dark:bg-background-dark p-4 rounded-xl border border-gray-200 dark:border-[#232f48]">
+<div class="flex flex-col">
+<h3 class="text-gray-800 dark:text-white text-lg font-bold">Filtres</h3>
+<p class="text-gray-500 dark:text-[#92a4c9] text-sm font-normal">Affinez votre recherche</p>
+</div>
+<div class="flex flex-col gap-4 border-t border-gray-200 dark:border-[#232f48] pt-4">
+<h4 class="text-gray-700 dark:text-white font-semibold text-sm">Catégories</h4>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"><input class="form-checkbox rounded text-primary focus:ring-primary/50" type="checkbox"/> Services à domicile</label>
+<label class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"><input checked="" class="form-checkbox rounded text-primary focus:ring-primary/50" type="checkbox"/> Cours &amp; Formations</label>
+<label class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"><input class="form-checkbox rounded text-primary focus:ring-primary/50" type="checkbox"/> Bien-être</label>
+<label class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"><input class="form-checkbox rounded text-primary focus:ring-primary/50" type="checkbox"/> Artisans</label>
+</div>
+</div>
+<div class="flex flex-col gap-3 border-t border-gray-200 dark:border-[#232f48] pt-4">
+<h4 class="text-gray-700 dark:text-white font-semibold text-sm">Tarif / heure</h4>
+<input class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer [&amp;::-webkit-slider-thumb]:bg-primary [&amp;::-moz-range-thumb]:bg-primary" max="200" min="0" type="range" value="50"/>
+<div class="flex justify-between text-xs text-gray-500 dark:text-[#92a4c9]"><span>0€</span><span>200€+</span></div>
+</div>
+<div class="flex flex-col gap-3 border-t border-gray-200 dark:border-[#232f48] pt-4">
+<h4 class="text-gray-700 dark:text-white font-semibold text-sm">Note minimale</h4>
+<div class="flex items-center gap-1 text-yellow-400">
+<span class="material-symbols-outlined cursor-pointer" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined cursor-pointer" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined cursor-pointer" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined cursor-pointer" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined cursor-pointer text-gray-300 dark:text-gray-600">star</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 border-t border-gray-200 dark:border-[#232f48] pt-6">
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-4 bg-primary text-white text-sm font-bold">Appliquer</button>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-4 bg-gray-100 hover:bg-gray-200 dark:bg-[#232f48] dark:hover:bg-[#2d3a57] text-gray-700 dark:text-white text-sm font-semibold">Réinitialiser</button>
+</div>
+</div>
+</aside>
+<!-- Main content -->
+<div class="lg:col-span-3">
+<div class="flex flex-col gap-6">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<h2 class="text-xl font-bold text-gray-800 dark:text-white">25 prestataires trouvés</h2>
+<div class="flex items-center gap-2">
+<label class="text-sm text-gray-500 dark:text-gray-400" for="sort">Trier par :</label>
+<select class="form-select text-sm rounded-lg border-gray-200 dark:border-[#232f48] bg-white dark:bg-[#232f48] text-gray-700 dark:text-white focus:ring-primary focus:border-primary" id="sort">
+<option>Pertinence</option>
+<option>Prix croissant</option>
+<option>Meilleures notes</option>
+</select>
+</div>
+</div>
+<!-- Results Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Provider Card -->
+<div class="flex flex-col bg-white dark:bg-[#1a2233] rounded-xl overflow-hidden border border-gray-200 dark:border-[#232f48] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+<div class="bg-center bg-no-repeat aspect-video bg-cover" data-alt="Yoga class in a bright studio" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqobu32682bB-wrPzf_uhP83I6Y8TGe6dqPl1-6yXPrzzxyrdsqSteOD8lAm1Nf242aMwX-fIam9VgQ7muI8cmLc7a0J1YF36BCL39Z2qu0Ef8LK4hw2swMVYXPRM4z0qr8C4uZ3aPoEXI4kj9EoeEn9Tj4ggmtU9Mmg-IrEZlvVWBODG9nsNKCrx7pPWI7NFv_JhFUyE9gwb76UnTW2BHZmDa5EUKiRuMwJKb01zUVDKz6pPSZbxLWUgza45IJtXkttXVrPgCuaEi");'></div>
+<div class="p-4 flex flex-col gap-3 flex-grow">
+<h3 class="font-bold text-gray-800 dark:text-white">Cours de Yoga Vinyasa</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Par Hélène Duval</p>
+<div class="flex items-center gap-1 text-sm">
+<div class="flex text-yellow-400"><span class="material-symbols-outlined !text-base" style="font-variation-settings: 'FILL' 1">star</span></div>
+<span class="font-semibold text-gray-700 dark:text-gray-200">4.9</span>
+<span class="text-gray-400 dark:text-gray-500">(120 avis)</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400"><span class="material-symbols-outlined !text-sm">location_on</span><span>Paris, 11ème</span></div>
+<div class="flex-grow"></div>
+<div class="pt-2 mt-auto">
+<p class="text-right text-lg font-bold text-gray-800 dark:text-white">Dès 25€</p>
+<button class="mt-2 w-full flex cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary/20 dark:bg-primary/30 text-primary dark:text-white text-sm font-bold hover:bg-primary/30 dark:hover:bg-primary/40">Voir le profil</button>
+</div>
+</div>
+</div>
+<!-- Provider Card -->
+<div class="flex flex-col bg-white dark:bg-[#1a2233] rounded-xl overflow-hidden border border-gray-200 dark:border-[#232f48] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+<div class="bg-center bg-no-repeat aspect-video bg-cover" data-alt="A clean and modern kitchen with new plumbing fixtures" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDIIU0t4QK3PTwANHnxaJrL5Vz-Js1vsin-wgNv6iMi63IbISKw3sqb_98P75lf2haZXIxkXelaNVDikJOPwFRnLvXyCkEglucxZwziJewY6YPxuQbY7_VmvsnStdMSCWNkrcGIjisKW1AcDgYcXdGEL6fbgwwB75ukaw19gButYCMWxqEqI09N5n5H7ieywZYYQ0Um7o1O5Ofrmw0qZy3OptYm02_4qv1_8rexS2OB4yu3vtWSuU2OTzRF-G9FaQZDr9GodIF26oGR");'></div>
+<div class="p-4 flex flex-col gap-3 flex-grow">
+<h3 class="font-bold text-gray-800 dark:text-white">Plomberie &amp; Dépannage</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Par ArtPlombier Pro</p>
+<div class="flex items-center gap-1 text-sm">
+<div class="flex text-yellow-400"><span class="material-symbols-outlined !text-base" style="font-variation-settings: 'FILL' 1">star</span></div>
+<span class="font-semibold text-gray-700 dark:text-gray-200">5.0</span>
+<span class="text-gray-400 dark:text-gray-500">(88 avis)</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400"><span class="material-symbols-outlined !text-sm">location_on</span><span>Lyon</span></div>
+<div class="flex-grow"></div>
+<div class="pt-2 mt-auto">
+<p class="text-right text-lg font-bold text-gray-800 dark:text-white">Sur devis</p>
+<button class="mt-2 w-full flex cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary/20 dark:bg-primary/30 text-primary dark:text-white text-sm font-bold hover:bg-primary/30 dark:hover:bg-primary/40">Contacter</button>
+</div>
+</div>
+</div>
+<!-- Provider Card -->
+<div class="flex flex-col bg-white dark:bg-[#1a2233] rounded-xl overflow-hidden border border-gray-200 dark:border-[#232f48] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+<div class="bg-center bg-no-repeat aspect-video bg-cover" data-alt="Person receiving a relaxing massage" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDjAhz66fM5_TG4AlGmcuRYQgac1BDrvHsJX_Q21khOME91GjN1444kYghJ5Vkf7HiGPjozyUubXboow4PVKIcsi9LQ3CKHX_I6oaYZkJzZUWkbXEO6yOKieAoWX-wE4b_7Nu_klJNjIyrX7japgOzKL92ZVqkg_fcXqVjDHkpqQ0rYNkxr6A684ZLoGkNdhiu_yDjQ_s7L2qp1VCeE-CoSrYUapfpSh927l7rQcNX921VpddiuZ6dQQBLUlYovMUjwL9vHHtkozulM");'></div>
+<div class="p-4 flex flex-col gap-3 flex-grow">
+<h3 class="font-bold text-gray-800 dark:text-white">Massage relaxant à domicile</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Par Zen &amp; Vous</p>
+<div class="flex items-center gap-1 text-sm">
+<div class="flex text-yellow-400"><span class="material-symbols-outlined !text-base" style="font-variation-settings: 'FILL' 1">star</span></div>
+<span class="font-semibold text-gray-700 dark:text-gray-200">4.8</span>
+<span class="text-gray-400 dark:text-gray-500">(214 avis)</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400"><span class="material-symbols-outlined !text-sm">location_on</span><span>Marseille</span></div>
+<div class="flex-grow"></div>
+<div class="pt-2 mt-auto">
+<p class="text-right text-lg font-bold text-gray-800 dark:text-white">Dès 60€</p>
+<button class="mt-2 w-full flex cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary/20 dark:bg-primary/30 text-primary dark:text-white text-sm font-bold hover:bg-primary/30 dark:hover:bg-primary/40">Voir le profil</button>
+</div>
+</div>
+</div>
+<!-- More cards... -->
+<div class="flex flex-col bg-white dark:bg-[#1a2233] rounded-xl overflow-hidden border border-gray-200 dark:border-[#232f48] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+<div class="bg-center bg-no-repeat aspect-video bg-cover" data-alt="Gardener working in a lush garden" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBzPxx8m-2JwUuL5kcGaWcvNtmAltEkD_uOIL3OdRlMBdboZpajgGRGqZOzn5NtMd5z8pinwciIEHlvBkVblH4NbXyfnACCwq0z6h2HZvajmWlKGgqD6g-X3r_Y4h-_B-x_p8MKNzM7Ts7cjAbBIaxTgS0mhzZZSNIrkBSW38Wti3XUDUV32mfo9D9oGn407Yt862tE_sPYPm-hI2N8kMApDxZtUKaWQmmAieCzTLrwiW87BsJBdCVs4vnRff5YD1YdnRuAXrwylguq");'></div>
+<div class="p-4 flex flex-col gap-3 flex-grow">
+<h3 class="font-bold text-gray-800 dark:text-white">Entretien de jardin</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Par VertJardin Services</p>
+<div class="flex items-center gap-1 text-sm">
+<div class="flex text-yellow-400"><span class="material-symbols-outlined !text-base" style="font-variation-settings: 'FILL' 1">star</span></div>
+<span class="font-semibold text-gray-700 dark:text-gray-200">4.9</span>
+<span class="text-gray-400 dark:text-gray-500">(95 avis)</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400"><span class="material-symbols-outlined !text-sm">location_on</span><span>Bordeaux</span></div>
+<div class="flex-grow"></div>
+<div class="pt-2 mt-auto">
+<p class="text-right text-lg font-bold text-gray-800 dark:text-white">Dès 45€</p>
+<button class="mt-2 w-full flex cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary/20 dark:bg-primary/30 text-primary dark:text-white text-sm font-bold hover:bg-primary/30 dark:hover:bg-primary/40">Voir le profil</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col bg-white dark:bg-[#1a2233] rounded-xl overflow-hidden border border-gray-200 dark:border-[#232f48] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+<div class="bg-center bg-no-repeat aspect-video bg-cover" data-alt="A private tutor helping a student with math" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJ98cyAbQWFBMd8mYZGcUmS8JKjjVjVqHK9lqH3aeMiGMvXokinf5kc7gFyl6gWql6_RGVbiC1W17_RjLHKWSmmOw6jkTBe4jhMhoCVNCphZUsAAdeJTA_l06d3svnbsHwpFHIyAKEUTTBMkOaE31FTePgH_5DLd-QNEO29ep7-vRZ_lGxb0rAt4g4wzmetrjQC_ksXgFk5mDL2597azmgOspF2F1Aln-R__MhdPOzKMU2YicCtmeN1GNgaHkbLI2KilBPnhsAGRW_");'></div>
+<div class="p-4 flex flex-col gap-3 flex-grow">
+<h3 class="font-bold text-gray-800 dark:text-white">Soutien scolaire - Maths</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Par Julien Martin</p>
+<div class="flex items-center gap-1 text-sm">
+<div class="flex text-yellow-400"><span class="material-symbols-outlined !text-base" style="font-variation-settings: 'FILL' 1">star</span></div>
+<span class="font-semibold text-gray-700 dark:text-gray-200">5.0</span>
+<span class="text-gray-400 dark:text-gray-500">(42 avis)</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400"><span class="material-symbols-outlined !text-sm">location_on</span><span>Lille</span></div>
+<div class="flex-grow"></div>
+<div class="pt-2 mt-auto">
+<p class="text-right text-lg font-bold text-gray-800 dark:text-white">Dès 30€</p>
+<button class="mt-2 w-full flex cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary/20 dark:bg-primary/30 text-primary dark:text-white text-sm font-bold hover:bg-primary/30 dark:hover:bg-primary/40">Contacter</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col bg-white dark:bg-[#1a2233] rounded-xl overflow-hidden border border-gray-200 dark:border-[#232f48] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+<div class="bg-center bg-no-repeat aspect-video bg-cover" data-alt="Professional photographer with camera" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAx2_FheVRC114JQyqbOmLwg-USEYHKsaP-6-mFOQZCY15l-_fVUnO8dClvo5qIQhZUcO4XRL_4O_CsMSJa_HNHdaac3xYT4SOSnsAl8MwppDK7QhnUcUi7jc0yi3GCRwXxpPGeTzytcAkZRkMmHZjbZvSv1v36QsymVUEpilfOYhSHtCjiXMHUX3mVYpXkEE1b75OgTuGluYqhm0jWbj_N7Q33Gun4zzu21SxUZ6l833XCAEuVl9OpMkCDDPyv4ldfqfrt6HIt6v9K");'></div>
+<div class="p-4 flex flex-col gap-3 flex-grow">
+<h3 class="font-bold text-gray-800 dark:text-white">Photographe de mariage</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400">Par Instant Précieux</p>
+<div class="flex items-center gap-1 text-sm">
+<div class="flex text-yellow-400"><span class="material-symbols-outlined !text-base" style="font-variation-settings: 'FILL' 1">star</span></div>
+<span class="font-semibold text-gray-700 dark:text-gray-200">4.9</span>
+<span class="text-gray-400 dark:text-gray-500">(150 avis)</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400"><span class="material-symbols-outlined !text-sm">location_on</span><span>Toulouse</span></div>
+<div class="flex-grow"></div>
+<div class="pt-2 mt-auto">
+<p class="text-right text-lg font-bold text-gray-800 dark:text-white">Sur devis</p>
+<button class="mt-2 w-full flex cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary/20 dark:bg-primary/30 text-primary dark:text-white text-sm font-bold hover:bg-primary/30 dark:hover:bg-primary/40">Voir le profil</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<nav class="flex items-center justify-center pt-8">
+<ul class="flex items-center -space-x-px h-10 text-base">
+<li><a class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" href="#"><span class="material-symbols-outlined">chevron_left</span></a></li>
+<li><a class="flex items-center justify-center px-4 h-10 text-primary bg-primary/20 border border-gray-300 dark:border-gray-700 dark:bg-gray-700 dark:text-white" href="#">1</a></li>
+<li><a class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" href="#">2</a></li>
+<li><a class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" href="#">3</a></li>
+<li><a class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-s-0 border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" href="#"><span class="material-symbols-outlined">chevron_right</span></a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
