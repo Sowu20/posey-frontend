@@ -1,17 +1,12 @@
 <template>
-  <default-layout>
-    <reset-password-template />
-  </default-layout>
+  <reset-password-template />
 </template>
 
 <script>
-  import DefaultLayout from './Layout.vue';
-  import ResetPasswordTemplate from '../templates/ResetPasswordTemplate.vue';
-  export default {
-    name: 'ResetPasswordPage',
-    components: {
-      DefaultLayout,
-      ResetPasswordTemplate
-    },
-  }
+import ResetPasswordTemplate from '../templates/ResetPasswordTemplate.vue'
+
+export default {
+  name: 'ResetPasswordPage',
+  components: { ResetPasswordTemplate },
+}
 </script>

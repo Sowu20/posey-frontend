@@ -1,66 +1,50 @@
 <template>
-  <div class="card shadow-sm">
-    <div class="card-header bg-primary text-white fw-bold">
-      Liste des Commandes
+  <div class="posey-card">
+    <div class="p-4 border-bottom" style="border-color: var(--posey-border) !important;">
+      <h5 class="fw-bold mb-0">Liste des commandes</h5>
     </div>
-    <div class="card-body">
-      <!-- Loader -->
+    <div class="p-4">
       <div v-if="loading" class="text-center py-3">
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden">Chargement...</span>
         </div>
       </div>
 
-      <!-- Message d'erreur -->
-      <div v-else-if="error" class="alert alert-danger">
-        {{ error }}
-      </div>
+      <div v-else-if="error" class="posey-alert posey-alert-danger">{{ error }}</div>
 
-      <!-- Tableau -->
       <div v-else>
-        <table class="table table-hover align-middle">
-          <thead class="table-light">
-            <tr>
-              <th>#</th>
-              <th>Titre de la prestation</th>
-              <th>Date de la commande</th>
-              <th>Client</th>
-              <th>Prestataire</th>
-              <th>Statut</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(commande, index) in commandes" :key="commande.id">
-              <td>{{ index + 1 }}</td>
-              <td>{{ commande.titre }}</td>
-              <td>{{ formatDate(commande.date_commande) }}</td>
-              <td>{{ commande.client }}</td>
-              <td>
-                <span v-if="commande.prestataire">
-                  {{ commande.prestataire}}
-                </span>
-                <span v-else class="text-muted">Non assigné</span>
-              </td>
-              <td>
-                <span
-                  class="badge"
-                  :class="{
-                    'bg-warning text-dark': commande.statut === 'en_attente',
-                    'bg-success': commande.statut === 'acceptee',
-                    'bg-danger': commande.statut === 'refusee',
-                    'bg-secondary': commande.statut === 'terminee'
-                  }"
-                >
-                  {{ commande.statut }}
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Si aucune commande -->
-        <div v-if="commandes.length === 0" class="text-center text-muted py-3">
+        <div v-if="commandes.length === 0" class="text-center posey-text-muted py-4">
           Aucune commande trouvée.
+        </div>
+
+        <div v-else class="posey-table-wrap">
+          <table class="posey-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Prestation</th>
+                <th>Date</th>
+                <th>Client</th>
+                <th>Prestataire</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(commande, index) in commandes" :key="commande.id">
+                <td>{{ index + 1 }}</td>
+                <td>{{ commande.titre }}</td>
+                <td>{{ formatDate(commande.date_commande) }}</td>
+                <td>{{ commande.client }}</td>
+                <td>
+                  <span v-if="commande.prestataire">{{ commande.prestataire }}</span>
+                  <span v-else class="posey-text-muted">Non assigné</span>
+                </td>
+                <td>
+                  <span :class="statutClass(commande.statut)">{{ commande.statut }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -68,42 +52,50 @@
 </template>
 
 <script>
-  import api from '../services/api'
+import api from '../services/api'
 
-  export default {
-    name: "ListeCommandes",
-    data() {
-      return {
-        commandes: [],
-        loading: false,
-        error: null,
+export default {
+  name: 'ListeCommandes',
+  data() {
+    return {
+      commandes: [],
+      loading: false,
+      error: null,
+    }
+  },
+  methods: {
+    async fetchCommandes() {
+      this.loading = true
+      this.error = null
+      try {
+        const response = await api.get('/commande/detail_commande/')
+        this.commandes = response.data
+      } catch (err) {
+        this.error = 'Impossible de charger les commandes.'
+        console.error(err)
+      } finally {
+        this.loading = false
       }
     },
-    methods: {
-      async fetchCommandes() {
-        this.loading = true
-        this.error = null
-        try {
-          const response = await api.get("/commande/detail_commande/")
-          this.commandes = response.data
-        } catch (err) {
-          this.error = "Impossible de charger les commandes.", err
-          // console.log(this.error, err)
-        } finally {
-          this.loading = false
-        }
-      },
-      formatDate(dateString) {
-        const date = new Date(dateString)
-        return date.toLocaleDateString("fr-FR", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })
-      },
+    formatDate(dateString) {
+      return new Date(dateString).toLocaleDateString('fr-FR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
     },
-    mounted() {
-      this.fetchCommandes()
+    statutClass(statut) {
+      const map = {
+        en_attente: 'posey-badge posey-badge-warning',
+        acceptee: 'posey-badge posey-badge-success',
+        refusee: 'posey-badge posey-badge-danger',
+        terminee: 'posey-badge posey-badge-neutral',
+      }
+      return map[statut] || 'posey-badge posey-badge-neutral'
     },
-  }
+  },
+  mounted() {
+    this.fetchCommandes()
+  },
+}
 </script>

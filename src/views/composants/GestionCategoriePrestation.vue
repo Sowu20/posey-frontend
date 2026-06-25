@@ -1,14 +1,12 @@
 <template>
-  <div class="container-fluid px-4 py-3">
-    <!-- Bouton ajouter -->
+  <div>
     <div class="mb-3 text-end">
-      <button class="btn btn-primary" @click="ouvrirModalAjout">Ajouter une catégorie</button>
+      <button class="posey-btn-primary" @click="ouvrirModalAjout">Ajouter une catégorie</button>
     </div>
 
-    <!-- Tableau -->
-    <div class="table-responsive shadow-sm rounded">
-      <table class="table table-bordered table-striped text-center">
-        <thead class="table-light">
+    <div class="posey-table-wrap">
+      <table class="posey-table">
+        <thead>
           <tr>
             <th>Nom</th>
             <th>Description</th>
@@ -20,9 +18,9 @@
             <td>{{ cat.nom }}</td>
             <td>{{ cat.description }}</td>
             <td>
-              <div class="d-flex justify-content-center gap-2">
-                <button class="btn btn-warning btn-sm" @click="ouvrirModalEdition(cat)">Modifier</button>
-                <button class="btn btn-danger btn-sm" @click="confirmerSuppression(cat)">Supprimer</button>
+              <div class="d-flex gap-2">
+                <button class="posey-btn-warning" @click="ouvrirModalEdition(cat)">Modifier</button>
+                <button class="posey-btn-danger posey-btn-sm" @click="confirmerSuppression(cat)">Supprimer</button>
               </div>
             </td>
           </tr>

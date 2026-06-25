@@ -1,49 +1,38 @@
 <template>
-  <footer class="bg-dark text-white pt-5 pb-3 mt-auto">
-    <div class="container-fluid">
-      <div class="row">
-        <!-- Brand/Description -->
-        <div class="col-md-3 mb-4">
-          <h5 class="fw-bold">POSEY</h5>
-          <p class="text-muted">
+  <footer class="posey-footer pt-5 pb-4 mt-auto">
+    <div class="container-fluid px-4">
+      <div class="row g-4">
+        <div class="col-md-3">
+          <h5 class="fw-bold mb-3">POSEY</h5>
+          <p class="posey-text-muted small">
             Nous donnons vie à vos projets en vous connectant aux meilleurs prestataires.
           </p>
         </div>
-
-        <!-- Services -->
-        <div class="col-md-3 mb-4">
-          <h6 class="fw-semibold mb-3">Services</h6>
+        <div class="col-md-3">
+          <h6 class="fw-semibold mb-3 text-uppercase small">À propos</h6>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-decoration-none">Maçonnerie</a></li>
-            <li><a href="#" class="text-decoration-none">Plomberie</a></li>
-            <li><a href="#" class="text-decoration-none">Électricité</a></li>
-            <li><a href="#" class="text-decoration-none">Menuiserie</a></li>
+            <li><router-link to="/about" class="footer-link">Qui sommes-nous</router-link></li>
+            <li><router-link to="/contact" class="footer-link">Nous contacter</router-link></li>
           </ul>
         </div>
-
-        <!-- Support -->
-        <div class="col-md-3 mb-4">
-          <h6 class="fw-semibold mb-3">Support</h6>
+        <div class="col-md-3">
+          <h6 class="fw-semibold mb-3 text-uppercase small">Support</h6>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-decoration-none">Contact</a></li>
-            <li><a href="#" class="text-decoration-none">FAQ</a></li>
-            <li><a href="#" class="text-decoration-none">Aide</a></li>
+            <li><router-link to="/contact" class="footer-link">Centre d'aide</router-link></li>
+            <li><a href="#" class="footer-link">FAQ</a></li>
           </ul>
         </div>
-
-        <!-- Contact -->
-        <div class="col-md-3 mb-4">
-          <h6 class="fw-semibold mb-3">Contact</h6>
-          <p class="mb-1">Agoè Cacaveli Bluezone</p>
-          <p class="mb-1">+228 93 55 47 40</p>
-          <p class="mb-0">contact@kofcorporation.com</p>
+        <div class="col-md-3">
+          <h6 class="fw-semibold mb-3 text-uppercase small">Contact</h6>
+          <p class="posey-text-muted small mb-1">Agoè Cacaveli Bluezone</p>
+          <p class="posey-text-muted small mb-1">+228 93 55 47 40</p>
+          <p class="posey-text-muted small">contact@kofcorporation.com</p>
         </div>
       </div>
-
-      <hr class="border-secondary mt-4" />
-      <div class="text-center">
-        <p class="mb-0">&copy; 2024 KOFCORPORATION. Tous droits réservés.</p>
-      </div>
+      <hr class="my-4" style="border-color: var(--posey-border);" />
+      <p class="text-center posey-text-muted small mb-0">
+        &copy; {{ new Date().getFullYear() }} KOFCORPORATION. Tous droits réservés.
+      </p>
     </div>
   </footer>
 </template>
@@ -53,3 +42,22 @@ export default {
   name: 'AppFooter',
 }
 </script>
+
+<style scoped>
+.posey-footer {
+  background: var(--posey-bg-card);
+  border-top: 1px solid var(--posey-border);
+}
+
+.footer-link {
+  color: var(--posey-text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  display: block;
+  padding: 0.2rem 0;
+}
+
+.footer-link:hover {
+  color: var(--posey-primary);
+}
+</style>

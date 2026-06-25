@@ -1,17 +1,12 @@
 <template>
-  <DefaultLayout>
-    <DashboardProviderTemplate />
-  </DefaultLayout>
+  <dashboard-provider-template />
 </template>
 
 <script>
-  import DefaultLayout from '../pages/Layout.vue'
-  import DashboardProviderTemplate from '../templates/DashboardProviderTemplate.vue';
-  export default {
-    name: 'DashboardProviderPage',
-    components: {
-      DefaultLayout,
-      DashboardProviderTemplate
-    },
-  }
+import DashboardProviderTemplate from '../templates/DashboardProviderTemplate.vue'
+
+export default {
+  name: 'DashboardProviderPage',
+  components: { DashboardProviderTemplate },
+}
 </script>

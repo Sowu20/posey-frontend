@@ -1,18 +1,12 @@
 <template>
-  <default-layout>
-    <dashboard-admin-template />
-  </default-layout>
+  <dashboard-admin-template />
 </template>
 
 <script>
-  import DashboardAdminTemplate from '../templates/DashboardAdminTemplate.vue';
-  import DefaultLayout from './Layout.vue';
+import DashboardAdminTemplate from '../templates/DashboardAdminTemplate.vue'
 
-  export default {
-    name: 'DashboardAdminPage',
-    components: {
-      DefaultLayout,
-      DashboardAdminTemplate
-    }
-  }
+export default {
+  name: 'DashboardAdminPage',
+  components: { DashboardAdminTemplate },
+}
 </script>

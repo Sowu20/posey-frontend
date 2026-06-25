@@ -1,17 +1,12 @@
 <template>
-  <default-layout>
-    <forgot-password-template />
-  </default-layout>
+  <forgot-password-template />
 </template>
 
 <script>
-  import DefaultLayout from './Layout.vue';
-  import ForgotPasswordTemplate from '../templates/ForgotPasswordTemplate.vue';
-  export default {
-    name: 'ForgotPasswordPage',
-    components: {
-      DefaultLayout,
-      ForgotPasswordTemplate
-    },
-  }
+import ForgotPasswordTemplate from '../templates/ForgotPasswordTemplate.vue'
+
+export default {
+  name: 'ForgotPasswordPage',
+  components: { ForgotPasswordTemplate },
+}
 </script>

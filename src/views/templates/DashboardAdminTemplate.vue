@@ -1,45 +1,57 @@
 <template>
-  <div class="container py-4">
-    <h4 class="mb-4 fw-bold">Tableau de bord Administrateur</h4>
+  <dashboard-layout>
+    <dashboard-sidebar
+      subtitle="Administration"
+      :items="navItems"
+      :active-view="String(activeTab)"
+      @navigate="activeTab = Number($event)"
+    />
 
-    <ul class="nav nav-tabs mb-3">
-      <li class="nav-item" v-for="(tab, index) in tabs" :key="index">
-        <a class="nav-link" :class="{ active: activeTab === index }" @click="activeTab = index">
-          {{ tab.label }}
-        </a>
-      </li>
-    </ul>
+    <div class="dashboard-main">
+      <div class="mb-4">
+        <h2 class="fw-bold mb-1">Tableau de bord administrateur</h2>
+        <p class="posey-text-muted mb-0">Gérez les utilisateurs, catégories, validations et commandes.</p>
+      </div>
 
-    <div>
       <component :is="tabs[activeTab].component" />
     </div>
-  </div>
+  </dashboard-layout>
 </template>
 
 <script>
-  import GestionUtilisateur from '../composants/GestionUtilisateur.vue'
-  import GestionCategoriePrestation from '../composants/GestionCategoriePrestation.vue'
-  import ValidationPrestataire from '../composants/ValidationPrestataire.vue'
-  import ListeCommandes from '../composants/ListeCommandes.vue'
+import DashboardLayout from '../pages/DashboardLayout.vue'
+import DashboardSidebar from '../composants/DashboardSidebar.vue'
+import GestionUtilisateur from '../composants/GestionUtilisateur.vue'
+import GestionCategoriePrestation from '../composants/GestionCategoriePrestation.vue'
+import ValidationPrestataire from '../composants/ValidationPrestataire.vue'
+import ListeCommandes from '../composants/ListeCommandes.vue'
 
-  export default {
-    name: 'DashboardAdminTemplate',
-    components: {
-      GestionUtilisateur,
-      GestionCategoriePrestation,
-      ValidationPrestataire,
-      ListeCommandes
-    },
-    data() {
-      return {
-        activeTab: 0,
-        tabs: [
-          { label: 'Utilisateurs', component: 'GestionUtilisateur' },
-          { label: 'Catégories des Prestations', component: 'GestionCategoriePrestation' },
-          { label: 'Validation Prestataires', component: 'ValidationPrestataire' },
-          { label: 'Liste des Commandes', component: 'ListeCommandes' },
-        ]
-      }
+export default {
+  name: 'DashboardAdminTemplate',
+  components: {
+    DashboardLayout,
+    DashboardSidebar,
+    GestionUtilisateur,
+    GestionCategoriePrestation,
+    ValidationPrestataire,
+    ListeCommandes,
+  },
+  data() {
+    return {
+      activeTab: 0,
+      navItems: [
+        { id: '0', label: 'Utilisateurs', icon: 'fas fa-users' },
+        { id: '1', label: 'Catégories', icon: 'fas fa-tags' },
+        { id: '2', label: 'Validation prestataires', icon: 'fas fa-user-check' },
+        { id: '3', label: 'Commandes', icon: 'fas fa-shopping-cart' },
+      ],
+      tabs: [
+        { label: 'Utilisateurs', component: 'GestionUtilisateur' },
+        { label: 'Catégories des Prestations', component: 'GestionCategoriePrestation' },
+        { label: 'Validation Prestataires', component: 'ValidationPrestataire' },
+        { label: 'Liste des Commandes', component: 'ListeCommandes' },
+      ],
     }
-  }
+  },
+}
 </script>

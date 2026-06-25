@@ -1,66 +1,60 @@
 <template>
-  <header class="bg-white shadow-sm border-bottom position-relative">
-    <div class="container-fluid">
+  <header class="posey-header">
+    <div class="container-fluid px-4">
       <div class="d-flex justify-content-between align-items-center py-3">
-        <!-- Logo + slogan -->
-        <div class="d-flex align-items-center">
-          <h1 class="h4 fw-bold text-primary mb-0">POSEY</h1>
-          <span class="ms-2 text-muted small">by KOFCORPORATION</span>
-        </div>
+        <router-link to="/" class="d-flex align-items-center text-decoration-none">
+          <div class="posey-logo-icon me-2">P</div>
+          <span class="fw-bold fs-5 text-white">POSEY</span>
+          <span class="ms-2 posey-text-muted small d-none d-sm-inline">by KOFCORPORATION</span>
+        </router-link>
 
-        <!-- Menu navigation -->
-        <div class="d-none d-md-flex gap-3">
-          <a href="/" class="text-dark text-decoration-none">Accueil</a>
-          <a href="/about" class="text-dark text-decoration-none">A Propos</a>
-          <a href="/contact" class="text-dark text-decoration-none">Contactez-Nous</a>
-        </div>
+        <nav class="d-none d-lg-flex gap-4">
+          <router-link to="/" class="nav-link-posey">Accueil</router-link>
+          <router-link to="/recherche_prestataire" class="nav-link-posey">Prestataires</router-link>
+          <router-link to="/about" class="nav-link-posey">À propos</router-link>
+          <router-link to="/contact" class="nav-link-posey">Contact</router-link>
+        </nav>
 
-        <!-- Boutons selon login -->
-        <div class="d-flex gap-3 align-items-center" v-if="isLoggedIn">
-          <!-- Avatar -->
-          <router-link to="/profil" class="d-flex align-items-center text-decoration-none">
-            <img src="/img/default-avatar.png" alt="image" class="rounded-circle" width="40" height="40"/>
-            <span class="ms-2 text-dark">{{ userData.username }}</span>
-          </router-link>
-          <span class="btn text-danger cursor-pointer ms-3 fw-semibold" @click="logout">
-            Se Déconnecter
-          </span>
-          <!-- Cloche de notification -->
-          <div class="position-relative me-3" @click="toggleNotifications" style="cursor: pointer;">
-            <i class="bi bi-bell fs-5 text-dark"></i>
-            <!-- <span v-if="notifications.length" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {{ notifications.length }}
-            </span> -->
+        <div class="d-flex gap-2 align-items-center" v-if="isLoggedIn">
+          <div class="position-relative me-2" @click="toggleNotifications" style="cursor: pointer;">
+            <i class="bi bi-bell fs-5"></i>
             <span v-if="unreadCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
               {{ unreadCount }}
             </span>
           </div>
 
-          <!-- Menu notifications -->
-          <div v-if="showNotifications" class="dropdown-menu show p-3 shadow rounded" style="position: absolute; right: 20px; top: 70px; min-width: 300px; z-index: 999;">
-            <h6 class="dropdown-header">Notifications</h6>
+          <div v-if="showNotifications" class="notification-dropdown posey-card p-3 shadow">
+            <h6 class="mb-3">Notifications</h6>
             <div v-if="notifications.length">
-              <div v-for="notif in notifications" :key="notif.id" class="dropdown-item d-flex justify-content-between align-items-center text-wrap" :class="{ 'fw-bold': !notif.is_read }">
-                <span @click="openNotification(notif)" style="cursor: pointer;">
-                  {{ notif.message }}
-                </span>
+              <div
+                v-for="notif in notifications"
+                :key="notif.id"
+                class="notification-item d-flex justify-content-between align-items-start py-2"
+                :class="{ 'fw-semibold': !notif.is_read }"
+              >
+                <span @click="openNotification(notif)" style="cursor: pointer;">{{ notif.message }}</span>
                 <i class="bi bi-x text-danger ms-2" style="cursor: pointer;" @click.stop="deleteNotification(notif.id)"></i>
               </div>
             </div>
-            <div v-else class="dropdown-item text-muted">Aucune notification</div>
+            <div v-else class="posey-text-muted small">Aucune notification</div>
           </div>
 
-          <!-- Voir la dernière notif -->
-          <div v-if="lastNotification" class="toast-notification shadow rounded px-3 py-2">
-            {{ lastNotification.message }}
-          </div>
+          <router-link to="/profil" class="d-flex align-items-center text-decoration-none text-white">
+            <img src="/img/default-avatar.png" alt="avatar" class="rounded-circle" width="36" height="36" />
+            <span class="ms-2 d-none d-md-inline">{{ userData.username }}</span>
+          </router-link>
+          <button class="posey-btn-outline btn-sm py-1 px-3" @click="logout">Déconnexion</button>
         </div>
 
         <div class="d-flex gap-2" v-else>
-          <a href="/login" class="btn text-primary">Connexion</a>
-          <a href="/register" class="btn btn-primary">Inscription</a>
+          <router-link to="/login" class="posey-btn-outline btn-sm py-2 px-3 text-decoration-none">Connexion</router-link>
+          <router-link to="/register" class="posey-btn-primary btn-sm py-2 px-3 text-decoration-none">Inscription</router-link>
         </div>
       </div>
+    </div>
+
+    <div v-if="lastNotification" class="toast-notification posey-card px-3 py-2">
+      {{ lastNotification.message }}
     </div>
   </header>
 </template>
@@ -79,93 +73,40 @@
       const notifications = ref([])
       const lastNotification = ref(false)
       const showNotifications = ref(false)
-      const activeNotification = ref(null)
       let interval = null
       let socket = null
       let hideTimer = null
       let firstFetchDone = false
 
-      const formatImage = (imagePath) => {
-        if (!imagePath) return '/img/default-avatar.png'
-        if (imagePath.startsWith('http')) return imagePath
-        return `http://127.0.0.1:8000${imagePath}`
-      }
-
-      const unreadCount = computed(() => {
-        return notifications.value.filter(n => !n.is_read).length
-      })
+      const unreadCount = computed(() => notifications.value.filter(n => !n.is_read).length)
 
       const showNotification = (message) => {
         if (lastNotification.value) return
-
         lastNotification.value = { message }
-        hideTimer = setTimeout(() => {
-          lastNotification.value = null
-        }, 3000)
-        clearTimeout(hideTimer)
+        hideTimer = setTimeout(() => { lastNotification.value = null }, 3000)
       }
 
       const fetchNotifications = async () => {
         try {
           const user = JSON.parse(localStorage.getItem('auth_user_data'))
           if (!user?.id || !user?.access) return
-
-          // On utilise le token dans l'en-tête Authorization
-          const res = await api.get(`prestation/notifications/`, {
+          const res = await api.get('prestation/notifications/', {
             headers: { Authorization: `Bearer ${user.access}` }
           })
-          notifications.value = res.data.sort((a, b) => {
-            return new Date(b.timestamp) -new Date(a.timestamp)
-          })
-
-          if (res.data.length) {
-            showNotification(res.data[0].message)
-          }
+          notifications.value = res.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
           if (!firstFetchDone) {
             const lastUnread = notifications.value.find(n => !n.is_read)
             if (lastUnread) showNotification(lastUnread.message)
             firstFetchDone = true
           }
         } catch (err) {
-          console.error("Erreur notifications :", err)
+          console.error('Erreur notifications :', err)
         }
       }
 
-      const markAsRead = async (notifId) => {
-        try {
-          const user = JSON.parse(localStorage.getItem('auth_user_data'))
-          if (!user?.access) return
-
-          await api.post(`prestation/notifications/lue/${notifId}/`, {}, {
-            headers: { Authorization: `Bearer ${user.access}` }
-          })
-
-          const notif = notifications.value.find(n => n.id === notifId)
-          if (notif) notif.is_read = true
-        } catch (err) {
-          console.error("Erreur marquage notification :", err)
-        }
-      }
-
-      const markAllRead = async () => {
-        try {
-          const user = JSON.parse(localStorage.getItem('auth_user_data'))
-          if (!user?.access) return
-
-          await api.post('prestation/notifications/tous_lues/', {}, {
-            headers: { Authorization: `Bearer ${user.access}` }
-          })
-          notifications.value.forEach(n => n.is_read = true)
-        } catch (err) {
-          console.error('Erreur! Tous les notifications ne sont pas marquées comme lues :', err)
-        }
-      }
-
-      const toggleNotifications = () => {
-        showNotifications.value = !showNotifications.value
-      }
+      const toggleNotifications = () => { showNotifications.value = !showNotifications.value }
       const openNotification = async (notif) => {
-        if(!notif.is_read) {
+        if (!notif.is_read) {
           try {
             const user = JSON.parse(localStorage.getItem('auth_user_data'))
             if (!user?.access) return
@@ -174,26 +115,20 @@
             })
             notif.is_read = true
           } catch (error) {
-            console.log("Erreur de notification", error)
+            console.error('Erreur notification', error)
           }
         }
-        activeNotification.value = notif
-      }
-
-      const closeNotification = () => {
-        activeNotification.value = null
       }
 
       const deleteNotification = async (id) => {
         try {
           const user = JSON.parse(localStorage.getItem('auth_user_data'))
           if (!user?.access) return
-
           await api.delete(`prestation/notifications/supprimer/${id}/`, {
             headers: { Authorization: `Bearer ${user.access}` }
           })
         } catch (err) {
-          console.error("Erreur suppression notification :", err)
+          console.error('Erreur suppression notification :', err)
         }
       }
 
@@ -206,19 +141,10 @@
 
       const initWebSocket = () => {
         const user = JSON.parse(localStorage.getItem('auth_user_data'))
-        if (!user?.id || !user?.access) return
-
-        // Remplace l'URL selon ton environnement
+        if (!user?.id) return
         socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${user.id}/`)
-
-        socket.onopen = () => {
-          console.log("WebSocket connecté")
-        }
-
         socket.onmessage = (event) => {
           const data = JSON.parse(event.data)
-          console.log("Notification reçue: ", data)
-
           if (data.notification) {
             notifications.value.unshift({
               id: Date.now(),
@@ -226,22 +152,10 @@
               timestamp: new Date().toISOString(),
               is_read: false
             })
-
-            notifications.value.sort((a, b) => {
-              return new Date(b.timestamp) - new Date(a.timestamp)
-            })
             showNotification(data.notification)
           }
         }
-
-        socket.onclose = () => {
-          console.log("WebSocket déconnecté, reconnexion ...")
-          setTimeout(initWebSocket, 5000)
-        }
-
-        socket.onerror = (err) => {
-          console.error("Erreur WebSocket :", err)
-        }
+        socket.onclose = () => setTimeout(initWebSocket, 5000)
       }
 
       onMounted(() => {
@@ -250,8 +164,7 @@
           isLoggedIn.value = true
           userData.value = JSON.parse(user)
           fetchNotifications()
-          interval = setInterval(fetchNotifications, 1000)
-          // fetchNotifications()
+          interval = setInterval(fetchNotifications, 5000)
           initWebSocket()
         }
       })
@@ -259,53 +172,76 @@
       onBeforeUnmount(() => {
         clearInterval(interval)
         clearTimeout(hideTimer)
-        if (socket) {
-          socket.close()
-        }
+        if (socket) socket.close()
       })
 
-      return { isLoggedIn, userData, logout, notifications, showNotifications, formatImage, toggleNotifications, lastNotification, markAsRead, openNotification, closeNotification, activeNotification, unreadCount, deleteNotification, markAllRead }
+      return { isLoggedIn, userData, logout, notifications, showNotifications, toggleNotifications, lastNotification, openNotification, unreadCount, deleteNotification }
     }
   }
 </script>
 
 <style scoped>
-  .dropdown-menu {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-  .toast-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #fff;
-    z-index: 2000;
-    animation: fadeInOut 3s ease forwards;
-  }
-  @keyframes fadeInOut {
-    0% { opacity: 0; transform: translateY(-10px); }
-    10% { opacity: 1; transform: translateY(0); }
-    90% { opacity: 1; }
-    100% { opacity: 0; transform: translateY(-10px); }
-  }
-  .notification-popup-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 350px;
-    height: 100%;
-    background: #fff;
-    box-shadow: -2px 0 8px rgba(0,0,0,0.2);
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    z-index: 3000;
-  }
-  .notification-popup-overlay.show {
-    transform: translateX(0);
-  }
-  .notification-popup {
-    padding: 20px;
-    overflow-y: auto;
-    height: 100%;
-  }
+.posey-header {
+  background: rgba(11, 17, 32, 0.95);
+  border-bottom: 1px solid var(--posey-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+.posey-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--posey-primary);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.nav-link-posey {
+  color: var(--posey-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.nav-link-posey:hover,
+.nav-link-posey.router-link-active {
+  color: var(--posey-text);
+}
+
+.notification-dropdown {
+  position: absolute;
+  right: 1rem;
+  top: 64px;
+  min-width: 300px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 1100;
+}
+
+.notification-item {
+  border-bottom: 1px solid var(--posey-border);
+  font-size: 0.875rem;
+}
+
+.toast-notification {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 2000;
+  animation: fadeInOut 3s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
 </style>

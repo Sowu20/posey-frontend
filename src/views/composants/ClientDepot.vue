@@ -1,35 +1,39 @@
 <template>
-  <div class="p-4 bg-white rounded shadow-sm">
-    <!-- Téléphone -->
+  <div class="posey-card p-4">
     <div class="mb-3">
-      <label class="form-label">Numéro de Téléphone</label>
-      <input v-model="telephone" type="text" class="form-control" placeholder="Ex: 99 00 00 00" />
+      <label class="posey-form-label">Numéro de téléphone</label>
+      <input v-model="telephone" type="text" class="posey-input" placeholder="Ex: 99 00 00 00" />
     </div>
 
-    <!-- Méthode de paiement -->
     <div class="mb-4">
-      <label class="form-label d-block mb-2">Méthode de paiement</label>
+      <label class="posey-form-label">Méthode de paiement</label>
       <div class="d-flex gap-3">
-        <div class="border rounded p-2 flex-fill text-center cursor-pointer" :class="{ 'border-primary': methode === 'TMONEY' }" @click="methode = 'TMONEY'">
+        <div
+          class="posey-card p-3 flex-fill text-center cursor-pointer"
+          :style="methode === 'TMONEY' ? 'border-color: var(--posey-primary) !important;' : ''"
+          @click="methode = 'TMONEY'"
+        >
           <img src="/img/mixx_by_yas.png" alt="TMoney" style="height: 40px; width: 40px;" />
           <p class="mt-2 mb-0 fw-semibold">Mixx By Yas</p>
         </div>
-        <div class="border rounded p-2 flex-fill text-center cursor-pointer" :class="{ 'border-primary': methode === 'FLOOZ' }" @click="methode = 'FLOOZ'">
+        <div
+          class="posey-card p-3 flex-fill text-center cursor-pointer"
+          :style="methode === 'FLOOZ' ? 'border-color: var(--posey-primary) !important;' : ''"
+          @click="methode = 'FLOOZ'"
+        >
           <img src="/img/flooz.png" alt="Flooz" style="height: 40px; width: 40px;" />
           <p class="mt-2 mb-0 fw-semibold">Flooz</p>
         </div>
       </div>
     </div>
 
-    <!-- Montant -->
     <div class="mb-4">
-      <label class="form-label">Montant (FCFA)</label>
-      <input v-model="localMontant" type="number" class="form-control" placeholder="Ex: 2000" />
+      <label class="posey-form-label">Montant (FCFA)</label>
+      <input v-model="localMontant" type="number" class="posey-input" placeholder="Ex: 2000" />
     </div>
 
-    <!-- Bouton -->
-    <button class="btn btn-primary w-100" @click="faireDepot" :disabled="loading">
-      {{ loading ? "Traitement..." : "Faire le dépôt" }}
+    <button class="posey-btn-primary w-100 py-3" @click="faireDepot" :disabled="loading">
+      {{ loading ? 'Traitement...' : 'Faire le dépôt' }}
     </button>
   </div>
 </template>
@@ -176,10 +180,7 @@
 </script>
 
 <style scoped>
-  .cursor-pointer {
-    cursor: pointer;
-  }
-  .border-primary {
-    border: 2px solid #0d6efd !important;
-  }
+.cursor-pointer {
+  cursor: pointer;
+}
 </style>

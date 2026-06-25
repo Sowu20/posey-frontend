@@ -1,60 +1,47 @@
 <template>
   <default-layout>
-    <!-- Qui sommes-nous -->
-    <section class="bg-primary text-white py-5 text-center">
-      <div class="container">
-        <h1 class="display-4 fw-bold mb-3">A propos de nous</h1>
-        <p class="lead mx-auto" style="max-width: 700px;">
-          Découvrez l'histoire et la mission de POSEY, la plateforme qui révolutionne
-          la mise en relation entre clients et prestataires de services au Togo.
+    <section class="posey-hero">
+      <div class="posey-container">
+        <h1 class="posey-hero-title">À propos de POSEY</h1>
+        <p class="posey-hero-subtitle">
+          La plateforme qui révolutionne la mise en relation entre clients et prestataires de services au Togo.
         </p>
       </div>
     </section>
 
-    <!-- Notre Mission -->
-    <section class="py-5">
-      <div class="container">
+    <section class="pb-5">
+      <div class="posey-container">
         <div class="text-center mb-5">
-          <h2 class="fw-bold mb-3">Notre Mission</h2>
-          <p class="lead text-muted mx-auto" style="max-width: 700px;">
-            Faciliter la mise en relation entre la population et les prestataires de services
-            qualifiés pour améliorer le quotidien de chacun.
+          <h2 class="posey-section-title">Notre mission</h2>
+          <p class="posey-section-subtitle mx-auto" style="max-width: 700px;">
+            Faciliter la mise en relation entre la population et les prestataires qualifiés pour améliorer le quotidien de chacun.
           </p>
         </div>
 
-        <div class="row align-items-center">
-          <div class="col-md-6 mb-4 mb-md-0">
-            <img src="/img/relation1.png" alt="Notre mission" class="img-fluid rounded shadow">
+        <div class="row align-items-center g-5 mb-5">
+          <div class="col-md-6">
+            <img src="/img/relation1.png" alt="Notre mission" class="img-fluid rounded-3 border" style="border-color: var(--posey-border) !important;" />
           </div>
           <div class="col-md-6">
-            <div class="mb-4 d-flex">
-              <div class="bg-light text-primary rounded-circle p-3 me-3 fs-4">🎯</div>
+            <div class="d-flex gap-3 mb-4">
+              <div class="posey-icon-box fs-4">🎯</div>
               <div>
-                <h5 class="fw-semibold">Objectif Principal</h5>
-                <p class="text-muted">
-                  Permettre la mise en relation facile de la population aux prestataires
-                  de services (Maçon, Menuisier, Plombier, etc.).
-                </p>
+                <h5 class="fw-semibold mb-2">Objectif principal</h5>
+                <p class="posey-text-muted mb-0">Permettre la mise en relation facile avec les prestataires (Maçon, Menuisier, Plombier, etc.).</p>
               </div>
             </div>
-            <div class="mb-4 d-flex">
-              <div class="bg-light text-primary rounded-circle p-3 me-3 fs-4">📈</div>
+            <div class="d-flex gap-3 mb-4">
+              <div class="posey-icon-box fs-4">📈</div>
               <div>
-                <h5 class="fw-semibold">Amélioration Continue</h5>
-                <p class="text-muted">
-                  Améliorer l'activité des prestataires en leur offrant plus de visibilité
-                  et d'opportunités d'affaires.
-                </p>
+                <h5 class="fw-semibold mb-2">Amélioration continue</h5>
+                <p class="posey-text-muted mb-0">Offrir plus de visibilité et d'opportunités aux prestataires.</p>
               </div>
             </div>
-            <div class="d-flex">
-              <div class="bg-light text-primary rounded-circle p-3 me-3 fs-4">🤝</div>
+            <div class="d-flex gap-3">
+              <div class="posey-icon-box fs-4">🤝</div>
               <div>
-                <h5 class="fw-semibold">Confiance & Qualité</h5>
-                <p class="text-muted">
-                  Garantir des services de qualité grâce à notre système de notation
-                  et de vérification des prestataires.
-                </p>
+                <h5 class="fw-semibold mb-2">Confiance &amp; qualité</h5>
+                <p class="posey-text-muted mb-0">Garantir des services de qualité grâce à la notation et la vérification.</p>
               </div>
             </div>
           </div>
@@ -62,81 +49,49 @@
       </div>
     </section>
 
-    <!-- À propos de KOFCORPORATION -->
-    <section class="py-5 bg-light">
-      <div class="container">
+    <section class="section-alt py-5">
+      <div class="posey-container">
         <div class="text-center mb-5">
-          <h2 class="fw-bold">À propos de KOFCORPORATION</h2>
+          <h2 class="posey-section-title">KOFCORPORATION</h2>
         </div>
-        <div class="row align-items-center">
+        <div class="row align-items-center g-5">
           <div class="col-md-6">
-            <h4 class="text-primary fw-semibold mb-3">Notre Histoire</h4>
-            <p class="text-muted">
-              KofCorporation est une société à responsabilité limitée unipersonnelle (SARLU)
-              créée en 2022. Depuis sa création, elle exerce dans la prestation de services IT,
-              notamment la création de sites web, d'applications mobiles, de logiciels de gestion,
-              l'assistance informatique et la formation en IT.
+            <h4 class="posey-text-primary fw-semibold mb-3">Notre histoire</h4>
+            <p class="posey-text-muted">
+              KofCorporation (SARLU) créée en 2022, exerce dans la prestation de services IT :
+              sites web, applications mobiles, logiciels de gestion, assistance informatique et formation.
             </p>
-            <p class="">
-              Dirigée par <strong>Omar Farouk KOUGBADA</strong>, notre équipe s'engage à donner
-              vie à vos projets avec passion et expertise.
+            <p class="mb-4">
+              Dirigée par <strong>Omar Farouk KOUGBADA</strong>, notre équipe donne vie à vos projets avec passion.
             </p>
-
-            <h4 class="text-primary fw-semibold mt-4 mb-3">Nos Services</h4>
-            <ul class="list-unstyled">
-              <li class="mb-2"><i class="bi bi-check2-circle text-success me-2"></i>Création de sites web vitrines et e-commerce</li>
-              <li class="mb-2"><i class="bi bi-check2-circle text-success me-2"></i>Développement d'applications mobiles</li>
-              <li class="mb-2"><i class="bi bi-check2-circle text-success me-2"></i>Conception de logiciels de gestion</li>
-              <li class="mb-2"><i class="bi bi-check2-circle text-success me-2"></i>Assistance informatique et infrastructure IT</li>
-              <li class="mb-2"><i class="bi bi-check2-circle text-success me-2"></i>Formation en informatique et développement</li>
+            <h4 class="posey-text-primary fw-semibold mb-3">Nos services</h4>
+            <ul class="list-unstyled posey-text-muted">
+              <li class="mb-2"><i class="fas fa-check posey-text-primary me-2"></i>Création de sites web vitrines et e-commerce</li>
+              <li class="mb-2"><i class="fas fa-check posey-text-primary me-2"></i>Développement d'applications mobiles</li>
+              <li class="mb-2"><i class="fas fa-check posey-text-primary me-2"></i>Conception de logiciels de gestion</li>
+              <li class="mb-2"><i class="fas fa-check posey-text-primary me-2"></i>Assistance informatique et infrastructure IT</li>
+              <li class="mb-2"><i class="fas fa-check posey-text-primary me-2"></i>Formation en informatique</li>
             </ul>
           </div>
           <div class="col-md-6">
-            <img src="/public/img/tech3.png" alt="KOFCORPORATION" class="img-fluid rounded shadow">
+            <img src="/img/tech3.png" alt="KOFCORPORATION" class="img-fluid rounded-3 border" style="border-color: var(--posey-border) !important;" />
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Nos Valeurs -->
     <section class="py-5">
-      <div class="container">
+      <div class="posey-container">
         <div class="text-center mb-5">
-          <h2 class="fw-bold mb-3">Nos Valeurs</h2>
-          <p class="lead text-muted">Les principes qui guident notre action au quotidien</p>
+          <h2 class="posey-section-title">Nos valeurs</h2>
+          <p class="posey-section-subtitle">Les principes qui guident notre action</p>
         </div>
-        <div class="row">
-          <div class="col-md-4 mb-4">
-            <div class="bg-white p-4 text-center rounded shadow-sm h-100">
-              <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
-                <span class="fs-2">💡</span>
-              </div>
-              <h5 class="fw-semibold mb-3">Innovation</h5>
-              <p class="text-muted">
-                Nous développons des solutions technologiques innovantes pour répondre aux besoins de notre époque.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4 mb-4">
-            <div class="bg-white p-4 text-center rounded shadow-sm h-100">
-              <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
-                <span class="fs-2">🎯</span>
-              </div>
-              <h5 class="fw-semibold mb-3">Excellence</h5>
-              <p class="text-muted">
-                Nous nous engageons à fournir des services de la plus haute qualité à tous nos clients et partenaires.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4 mb-4">
-            <div class="bg-white p-4 text-center rounded shadow-sm h-100">
-              <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px;">
-                <span class="fs-2">🤝</span>
-              </div>
-              <h5 class="fw-semibold mb-3">Confiance</h5>
-              <p class="text-muted">
-                Nous bâtissons des relations durables basées sur la transparence, l'intégrité et la confiance mutuelle.
-              </p>
+        <div class="row g-4">
+          <div class="col-md-4" v-for="value in values" :key="value.title">
+            <div class="feature-card">
+              <div class="feature-icon">{{ value.icon }}</div>
+              <h5 class="fw-semibold mb-3">{{ value.title }}</h5>
+              <p class="posey-text-muted mb-0">{{ value.text }}</p>
             </div>
           </div>
         </div>
@@ -146,18 +101,19 @@
 </template>
 
 <script>
-  import DefaultLayout from './Layout.vue'
+import DefaultLayout from './Layout.vue'
 
-  export default {
-    name: 'AboutPage',
-    components: {
-      DefaultLayout,
-    },
-  }
+export default {
+  name: 'AboutPage',
+  components: { DefaultLayout },
+  data() {
+    return {
+      values: [
+        { icon: '💡', title: 'Innovation', text: 'Des solutions technologiques innovantes pour répondre aux besoins actuels.' },
+        { icon: '🎯', title: 'Excellence', text: 'Des services de la plus haute qualité pour tous nos clients et partenaires.' },
+        { icon: '🤝', title: 'Confiance', text: 'Des relations durables basées sur la transparence et l\'intégrité.' },
+      ],
+    }
+  },
+}
 </script>
-
-<style scoped>
-  .hover-shadow:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-  }
-</style>

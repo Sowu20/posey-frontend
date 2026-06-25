@@ -1,8 +1,8 @@
 <template>
-  <div class="container-fluid px-4 py-3">
-    <div class="table-responsive shadow-sm rounded">
-      <table class="table align-middle table-striped table-bordered mb-0">
-        <thead class="table-light text-center">
+  <div>
+    <div class="posey-table-wrap mb-4">
+      <table class="posey-table">
+        <thead>
           <tr>
             <th>Username</th>
             <th>Nom</th>
@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in utilisateursPagines" :key="user.id" class="text-center">
+          <tr v-for="user in utilisateursPagines" :key="user.id">
             <td>{{ user.username }}</td>
             <td>{{ user.nom }}</td>
             <td>{{ user.prenom }}</td>
@@ -27,10 +27,10 @@
             <td>{{ user.ville }}</td>
             <td>{{ user.categorie ? user.categorie.nom : '-' }}</td>
             <td>{{ formatDate(user.date_inscription) }}</td>
-            <td class="text-center">
-              <div class="d-flex justify-content-center gap-2">
-                <button class="btn btn-warning btn-sm" @click="ouvrirModalEdition(user)">Modifier</button>
-                <button class="btn btn-danger btn-sm" @click="confirmerSuppression(user)">Supprimer</button>
+            <td>
+              <div class="d-flex gap-2">
+                <button class="posey-btn-warning" @click="ouvrirModalEdition(user)">Modifier</button>
+                <button class="posey-btn-danger posey-btn-sm" @click="confirmerSuppression(user)">Supprimer</button>
               </div>
             </td>
           </tr>
@@ -38,20 +38,17 @@
       </table>
     </div>
 
-    <!-- Pagination -->
-    <nav class="d-flex justify-content-center mt-4">
-      <ul class="pagination">
-        <li class="page-item" :class="{ disabled: page === 1 }">
-          <button class="page-link" @click="changerPage(page - 1)">Précédent</button>
-        </li>
-        <li class="page-item" v-for="p in totalPages" :key="p" :class="{ active: p === page }">
-          <button class="page-link" @click="changerPage(p)">{{ p }}</button>
-        </li>
-        <li class="page-item" :class="{ disabled: page === totalPages }">
-          <button class="page-link" @click="changerPage(page + 1)">Suivant</button>
-        </li>
-      </ul>
-    </nav>
+    <ul class="posey-pagination">
+      <li>
+        <button @click="changerPage(page - 1)" :disabled="page === 1">Précédent</button>
+      </li>
+      <li v-for="p in totalPages" :key="p">
+        <button :class="{ active: p === page }" @click="changerPage(p)">{{ p }}</button>
+      </li>
+      <li>
+        <button @click="changerPage(page + 1)" :disabled="page === totalPages">Suivant</button>
+      </li>
+    </ul>
 
     <!-- Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -108,7 +105,7 @@
               </div>
 
               <div class="text-end">
-                <button class="btn btn-primary" type="submit">Enregistrer</button>
+                <button class="posey-btn-primary" type="submit">Enregistrer</button>
               </div>
             </form>
           </div>

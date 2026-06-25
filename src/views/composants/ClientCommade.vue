@@ -1,17 +1,17 @@
 <template>
   <div>
     <h5 class="mb-3 fw-bold">Mes commandes</h5>
-    <div v-if="loading" class="text-center">
+    <div v-if="loading" class="text-center py-4">
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Chargement...</span>
       </div>
     </div>
-    <div v-else-if="commandes.length === 0" class="alert alert-info">
-      Aucune commande faite pour le moment.
+    <div v-else-if="commandes.length === 0" class="posey-card p-4 text-center posey-text-muted">
+      Aucune commande pour le moment.
     </div>
-    <div v-else class="table-responsive">
-      <table class="table table-bordered table-striped align-middle">
-        <thead class="table-dark">
+    <div v-else class="posey-table-wrap">
+      <table class="posey-table">
+        <thead>
           <tr>
             <th>Prestation</th>
             <th>Date</th>
@@ -33,21 +33,29 @@
 </template>
 
 <script>
-  export default {
-    name: 'ClientCommandes',
-    props: ['commandes', 'loading'],
-    methods: {
-      getStatutBadge(statut) {
-        switch (statut) {
-          case 'en attente': return 'badge bg-warning text-dark';
-          case 'accepte': return 'badge bg-primary';
-          case 'succes': return 'badge bg-success';
-          default: return 'badge bg-secondary';
-        }
-      },
-      formatDate(dateStr) {
-        return new Date(dateStr).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
+export default {
+  name: 'ClientCommandes',
+  props: ['commandes', 'loading'],
+  methods: {
+    getStatutBadge(statut) {
+      switch (statut) {
+        case 'en attente':
+          return 'posey-badge posey-badge-warning'
+        case 'accepte':
+          return 'posey-badge posey-badge-info'
+        case 'succes':
+          return 'posey-badge posey-badge-success'
+        default:
+          return 'posey-badge posey-badge-neutral'
       }
-    }
-  }
+    },
+    formatDate(dateStr) {
+      return new Date(dateStr).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    },
+  },
+}
 </script>
