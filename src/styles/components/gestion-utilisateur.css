@@ -1,0 +1,19 @@
+.table th,
+.table td {
+  vertical-align: middle;
+  font-size: 0.9rem;
+  padding: 0.75rem;
+}
+
+.table thead th {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+.pagination .page-link {
+  border-radius: 0.25rem;
+}

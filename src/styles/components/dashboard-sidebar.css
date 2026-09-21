@@ -1,0 +1,11 @@
+.posey-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--posey-primary);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+}

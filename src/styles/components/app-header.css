@@ -1,0 +1,91 @@
+.posey-header {
+  background: rgba(16, 22, 34, 0.88);
+  border-bottom: 1px solid var(--posey-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+.posey-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 4.25rem;
+  border-bottom: 1px solid rgba(67, 70, 85, 0.7);
+}
+
+.posey-brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.posey-header__nav {
+  align-items: center;
+  gap: 2rem;
+}
+
+.posey-header__actions {
+  flex-shrink: 0;
+}
+
+.posey-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--posey-primary);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.nav-link-posey {
+  color: var(--posey-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+@media (max-width: 575.98px) {
+  .posey-header__actions .posey-btn-outline {
+    display: none;
+  }
+}
+
+.nav-link-posey:hover,
+.nav-link-posey.router-link-active {
+  color: var(--posey-text);
+}
+
+.notification-dropdown {
+  position: absolute;
+  right: 1rem;
+  top: 64px;
+  min-width: 300px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 1100;
+}
+
+.notification-item {
+  border-bottom: 1px solid var(--posey-border);
+  font-size: 0.875rem;
+}
+
+.toast-notification {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 2000;
+  animation: fadeInOut 3s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}

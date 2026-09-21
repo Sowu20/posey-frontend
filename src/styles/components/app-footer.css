@@ -1,0 +1,21 @@
+.posey-footer {
+  background: #101622;
+  border-top: 1px solid var(--posey-border);
+}
+
+.posey-footer hr {
+  border-color: var(--posey-border);
+  opacity: 1;
+}
+
+.footer-link {
+  color: var(--posey-text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  display: block;
+  padding: 0.2rem 0;
+}
+
+.footer-link:hover {
+  color: var(--posey-primary);
+}
